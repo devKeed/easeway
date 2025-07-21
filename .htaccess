@@ -1,0 +1,26 @@
+# Enable rewriting
+RewriteEngine On
+
+# If the request is not for a file, directory, or symbolic link
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# Rewrite everything to the root index.html
+RewriteRule ^(.*)$ index.html [QSA,L]
+
+# Cache control headers for HTML files
+<FilesMatch "\.(html|htm)$">
+    # Prevent caching of HTML files
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</FilesMatch>
+
+# Force browsers to use the correct title
+<IfModule mod_headers.c>
+    # Set a shorter cache time for all text/html content
+    Header set X-Content-Type-Options "nosniff"
+    # Add a version indicator to force cache refresh
+    Header set X-Version "v2-June2025"
+</IfModule>
