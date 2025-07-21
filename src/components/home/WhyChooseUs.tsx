@@ -6,25 +6,25 @@ const WhyChooseUs = () => {
       icon: "👤",
       title: "Personalized Treatment",
       description:
-        "We focus on what works best for you with tailored treatment plans designed for your specific needs and goals.",
+        "Tailored plans for faster recovery. We focus on what works best for you with treatment plans designed for your specific needs and goals.",
     },
     {
       icon: "🏥",
       title: "Comprehensive Care",
       description:
-        "A full range of therapies and support services to address all aspects of your recovery and well-being.",
+        "Therapies for all recovery stages. A full range of therapies and support services to address all aspects of your recovery and well-being.",
     },
     {
       icon: "👨‍⚕️",
-      title: "Skilled Professionals",
+      title: "Experienced Professionals",
       description:
-        "Led by experienced physiotherapists with extensive training in modern treatment techniques and patient care.",
+        "Skilled and qualified team. Led by experienced physiotherapists with extensive training in modern treatment techniques and patient care.",
     },
     {
       icon: "🌱",
       title: "Holistic Approach",
       description:
-        "Treating the whole person for lasting recovery, addressing not just symptoms but underlying causes.",
+        "Focused on long-term wellness. Treating the whole person for lasting recovery, addressing not just symptoms but underlying causes.",
     },
   ];
 

@@ -209,7 +209,7 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p className="text-gray-400 text-sm">
-            &copy; 2024 Easeway Medicare Physiotherapy Clinic. All rights
+            &copy; 2025 Easeway Medicare Physiotherapy Clinic. All rights
             reserved.
             <span className="mx-3 text-[#FF3133]">•</span>
             Professional physiotherapy services in Whittlesey, Peterborough.

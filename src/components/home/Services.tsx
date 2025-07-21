@@ -4,9 +4,9 @@ const Services = () => {
   const services = [
     {
       icon: "🔍",
-      title: "Comprehensive Assessment",
+      title: "Comprehensive Musculoskeletal Assessment and Diagnosis",
       description:
-        "Thorough evaluation to identify the root cause of your pain and mobility issues.",
+        "Thorough evaluation to identify the root cause of your pain and mobility issues with detailed musculoskeletal assessment.",
       image: "/images/image copy 2.png",
     },
     {
@@ -46,7 +46,7 @@ const Services = () => {
     },
     {
       icon: "🏠",
-      title: "Home Physiotherapy Care",
+      title: "Home Physiotherapy (Exclusive in Whittlesey)",
       description:
         "The only provider of this service in Whittlesey - professional care in the comfort of your home.",
       highlight: true,

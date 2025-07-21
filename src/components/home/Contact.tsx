@@ -120,6 +120,25 @@ const Contact = () => {
                     </p>
                   </div>
                 </div>
+
+                <div className="flex items-start space-x-4 pt-6 border-t border-gray-100">
+                  <div className="text-[#FF3133] text-2xl">📱</div>
+                  <div>
+                    <h4 className="font-semibold text-[#0E2127] mb-1">
+                      Scan Our QR Code
+                    </h4>
+                    <div className="w-32 h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
+                      <div className="text-center text-gray-500 text-sm">
+                        <div className="text-2xl mb-2">📱</div>
+                        <p>QR Code</p>
+                        <p>Coming Soon</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-2">
+                      Scan to visit our website or contact us directly
+                    </p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -136,7 +155,7 @@ const Contact = () => {
                 className="bg-white p-8 rounded-xl shadow-lg"
               >
                 <h3 className="text-2xl font-bold text-[#0E2127] mb-6">
-                  Send us a Message
+                  Send Us a Message
                 </h3>
 
                 <form onSubmit={handleSubmit}>
@@ -152,7 +171,7 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                        placeholder="Your name"
+                        placeholder="Your Name"
                       />
                     </div>
 
@@ -183,7 +202,7 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                        placeholder="your.email@example.com"
+                        placeholder="Your Email"
                       />
                     </div>
 
@@ -217,7 +236,7 @@ const Contact = () => {
                       rows={5}
                       required
                       className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                      placeholder="Tell us how we can help you..."
+                      placeholder="Your Message"
                     ></textarea>
                   </div>
 
