@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { MapPin, Phone, Mail, Globe } from "lucide-react";
 
 const Contact = () => {
   const [contactForm, setContactForm] = useState({
@@ -37,8 +38,8 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0E2127] mb-4">
-              📍 Contact Us
+            <h2 className="text-4xl md:text-5xl font-bold text-[#0E2127] mb-4 flex items-center justify-center gap-3">
+              <MapPin className="w-8 h-8 text-[#FF3133]" /> Contact Us
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Get in touch with us today. We're here to help with all your
@@ -63,7 +64,7 @@ const Contact = () => {
 
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="text-[#FF3133] text-2xl">📞</div>
+                  <Phone className="text-[#FF3133] w-6 h-6 mt-1" />
                   <div>
                     <h4 className="font-semibold text-[#0E2127] mb-1">Phone</h4>
                     <a
@@ -76,7 +77,7 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="text-[#FF3133] text-2xl">📧</div>
+                  <Mail className="text-[#FF3133] w-6 h-6 mt-1" />
                   <div>
                     <h4 className="font-semibold text-[#0E2127] mb-1">Email</h4>
                     <a
@@ -89,7 +90,7 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="text-[#FF3133] text-2xl">🌐</div>
+                  <Globe className="text-[#FF3133] w-6 h-6 mt-1" />
                   <div>
                     <h4 className="font-semibold text-[#0E2127] mb-1">
                       Website
@@ -106,7 +107,7 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="text-[#FF3133] text-2xl">📍</div>
+                  <MapPin className="text-[#FF3133] w-6 h-6 mt-1" />
                   <div>
                     <h4 className="font-semibold text-[#0E2127] mb-1">
                       Address
@@ -260,7 +261,9 @@ const Contact = () => {
                 <div className="h-80 bg-gray-200 flex items-center justify-center">
                   {/* Replace this with actual Google Maps embed */}
                   <div className="text-center text-gray-600">
-                    <div className="text-4xl mb-4">🗺️</div>
+                    <div className="w-16 h-16 bg-[#FF3133]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <MapPin className="w-8 h-8 text-[#FF3133]" />
+                    </div>
                     <p className="font-semibold">Manor Leisure Centre</p>
                     <p>PE7 1UA, Whittlesey, Peterborough</p>
                     <p className="text-sm mt-2">

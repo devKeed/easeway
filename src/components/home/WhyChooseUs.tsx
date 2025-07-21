@@ -1,27 +1,28 @@
 import { motion } from "framer-motion";
+import { User, Building2, UserCheck, Sprout, Handshake } from "lucide-react";
 
 const WhyChooseUs = () => {
   const reasons = [
     {
-      icon: "👤",
+      icon: User,
       title: "Personalized Treatment",
       description:
         "Tailored plans for faster recovery. We focus on what works best for you with treatment plans designed for your specific needs and goals.",
     },
     {
-      icon: "🏥",
+      icon: Building2,
       title: "Comprehensive Care",
       description:
         "Therapies for all recovery stages. A full range of therapies and support services to address all aspects of your recovery and well-being.",
     },
     {
-      icon: "👨‍⚕️",
+      icon: UserCheck,
       title: "Experienced Professionals",
       description:
         "Skilled and qualified team. Led by experienced physiotherapists with extensive training in modern treatment techniques and patient care.",
     },
     {
-      icon: "🌱",
+      icon: Sprout,
       title: "Holistic Approach",
       description:
         "Focused on long-term wellness. Treating the whole person for lasting recovery, addressing not just symptoms but underlying causes.",
@@ -38,8 +39,8 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0E2127] mb-4">
-              🤝 Why Choose Us?
+            <h2 className="text-4xl md:text-5xl font-bold text-[#0E2127] mb-4 flex items-center justify-center gap-3">
+              <Handshake className="w-8 h-8 text-[#FF3133]" /> Why Choose Us?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Your health and recovery are our priority. Here's what sets us
@@ -58,8 +59,8 @@ const WhyChooseUs = () => {
               viewport={{ once: true }}
               className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
             >
-              <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                {reason.icon}
+              <div className="w-16 h-16 bg-[#FF3133]/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <reason.icon className="w-8 h-8 text-[#FF3133]" />
               </div>
               <h3 className="text-xl font-bold text-[#0E2127] mb-4">
                 {reason.title}

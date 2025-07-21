@@ -1,51 +1,60 @@
 import { motion } from "framer-motion";
+import {
+  Search,
+  Hand,
+  Zap,
+  Building2,
+  Scissors,
+  Waves,
+  Home,
+} from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      icon: "🔍",
+      icon: Search,
       title: "Comprehensive Musculoskeletal Assessment and Diagnosis",
       description:
         "Thorough evaluation to identify the root cause of your pain and mobility issues with detailed musculoskeletal assessment.",
       image: "/images/image copy 2.png",
     },
     {
-      icon: "✋",
+      icon: Hand,
       title: "Manual Therapy",
       description:
         "Hands-on treatment techniques to improve joint mobility and reduce pain.",
       image: "/images/image copy 3.png",
     },
     {
-      icon: "⚡",
+      icon: Zap,
       title: "Electrotherapy",
       description:
         "Advanced electrical stimulation techniques for pain relief and tissue healing.",
       image: "/images/image copy 4.png",
     },
     {
-      icon: "🏥",
+      icon: Building2,
       title: "Post-surgical Rehabilitation",
       description:
         "Specialized recovery programs to help you regain strength and function after surgery.",
       image: "/images/image copy 5.png",
     },
     {
-      icon: "🩹",
+      icon: Scissors,
       title: "Kinesotaping",
       description:
         "Therapeutic taping techniques to support muscles and joints during healing.",
       image: "/images/image copy 6.png",
     },
     {
-      icon: "💆",
+      icon: Waves,
       title: "Sports Massage",
       description:
         "Targeted massage therapy for athletes and active individuals.",
       image: "/images/image copy 7.png",
     },
     {
-      icon: "🏠",
+      icon: Home,
       title: "Home Physiotherapy (Exclusive in Whittlesey)",
       description:
         "The only provider of this service in Whittlesey - professional care in the comfort of your home.",
@@ -66,8 +75,8 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <span className="text-[#FF3133] text-sm font-medium">
-              🏥 Our Services
+            <span className="text-[#FF3133] text-sm font-medium flex items-center gap-2">
+              <Building2 className="w-4 h-4" /> Our Services
             </span>
           </motion.div>
 
@@ -133,7 +142,7 @@ const Services = () => {
                 {/* Icon */}
                 <div className="absolute top-4 left-4">
                   <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">{service.icon}</span>
+                    <service.icon className="w-6 h-6 text-[#FF3133]" />
                   </div>
                 </div>
               </div>

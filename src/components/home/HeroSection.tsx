@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Building2, Home, Zap, Target } from "lucide-react";
 
 const HeroSection: React.FC = () => {
   return (
@@ -32,8 +33,9 @@ const HeroSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-[#FF3133] text-sm font-medium">
-                🏥 Professional Physiotherapy Care
+              <span className="text-[#FF3133] text-sm font-medium flex items-center gap-2">
+                <Building2 className="w-4 h-4" /> Professional Physiotherapy
+                Care
               </span>
             </motion.div>
 
@@ -105,7 +107,7 @@ const HeroSection: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="w-12 h-12 bg-[#FF3133] rounded-xl flex items-center justify-center mb-4">
-                  <span className="text-2xl">🏠</span>
+                  <Home className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-white font-semibold mb-2">Home Visits</h3>
                 <p className="text-gray-300 text-sm">
@@ -118,7 +120,7 @@ const HeroSection: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="w-12 h-12 bg-[#FF3133] rounded-xl flex items-center justify-center mb-4">
-                  <span className="text-2xl">⚡</span>
+                  <Zap className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-white font-semibold mb-2">
                   Modern Technology
@@ -132,7 +134,7 @@ const HeroSection: React.FC = () => {
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-[#FF3133] rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">🎯</span>
+                    <Target className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">

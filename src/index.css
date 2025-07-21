@@ -81,7 +81,8 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 50px;
   cursor: pointer;
-  background: #FF3133;
+  background: #0E2127;
+  /* background: #FF3133; */
   color: #fff;
   border: none;
   transition: background-color 0.3s ease, transform 0.2s ease;

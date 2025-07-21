@@ -1,7 +1,24 @@
 import Logo from "/images/easeway_logo.png";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { Phone, MapPin } from "lucide-react";
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const menuItems = [
+    { label: "Services", href: "#services" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const handleMenuClick = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <motion.header
       className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm"
@@ -9,82 +26,183 @@ const Header = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between items-center h-20">
-        {/* Logo Section */}
-        <motion.div
-          className="flex items-center"
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-        >
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <img
-                src={Logo}
-                alt="Easeway Medicare Physiotherapy Clinic"
-                className="h-12 w-12 rounded-xl"
-              />
-            </div>
-            <div className="flex flex-col">
-              <h5 className="text-[#0E2127] font-bold leading-tight">
-                Easeway Medicare
-              </h5>
-              <p className="text-[#0E2127]/70 text-xs">
-                Physiotherapy Clinic
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Right Section */}
-        <div className="flex items-center space-x-6">
-          {/* Contact Info - Hidden on mobile */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <div className="flex items-center space-x-2 text-[#0E2127]">
-              <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
-                <span className="text-[#FF3133]">📞</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs text-[#0E2127]/60 text-xs">
-                  Call us
-                </span>
-                <a
-                  href="tel:+447460091561"
-                  className="text-[#FF3133] font-semibold text-xs hover:text-[#e62a2c] transition-colors"
-                >
-                  +44 7460 091561
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-2 text-[#0E2127]">
-              <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
-                <span className="text-[#FF3133]">📍</span>
-              </div>
-              <div className="flex flex-col">
-                <span className=" text-[#0E2127]/60 text-xs text-xs">
-                  Location
-                </span>
-                <span className="text-xs text-xs">
-                  Whittlesey, Peterborough
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Book Appointment Button */}
-          <motion.button
-            onClick={() => {
-              document
-                .getElementById("book-appointment")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className=""
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 md:h-20">
+          {/* Logo Section */}
+          <motion.div
+            className="flex items-center"
             whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
           >
-            Book Appointment
-          </motion.button>
+            <div className="flex items-center space-x-2 md:space-x-3">
+              <div className="relative">
+                <img
+                  src={Logo}
+                  alt="Easeway Medicare Physiotherapy Clinic"
+                  className="w-10 md:w-12 rounded-xl"
+                />
+              </div>
+              <div className="flex flex-col">
+                <h5 className="text-[#0E2127] font-bold text-xs md:text-base leading-tight">
+                  Easeway Medicare
+                </h5>
+                <p className="text-[#0E2127]/70 text-xs">
+                  Physiotherapy Clinic
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="flex items-center space-x-4">
+            {/* Desktop Contact Info & CTA */}
+            <div className="hidden lg:flex items-center space-x-6">
+              {/* Contact Info */}
+              <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-2 text-[#0E2127]">
+                  <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                    <Phone className="text-[#FF3133] w-4 h-4" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[#0E2127]/60 text-xs">Call us</span>
+                    <a
+                      href="tel:+447460091561"
+                      className="text-[#FF3133] font-semibold text-xs hover:text-[#e62a2c] transition-colors"
+                    >
+                      +44 7460 091561
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-2 text-[#0E2127]">
+                  <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                    <MapPin className="text-[#FF3133] w-4 h-4" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[#0E2127]/60 text-xs">Location</span>
+                    <span className="text-xs">Whittlesey, Peterborough</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Book Appointment Button */}
+              <motion.button
+                onClick={() => {
+                  document
+                    .getElementById("book-appointment")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Book Appointment
+              </motion.button>
+            </div>
+
+            {/* Hamburger Menu Button */}
+            <motion.button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 bg-transparent  text-[#0E2127] transition-colors"
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="w-6 h-5 flex flex-col justify-between">
+                <motion.span
+                  className="block h-0.5 bg-[#0E2127] rounded"
+                  animate={
+                    isMobileMenuOpen
+                      ? { rotate: 45, y: 8 }
+                      : { rotate: 0, y: 0 }
+                  }
+                  transition={{ duration: 0.2 }}
+                />
+                <motion.span
+                  className="block h-0.5 bg-[#0E2127] rounded"
+                  animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <motion.span
+                  className="block h-0.5 bg-[#0E2127] rounded"
+                  animate={
+                    isMobileMenuOpen
+                      ? { rotate: -45, y: -8 }
+                      : { rotate: 0, y: 0 }
+                  }
+                  transition={{ duration: 0.2 }}
+                />
+              </div>
+            </motion.button>
+          </div>
         </div>
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              className=" bg-transparent border-t border-white/20"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="px-4 py-6 space-y-4 bg-transparent backdrop-blur-md">
+                {/* Mobile Navigation */}
+                <nav className="space-y-3">
+                  {menuItems.map((item) => (
+                    <a
+                      key={item.label}
+                      onClick={() => handleMenuClick(item.href)}
+                      className="block w-full cursor-pointer text-left text-[#0E2127] hover:text-[#FF3133] transition-colors text-base font-medium py-2"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
+
+                {/* Mobile Contact Info */}
+                <div className="pt-4 border-t border-[#0E2127]/10 space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                      <Phone className="text-[#FF3133] w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[#0E2127]/60 text-xs">Call us</p>
+                      <a
+                        href="tel:+447460091561"
+                        className="text-[#FF3133] font-semibold text-xs hover:text-[#e62a2c] transition-colors"
+                      >
+                        +44 7460 091561
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                      <MapPin className="text-[#FF3133] w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[#0E2127]/60 text-xs">Location</p>
+                      <p className="text-xs">Whittlesey, Peterborough</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mobile Book Appointment Button */}
+                <div className="pt-4">
+                  <motion.button
+                    onClick={() => {
+                      document
+                        .getElementById("book-appointment")
+                        ?.scrollIntoView({ behavior: "smooth" });
+                      setIsMobileMenuOpen(false);
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Book Appointment
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.header>
   );

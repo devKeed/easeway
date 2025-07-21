@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Mail, Phone, Globe, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -52,17 +53,17 @@ const Footer = () => {
             >
               <div className="group">
                 <div className="w-12 h-12 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center hover:bg-[#FF3133] transition-all duration-300 cursor-pointer group-hover:scale-110">
-                  <span className="text-xl">📧</span>
+                  <Mail className="w-5 h-5" />
                 </div>
               </div>
               <div className="group">
                 <div className="w-12 h-12 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center hover:bg-[#FF3133] transition-all duration-300 cursor-pointer group-hover:scale-110">
-                  <span className="text-xl">📞</span>
+                  <Phone className="w-5 h-5" />
                 </div>
               </div>
               <div className="group">
                 <div className="w-12 h-12 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center hover:bg-[#FF3133] transition-all duration-300 cursor-pointer group-hover:scale-110">
-                  <span className="text-xl">🌐</span>
+                  <Globe className="w-5 h-5" />
                 </div>
               </div>
             </motion.div>
@@ -136,7 +137,7 @@ const Footer = () => {
             >
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 bg-[#FF3133]/20 rounded-lg flex items-center justify-center mt-0.5">
-                  <span className="text-[#FF3133] text-sm">📞</span>
+                  <Phone className="text-[#FF3133] w-3 h-3" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Phone</p>
@@ -151,7 +152,7 @@ const Footer = () => {
 
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 bg-[#FF3133]/20 rounded-lg flex items-center justify-center mt-0.5">
-                  <span className="text-[#FF3133] text-sm">📧</span>
+                  <Mail className="text-[#FF3133] w-3 h-3" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Email</p>
@@ -166,7 +167,7 @@ const Footer = () => {
 
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 bg-[#FF3133]/20 rounded-lg flex items-center justify-center mt-0.5">
-                  <span className="text-[#FF3133] text-sm">📍</span>
+                  <MapPin className="text-[#FF3133] w-3 h-3" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Address</p>
@@ -182,7 +183,7 @@ const Footer = () => {
 
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 bg-[#FF3133]/20 rounded-lg flex items-center justify-center mt-0.5">
-                  <span className="text-[#FF3133] text-sm">🌐</span>
+                  <Globe className="text-[#FF3133] w-3 h-3" />
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Website</p>

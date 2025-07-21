@@ -52,7 +52,7 @@ export const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
         ) {
           setToastType("success");
           setToastMessage(
-            "🎉 Welcome aboard! You've successfully joined our newsletter."
+            "Welcome aboard! You've successfully joined our newsletter."
           );
           setShowToast(true);
           if (onSuccess) onSuccess();
@@ -65,32 +65,31 @@ export const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
           // Get the actual error message from Mailchimp or provide a better default
           const errorText = errorMessage.textContent || "";
           let friendlyMessage =
-            "🚫 Oops! Something went wrong. Please check your email and try again.";
+            "Oops! Something went wrong. Please check your email and try again.";
 
           if (errorText.toLowerCase().includes("already subscribed")) {
             friendlyMessage =
-              "✨ You're already part of our community! Thanks for your enthusiasm.";
+              "You're already part of our community! Thanks for your enthusiasm.";
           } else if (
             errorText.toLowerCase().includes("invalid") ||
             errorText.toLowerCase().includes("valid email")
           ) {
             friendlyMessage =
-              "📧 Please enter a valid email address to join our newsletter.";
+              "Please enter a valid email address to join our newsletter.";
           } else if (
             errorText.toLowerCase().includes("required") ||
             errorText.toLowerCase().includes("blank")
           ) {
-            friendlyMessage =
-              "📝 Please fill in all required fields to continue.";
+            friendlyMessage = "Please fill in all required fields to continue.";
           } else if (errorText.toLowerCase().includes("too many")) {
             friendlyMessage =
-              "⏰ Too many attempts. Please wait a moment before trying again.";
+              "Too many attempts. Please wait a moment before trying again.";
           } else if (
             errorText.toLowerCase().includes("network") ||
             errorText.toLowerCase().includes("connection")
           ) {
             friendlyMessage =
-              "🌐 Network error. Please check your connection and try again.";
+              "Network error. Please check your connection and try again.";
           }
 
           setToastMessage(friendlyMessage);
