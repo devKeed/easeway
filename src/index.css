@@ -11,6 +11,7 @@
   scroll-behavior: smooth;
   font-weight: 500;
   line-height: 1.5;
+ 
 }
 
 :root {
@@ -25,6 +26,8 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+
 
 h1,
 h2,

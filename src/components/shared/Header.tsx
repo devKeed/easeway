@@ -21,13 +21,13 @@ const Header = () => {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm"
+      className=" w-full z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
+        <div className="flex justify-between items-center py-2">
           {/* Logo Section */}
           <motion.div
             className="flex items-center"
@@ -39,14 +39,14 @@ const Header = () => {
                 <img
                   src={Logo}
                   alt="Easeway Medicare Physiotherapy Clinic"
-                  className="w-10 md:w-12 rounded-xl"
+                  className="w-8 md:w-10 rounded-xl"
                 />
               </div>
               <div className="flex flex-col">
-                <h5 className="text-[#0E2127] font-bold text-xs md:text-base leading-tight">
+                <p className="text-[#0E2127] font-bold text-xs md:text-base leading-tight">
                   Easeway Medicare
-                </h5>
-                <p className="text-[#0E2127]/70 text-xs">
+                </p>
+                <p className="text-[#0E2127]/70 text-[12px] md:text-[14px]">
                   Physiotherapy Clinic
                 </p>
               </div>

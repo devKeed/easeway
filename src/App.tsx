@@ -13,7 +13,7 @@ import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#EDF2F6] ">
+    <div className="flex flex-col min-h-screen bg-[#EDF2F6] overflow-hidden">
       <SEO
         title="Easeway Medicare Physiotherapy Clinic - Professional Physiotherapy Services in Whittlesey"
         description="Overcome pain, regain mobility and live life to the fullest easily! Professional physiotherapy services including manual therapy, electrotherapy, sports massage and home physiotherapy care in Whittlesey, Peterborough."
