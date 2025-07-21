@@ -32,42 +32,42 @@ const Services = () => {
       title: "Comprehensive Musculoskeletal Assessment and Diagnosis",
       description:
         "Thorough evaluation to identify the root cause of your pain and mobility issues with detailed musculoskeletal assessment.",
-      image: "/images/fx2.jpg",
+      image: "/images/fx5.jpg",
     },
     {
       icon: Hand,
       title: "Manual Therapy",
       description:
         "Hands-on treatment techniques to improve joint mobility and reduce pain.",
-      image: "/images/fx3.jpg",
+      image: "/images/fx13.jpg",
     },
     {
       icon: Zap,
       title: "Electrotherapy",
       description:
         "Advanced electrical stimulation techniques for pain relief and tissue healing.",
-      image: "/images/fx4.jpg",
+      image: "/images/fx10.jpg",
     },
     {
       icon: Building2,
       title: "Post-surgical Rehabilitation",
       description:
         "Specialized recovery programs to help you regain strength and function after surgery.",
-      image: "/images/fx5.jpg",
+      image: "/images/fx16.jpg",
     },
     {
       icon: Scissors,
       title: "Kinesotaping",
       description:
         "Therapeutic taping techniques to support muscles and joints during healing.",
-      image: "/images/fx6.jpg",
+      image: "/images/fx7.jpg",
     },
     {
       icon: Waves,
       title: "Sports Massage",
       description:
         "Targeted massage therapy for athletes and active individuals.",
-      image: "/images/fx7.jpg",
+      image: "/images/fx17.jpg",
     },
     {
       icon: Home,
@@ -75,7 +75,7 @@ const Services = () => {
       description:
         "The only provider of this service in Whittlesey - professional care in the comfort of your home.",
       highlight: true,
-      image: "/images/fx8.jpg",
+      image: "/images/fx20.jpg",
     },
   ];
 

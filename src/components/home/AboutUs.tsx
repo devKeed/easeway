@@ -128,7 +128,7 @@ const AboutUs = () => {
                 transition={{ duration: 0.3 }}
               >
                 <img
-                  src="/images/fx10.jpg"
+                  src="/images/fx1.jpg"
                   alt="Modern physiotherapy equipment"
                   className="w-full h-32 object-cover"
                 />
@@ -138,7 +138,7 @@ const AboutUs = () => {
               {/* Small image bottom-right */}
               <motion.div className="relative rounded-2xl overflow-hidden">
                 <motion.img
-                  src="/images/fx9.jpg"
+                  src="/images/fx8.jpg"
                   alt="Patient recovery success"
                   className="w-full h-32 object-cover"
                   whileHover={{ scale: 1.02 }}
