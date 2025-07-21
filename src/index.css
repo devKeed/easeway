@@ -37,30 +37,30 @@ h6 {
 }
 
 h1 {
-  font-size: 4.5rem !important;
+  font-size: 2.5rem !important;
 }
 h2 {
-  font-size: 3.5rem;
+  font-size: 2rem;
 }
 h3 {
-  font-size: 64px;
+  font-size: 1.5px;
 }
 h4 {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
 }
 h5 {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 h6 {
-  font-size: 20px;
+  font-size: 16px;
 }
 p,
 li {
-  font-size: 20px;
+  font-size: 16px;
   color: #414141;
 }
 a {
-  font-size: 18px !important;
+  font-size: 16px !important;
   text-decoration: none;
   color: #000;
 }
@@ -73,6 +73,18 @@ a {
 
 .rules-card:hover p {
   font-weight: 800 !important;
+}
+
+button {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #FF3133;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 @keyframes bounce {

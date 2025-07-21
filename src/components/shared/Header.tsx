@@ -21,14 +21,14 @@ const Header = () => {
               <img
                 src={Logo}
                 alt="Easeway Medicare Physiotherapy Clinic"
-                className="h-12 w-12 rounded-xl shadow-sm"
+                className="h-12 w-12 rounded-xl"
               />
             </div>
             <div className="flex flex-col">
-              <h1 className="text-[#0E2127] text-xl font-bold leading-tight">
+              <h5 className="text-[#0E2127] font-bold leading-tight">
                 Easeway Medicare
-              </h1>
-              <p className="text-[#0E2127]/70 text-sm font-medium">
+              </h5>
+              <p className="text-[#0E2127]/70 text-xs">
                 Physiotherapy Clinic
               </p>
             </div>
@@ -41,15 +41,15 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-6">
             <div className="flex items-center space-x-2 text-[#0E2127]">
               <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
-                <span className="text-[#FF3133] text-sm">📞</span>
+                <span className="text-[#FF3133]">📞</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-[#0E2127]/60 font-medium">
+                <span className="text-xs text-[#0E2127]/60 text-xs">
                   Call us
                 </span>
                 <a
                   href="tel:+447460091561"
-                  className="text-[#FF3133] font-semibold hover:text-[#e62a2c] transition-colors"
+                  className="text-[#FF3133] font-semibold text-xs hover:text-[#e62a2c] transition-colors"
                 >
                   +44 7460 091561
                 </a>
@@ -58,13 +58,13 @@ const Header = () => {
 
             <div className="flex items-center space-x-2 text-[#0E2127]">
               <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
-                <span className="text-[#FF3133] text-sm">📍</span>
+                <span className="text-[#FF3133]">📍</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs text-[#0E2127]/60 font-medium">
+                <span className=" text-[#0E2127]/60 text-xs text-xs">
                   Location
                 </span>
-                <span className="text-sm font-medium">
+                <span className="text-xs text-xs">
                   Whittlesey, Peterborough
                 </span>
               </div>
@@ -78,8 +78,8 @@ const Header = () => {
                 .getElementById("book-appointment")
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="bg-[#FF3133] hover:bg-[#e62a2c] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-            whileHover={{ scale: 1.05 }}
+            className=""
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}
           >
             Book Appointment
