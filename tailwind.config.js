@@ -14,7 +14,7 @@ export default {
       },
       fontSize: {
         h1: ["2.5rem", { fontWeight: "700" }],
-        h2: ["2rem", { fontWeight: "700" }],
+        h2: ["1.8rem", { fontWeight: "700" }],
         h3: ["1.5rem", { fontWeight: "700" }],
         h4: ["1.25rem", { fontWeight: "700" }],
         h5: ["1rem", { fontWeight: "700" }],

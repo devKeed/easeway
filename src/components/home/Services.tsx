@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useRef } from "react";
 import {
   Search,
   Hand,
@@ -7,51 +8,66 @@ import {
   Scissors,
   Waves,
   Home,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 const Services = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -400, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 400, behavior: "smooth" });
+    }
+  };
   const services = [
     {
       icon: Search,
       title: "Comprehensive Musculoskeletal Assessment and Diagnosis",
       description:
         "Thorough evaluation to identify the root cause of your pain and mobility issues with detailed musculoskeletal assessment.",
-      image: "/images/image copy 2.png",
+      image: "/images/fx2.jpg",
     },
     {
       icon: Hand,
       title: "Manual Therapy",
       description:
         "Hands-on treatment techniques to improve joint mobility and reduce pain.",
-      image: "/images/image copy 3.png",
+      image: "/images/fx3.jpg",
     },
     {
       icon: Zap,
       title: "Electrotherapy",
       description:
         "Advanced electrical stimulation techniques for pain relief and tissue healing.",
-      image: "/images/image copy 4.png",
+      image: "/images/fx4.jpg",
     },
     {
       icon: Building2,
       title: "Post-surgical Rehabilitation",
       description:
         "Specialized recovery programs to help you regain strength and function after surgery.",
-      image: "/images/image copy 5.png",
+      image: "/images/fx5.jpg",
     },
     {
       icon: Scissors,
       title: "Kinesotaping",
       description:
         "Therapeutic taping techniques to support muscles and joints during healing.",
-      image: "/images/image copy 6.png",
+      image: "/images/fx6.jpg",
     },
     {
       icon: Waves,
       title: "Sports Massage",
       description:
         "Targeted massage therapy for athletes and active individuals.",
-      image: "/images/image copy 7.png",
+      image: "/images/fx7.jpg",
     },
     {
       icon: Home,
@@ -59,40 +75,46 @@ const Services = () => {
       description:
         "The only provider of this service in Whittlesey - professional care in the comfort of your home.",
       highlight: true,
-      image: "/images/image copy 8.png",
+      image: "/images/fx8.jpg",
     },
   ];
 
   return (
-    <section id="services" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section
+      id="services"
+      className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+    >
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),transparent_70%)]" />
+
+      <div className="relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 px-6">
           <motion.div
-            className="inline-flex items-center px-4 py-2 bg-[#FF3133]/5 border border-[#FF3133]/10 rounded-full mb-6"
+            className="inline-flex items-center px-4 py-2 bg-[#FF3133]/5 border border-[#FF3133]/10 rounded-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <span className="text-[#FF3133] text-sm font-medium flex items-center gap-2">
-              <Building2 className="w-4 h-4" /> Our Services
+            <Building2 className="w-4 h-4 mr-2 text-[#FF3133]" />
+            <span className="text-[#FF3133] text-sm font-medium">
+              Our Services
             </span>
           </motion.div>
 
           <motion.h2
-            className="text-4xl lg:text-5xl font-bold text-[#0E2127] mb-6"
+            className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-8 mt-4 tracking-tight max-w-xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Professional Physiotherapy
-            <span className="block text-[#FF3133]">Services</span>
+            Professional Physiotherapy Services
           </motion.h2>
 
           <motion.p
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-sm text-gray-600 mx-auto leading-relaxed font-light max-w-md"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -104,18 +126,37 @@ const Services = () => {
           </motion.p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Navigation Arrows */}
+        <div className="absolute left-6 right-6 top-1/3 -translate-y-1/2 flex justify-between items-center pointer-events-none z-20">
+          <button
+            onClick={scrollLeft}
+            className="w-12 h-12 bg-[#FF3133]/40 backdrop-blur-md border border-[#FF3133]/30 rounded-2xl flex items-center justify-center hover:bg-[#FF3133]/60 transition-all duration-300 pointer-events-auto group"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors" />
+          </button>
+          <button
+            onClick={scrollRight}
+            className="w-12 h-12 bg-[#FF3133]/40 backdrop-blur-md border border-[#FF3133]/30 rounded-2xl flex items-center justify-center hover:bg-[#FF3133]/60 transition-all duration-300 pointer-events-auto group"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors" />
+          </button>
+        </div>
+
+        {/* Horizontal Scrollable Services */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto scrollbar-hide px-6 lg:px-8 pb-4"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${
-                service.highlight
-                  ? "ring-2 ring-[#FF3133] ring-offset-4 transform scale-105"
-                  : "hover:scale-105"
-              }`}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="group relative bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl overflow-hidden transition-all duration-500 hover:bg-white/50 hover:backdrop-blur-lg flex-shrink-0 w-80 ring-1 ring-gray-300/50"
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
               transition={{
                 duration: 0.6,
                 delay: index * 0.1,
@@ -123,9 +164,9 @@ const Services = () => {
               viewport={{ once: true }}
             >
               {service.highlight && (
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="bg-[#FF3133] text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    Exclusive to Whittlesey
+                <div className="absolute top-6 right-6 z-10">
+                  <span className="bg-gray-900/80 text-white text-xs font-medium px-4 py-2 rounded-full">
+                    Exclusive
                   </span>
                 </div>
               )}
@@ -135,37 +176,37 @@ const Services = () => {
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
                 {/* Icon */}
-                <div className="absolute top-4 left-4">
-                  <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                    <service.icon className="w-6 h-6 text-[#FF3133]" />
+                <div className="absolute bottom-4 left-4">
+                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center">
+                    <service.icon className="w-6 h-6 text-gray-800" />
                   </div>
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-[#0E2127] mb-3 group-hover:text-[#FF3133] transition-colors">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 text-xs leading-relaxed font-light">
                   {service.description}
                 </p>
               </div>
 
-              {/* Hover Effect */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FF3133]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Subtle hover effect */}
+              <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </motion.div>
           ))}
         </div>
 
         {/* Call to Action */}
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-16 px-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -177,7 +218,7 @@ const Services = () => {
                 .getElementById("book-appointment")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
-            className="bg-[#FF3133] hover:bg-[#e62a2c] text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+            className="bg-[#0E2127]"
           >
             Book Your Consultation
           </button>

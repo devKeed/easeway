@@ -20,7 +20,7 @@ const Info = () => {
               .getElementById("services")
               ?.scrollIntoView({ behavior: "smooth" })
           }
-          className="bg-[#0E2127] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="bg-[#0E2127] "
         >
           Learn More About Our Services
         </button>

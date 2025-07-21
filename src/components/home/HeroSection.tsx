@@ -3,12 +3,12 @@ import { ArrowUpRight } from "lucide-react";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="min-h-screen sm:min-h-[90vh] flex items-center bg-white py-4 sm:py-2">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
-        <div className="relative mx-2 sm:mx-4">
+    <section className="min-h-full sm:min-h-[90vh] flex items-center bg-white py-3 sm:py-2">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 w-full">
+        <div className="relative sm:mx-4">
           {/* Background Image */}
           <div
-            className="relative h-[70vh] sm:h-[75vh] md:h-[80vh] lg:h-[85vh] bg-cover bg-center bg-no-repeat rounded-xl sm:rounded-2xl overflow-hidden"
+            className="relative h-[85vh] md:h-[85vh] bg-cover bg-center bg-no-repeat rounded-xl sm:rounded-2xl overflow-hidden"
             style={{
               backgroundImage: `url(/images/fx4.jpg)`,
             }}
@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
             <div className="absolute inset-0 flex items-center">
               <div className="max-w-xl sm:max-w-2xl px-6 sm:px-8 md:px-16 lg:px-20">
                 {/* Main Heading */}
-                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-4 sm:mb-6 leading-tight">
+                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-4 sm:mb-6 leading-tight ">
                   Professional Physiotherapy
                 </p>
 

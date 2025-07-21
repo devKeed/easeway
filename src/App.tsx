@@ -10,6 +10,7 @@ import RevealOnScroll from "./components/animations/Reveal";
 import Contact from "./components/home/Contact";
 import SEO from "./components/SEO";
 import ScrollToTop from "./components/ScrollToTop";
+import CustomCursor from "./components/CustomCursor";
 
 function App() {
   return (
@@ -22,26 +23,32 @@ function App() {
         type="website"
       />
       <ScrollToTop />
+      <CustomCursor />
       <Header />
       <main className="flex-1">
         <div className="flex flex-col">
           <HeroSection />
-          <Info />
-          <RevealOnScroll>
-            <AboutUs />
-          </RevealOnScroll>
-          <RevealOnScroll>
+          <div className="max-w-[1280px] mx-auto">
+            {" "}
+            <Info />
+            <RevealOnScroll>
+              <AboutUs />
+            </RevealOnScroll>
+          </div>
+         <div className="mt-4 md:mt-20"> <RevealOnScroll>
             <Services />
-          </RevealOnScroll>
-          <RevealOnScroll>
-            <WhyChooseUs />
-          </RevealOnScroll>
-          <RevealOnScroll>
-            <BookAppointment />
-          </RevealOnScroll>
-          <RevealOnScroll>
-            <Contact />
-          </RevealOnScroll>
+          </RevealOnScroll></div>
+          <div className="max-w-[1280px] mx-auto">
+            <RevealOnScroll>
+              <WhyChooseUs />
+            </RevealOnScroll>
+            <RevealOnScroll>
+              <BookAppointment />
+            </RevealOnScroll>
+            <RevealOnScroll>
+              <Contact />
+            </RevealOnScroll>
+          </div>
         </div>
       </main>
       <Footer />

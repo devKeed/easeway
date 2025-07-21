@@ -50,7 +50,7 @@ const SEO: React.FC<SEOProps> = ({
 
       {/* Additional SEO Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="theme-color" content="#00CCB8" />
+      <meta name="theme-color" content="#FF3133" />
       <link rel="canonical" href={url} />
     </Helmet>
   );
