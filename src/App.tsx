@@ -8,6 +8,7 @@ import Footer from "./components/shared/Footer";
 import Info from "./components/home/Info";
 import RevealOnScroll from "./components/animations/Reveal";
 import Contact from "./components/home/Contact";
+import Testimonials from "./components/home/Testimonials";
 import SEO from "./components/SEO";
 import ScrollToTop from "./components/ScrollToTop";
 import CustomCursor from "./components/CustomCursor";
@@ -35,20 +36,22 @@ function App() {
               <AboutUs />
             </RevealOnScroll>
           </div>
-         <div className="mt-4 md:mt-20"> <RevealOnScroll>
-            <Services />
-          </RevealOnScroll></div>
+          <div className="mt-4 md:mt-20">
+            {" "}
+            <RevealOnScroll>
+              <Services />
+            </RevealOnScroll>{" "}
+            <WhyChooseUs />
+          </div>
+           <RevealOnScroll>
+            <Testimonials />
+          </RevealOnScroll>
           <div className="max-w-[1280px] mx-auto">
-            <RevealOnScroll>
-              <WhyChooseUs />
-            </RevealOnScroll>
-            <RevealOnScroll>
-              <BookAppointment />
-            </RevealOnScroll>
             <RevealOnScroll>
               <Contact />
             </RevealOnScroll>
           </div>
+         
         </div>
       </main>
       <Footer />

@@ -24,11 +24,8 @@ const BookAppointment = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData);
-    alert(
-      "Thank you for your booking request! We will contact you shortly to confirm your appointment."
-    );
+    // Redirect to the booking link
+    window.open("https://qr-codes.io/wZKD7d", "_blank");
   };
 
   const handleChange = (

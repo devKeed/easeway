@@ -31,19 +31,17 @@ const HeroSection: React.FC = () => {
                 </p>
 
                 {/* Single CTA Button */}
-                <button
-                  onClick={() =>
-                    document
-                      .getElementById("book-appointment")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
+                <a
+                  href="https://qr-codes.io/wZKD7d"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-[#FF3133] hover:bg-[#e62a2c] flex items-center gap-3 pr-1 py-1 "
                 >
                   Book Appointment
                   <div className="bg-white rounded-full p-1.5 flex items-center justify-center">
                     <ArrowUpRight className="h-4 w-4 text-[#FF3133]" />
                   </div>
-                </button>
+                </a>
               </div>
             </div>
           </div>

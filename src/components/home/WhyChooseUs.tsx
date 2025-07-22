@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { User, Building2, UserCheck, Sprout, Handshake } from "lucide-react";
+import {
+  User,
+  Building2,
+  UserCheck,
+  Sprout,
+  Handshake,
+  ArrowUpRight,
+} from "lucide-react";
 
 const WhyChooseUs = () => {
   const reasons = [
@@ -30,7 +37,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#EDF2F6]">
+    <section className="py-20 bg-[#0e2127] text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <motion.div
@@ -39,17 +46,17 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0E2127] mb-4 flex items-center justify-center gap-3">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center gap-3">
               <Handshake className="w-8 h-8 text-[#FF3133]" /> Why Choose Us?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm text-gray-200 max-w-xl mx-auto">
               Your health and recovery are our priority. Here's what sets us
               apart.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {reasons.map((reason, index) => (
             <motion.div
               key={index}
@@ -57,12 +64,12 @@ const WhyChooseUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+              className="bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
             >
               <div className="w-16 h-16 bg-[#FF3133]/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <reason.icon className="w-8 h-8 text-[#FF3133]" />
               </div>
-              <h3 className="text-xl font-bold text-[#0E2127] mb-4">
+              <h3 className="text-sm font-bold text-[#0E2127] mb-4">
                 {reason.title}
               </h3>
               <p className="text-gray-600 leading-relaxed">
@@ -91,16 +98,17 @@ const WhyChooseUs = () => {
               Experience the difference personalized physiotherapy care can make
               in your life.
             </p>
-            <button
-              onClick={() => {
-                document
-                  .getElementById("book-appointment")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="bg-[#FF3133] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[#e62a2c] transition-all duration-300 shadow-lg hover:shadow-xl"
+            <a
+              href="https://qr-codes.io/wZKD7d"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#FF3133] hover:bg-[#e62a2c] flex items-center gap-3 pr-1 py-1 mx-auto"
             >
-              Book Your Consultation
-            </button>
+              Book your appointment
+              <div className="bg-white rounded-full p-1.5 flex items-center justify-center">
+                <ArrowUpRight className="h-4 w-4 text-[#FF3133]" />
+              </div>
+            </a>
           </div>
         </motion.div>
       </div>

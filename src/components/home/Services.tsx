@@ -212,16 +212,14 @@ const Services = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <button
-            onClick={() =>
-              document
-                .getElementById("book-appointment")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+          <a
+            href="https://qr-codes.io/wZKD7d"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-[#0E2127]"
           >
             Book Your Consultation
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

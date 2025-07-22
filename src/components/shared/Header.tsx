@@ -85,17 +85,15 @@ const Header = () => {
               </div>
 
               {/* Book Appointment Button */}
-              <motion.button
-                onClick={() => {
-                  document
-                    .getElementById("book-appointment")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
+              <motion.a
+                href="https://qr-codes.io/wZKD7d"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Book Appointment
-              </motion.button>
+              </motion.a>
             </div>
 
             {/* Hamburger Menu Button */}
@@ -186,18 +184,16 @@ const Header = () => {
 
                 {/* Mobile Book Appointment Button */}
                 <div className="pt-4">
-                  <motion.button
-                    onClick={() => {
-                      document
-                        .getElementById("book-appointment")
-                        ?.scrollIntoView({ behavior: "smooth" });
-                      setIsMobileMenuOpen(false);
-                    }}
+                  <motion.a
+                    href="https://qr-codes.io/wZKD7d"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     Book Appointment
-                  </motion.button>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>

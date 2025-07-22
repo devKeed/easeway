@@ -1,75 +1,59 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { MapPin, Phone, Mail, Globe } from "lucide-react";
 
 const Contact = () => {
-  const [contactForm, setContactForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Contact form submitted:", contactForm);
-    alert("Thank you for your message! We will get back to you soon.");
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    setContactForm({
-      ...contactForm,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
-    <section className="py-20 bg-[#EDF2F6]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16">
+    <section
+      id="contact"
+      className="py-24 bg-gradient-to-br from-gray-50 to-white"
+    >
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0E2127] mb-4 flex items-center justify-center gap-3">
-              <MapPin className="w-8 h-8 text-[#FF3133]" /> Contact Us
+            <div className="inline-flex items-center px-6 py-2 bg-white/40 backdrop-blur-md border border-white/20 rounded-full mb-8">
+              <span className="text-gray-700 text-sm font-medium flex items-center gap-2">
+                <Mail className="w-4 h-4" /> Get in Touch
+              </span>
+            </div>
+            <h2 className="text-5xl lg:text-6xl font-light text-gray-900 mb-8 tracking-tight">
+              Contact Us
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get in touch with us today. We're here to help with all your
-              physiotherapy needs.
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
+              Ready to start your journey to recovery? Get in touch with us
+              today.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-12">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Information */}
-          <div className="lg:col-span-1">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-white p-8 rounded-xl shadow-lg h-fit"
-            >
-              <h3 className="text-2xl font-bold text-[#0E2127] mb-6">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div>
+              <h3 className="text-2xl font-medium text-gray-900 mb-8">
                 Get In Touch
               </h3>
 
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <Phone className="text-[#FF3133] w-6 h-6 mt-1" />
+                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl flex items-center justify-center">
+                    <Phone className="text-gray-700 w-5 h-5" />
+                  </div>
                   <div>
-                    <h4 className="font-semibold text-[#0E2127] mb-1">Phone</h4>
+                    <h4 className="font-medium text-gray-900 mb-2">Phone</h4>
                     <a
                       href="tel:+447460091561"
-                      className="text-[#FF3133] hover:underline"
+                      className="text-gray-600 hover:text-gray-900 transition-colors font-light"
                     >
                       +44 7460 091561
                     </a>
@@ -77,12 +61,14 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <Mail className="text-[#FF3133] w-6 h-6 mt-1" />
+                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl flex items-center justify-center">
+                    <Mail className="text-gray-700 w-5 h-5" />
+                  </div>
                   <div>
-                    <h4 className="font-semibold text-[#0E2127] mb-1">Email</h4>
+                    <h4 className="font-medium text-gray-900 mb-2">Email</h4>
                     <a
                       href="mailto:easeway.physiotherapy@easewaymedicare.co.uk"
-                      className="text-[#FF3133] hover:underline break-all"
+                      className="text-gray-600 hover:text-gray-900 transition-colors font-light break-all"
                     >
                       easeway.physiotherapy@easewaymedicare.co.uk
                     </a>
@@ -90,16 +76,16 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <Globe className="text-[#FF3133] w-6 h-6 mt-1" />
+                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl flex items-center justify-center">
+                    <Globe className="text-gray-700 w-5 h-5" />
+                  </div>
                   <div>
-                    <h4 className="font-semibold text-[#0E2127] mb-1">
-                      Website
-                    </h4>
+                    <h4 className="font-medium text-gray-900 mb-2">Website</h4>
                     <a
                       href="https://www.easewaymedicare.co.uk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#FF3133] hover:underline"
+                      className="text-gray-600 hover:text-gray-900 transition-colors font-light"
                     >
                       www.easewaymedicare.co.uk
                     </a>
@@ -107,12 +93,12 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <MapPin className="text-[#FF3133] w-6 h-6 mt-1" />
+                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl flex items-center justify-center">
+                    <MapPin className="text-gray-700 w-5 h-5" />
+                  </div>
                   <div>
-                    <h4 className="font-semibold text-[#0E2127] mb-1">
-                      Address
-                    </h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-medium text-gray-900 mb-2">Location</h4>
+                    <p className="text-gray-600 font-light leading-relaxed">
                       Manor Leisure Centre
                       <br />
                       PE7 1UA, Whittlesey
@@ -121,159 +107,72 @@ const Contact = () => {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </motion.div>
 
-                <div className="flex items-start space-x-4 pt-6 border-t border-gray-100">
-                  <div className="text-[#FF3133] text-2xl">📱</div>
-                  <div>
-                    <h4 className="font-semibold text-[#0E2127] mb-1">
-                      Scan Our QR Code
-                    </h4>
-                    <div className="w-32 h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
-                      <div className="text-center text-gray-500 text-sm">
-                        <div className="text-2xl mb-2">📱</div>
-                        <p>QR Code</p>
-                        <p>Coming Soon</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 text-sm mt-2">
-                      Scan to visit our website or contact us directly
-                    </p>
+          {/* QR Code Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="bg-white/50 backdrop-blur-md border-2 border-gray-300/50 rounded-3xl p-12 text-center"
+          >
+            <h3 className="text-3xl font-medium text-gray-900 mb-8">
+              🔗 Quick Access QR Code
+            </h3>
+
+            <div className="max-w-sm mx-auto">
+              <a
+                href="https://qr-codes.io/wZKD7d"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-48 h-48 bg-gradient-to-br from-blue-100 to-purple-100 border-4 border-blue-200 rounded-3xl flex items-center justify-center mx-auto mb-6 hover:from-blue-200 hover:to-purple-200 transition-all duration-300 group shadow-xl"
+              >
+                <div className="text-center text-gray-800">
+                  <div className="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 transition-all">
+                    <Phone className="w-10 h-10 text-white" />
                   </div>
+                  <p className="font-bold text-xl mb-2 text-blue-800">
+                    CLICK HERE
+                  </p>
+                  <p className="text-md text-blue-700 font-medium">
+                    View QR Code
+                  </p>
+                </div>
+              </a>
+
+              <p className="text-gray-600 font-light mb-6">
+                Scan the QR code above to instantly call us or visit our website
+                for more information about our services.
+              </p>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-center space-x-4 p-4 bg-white/40 backdrop-blur-sm border border-white/30 rounded-2xl">
+                  <Phone className="w-5 h-5 text-gray-700" />
+                  <a
+                    href="tel:+447460091561"
+                    className="text-gray-900 hover:text-gray-600 font-medium transition-colors"
+                  >
+                    +44 7460 091561
+                  </a>
+                </div>
+
+                <div className="flex items-center justify-center space-x-4 p-4 bg-white/40 backdrop-blur-sm border border-white/30 rounded-2xl">
+                  <Globe className="w-5 h-5 text-gray-700" />
+                  <a
+                    href="https://www.easewaymedicare.co.uk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-900 hover:text-gray-600 font-medium transition-colors"
+                  >
+                    Visit Website
+                  </a>
                 </div>
               </div>
-            </motion.div>
-          </div>
-
-          {/* Contact Form and Map */}
-          <div className="lg:col-span-2">
-            <div className="grid gap-8">
-              {/* Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="bg-white p-8 rounded-xl shadow-lg"
-              >
-                <h3 className="text-2xl font-bold text-[#0E2127] mb-6">
-                  Send Us a Message
-                </h3>
-
-                <form onSubmit={handleSubmit}>
-                  <div className="grid md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="block text-[#0E2127] font-semibold mb-2">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={contactForm.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                        placeholder="Your Name"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[#0E2127] font-semibold mb-2">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={contactForm.phone}
-                        onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                        placeholder="Your phone"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="block text-[#0E2127] font-semibold mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={contactForm.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                        placeholder="Your Email"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[#0E2127] font-semibold mb-2">
-                        Subject
-                      </label>
-                      <select
-                        name="subject"
-                        value={contactForm.subject}
-                        onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                      >
-                        <option value="">Select subject</option>
-                        <option value="appointment">Book Appointment</option>
-                        <option value="inquiry">General Inquiry</option>
-                        <option value="home-visit">Home Visit Request</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="mb-6">
-                    <label className="block text-[#0E2127] font-semibold mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      name="message"
-                      value={contactForm.message}
-                      onChange={handleChange}
-                      rows={5}
-                      required
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
-                      placeholder="Your Message"
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-[#FF3133] text-white py-4 px-6 rounded-lg text-lg font-semibold hover:bg-[#e62a2c] transition-all duration-300 shadow-lg hover:shadow-xl"
-                  >
-                    Send Message
-                  </button>
-                </form>
-              </motion.div>
-
-              {/* Google Map Embed */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden"
-              >
-                <div className="h-80 bg-gray-200 flex items-center justify-center">
-                  {/* Replace this with actual Google Maps embed */}
-                  <div className="text-center text-gray-600">
-                    <div className="w-16 h-16 bg-[#FF3133]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                      <MapPin className="w-8 h-8 text-[#FF3133]" />
-                    </div>
-                    <p className="font-semibold">Manor Leisure Centre</p>
-                    <p>PE7 1UA, Whittlesey, Peterborough</p>
-                    <p className="text-sm mt-2">
-                      Google Maps will be embedded here
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
