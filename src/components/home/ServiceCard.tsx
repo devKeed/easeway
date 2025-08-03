@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { BsArrowDownLeftCircle } from "react-icons/bs";
 

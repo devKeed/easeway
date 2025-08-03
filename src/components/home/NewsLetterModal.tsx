@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { NewsLetterForm } from "../reusables/NewsLetterForm";
 
@@ -69,5 +71,3 @@ const NewsletterModal: React.FC<NewsletterModalProps> = ({
 };
 
 export default NewsletterModal;
-
-

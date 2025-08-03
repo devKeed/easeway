@@ -1,4 +1,14 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
+
+interface WindowWithMailchimp extends Window {
+  fnames?: unknown;
+  $mcj?: unknown;
+  jQuery?: {
+    noConflict: (flag: boolean) => unknown;
+  };
+}
 
 interface NewsLetterFormProps {
   onSuccess?: () => void;
@@ -22,8 +32,9 @@ export const NewsLetterForm: React.FC<NewsLetterFormProps> = ({
     document.body.appendChild(script);
 
     script.onload = () => {
-      if ((window as any).fnames) {
-        (window as any).$mcj = (window as any).jQuery.noConflict(true);
+      const mailchimpWindow = window as WindowWithMailchimp;
+      if (mailchimpWindow.fnames) {
+        mailchimpWindow.$mcj = mailchimpWindow.jQuery?.noConflict(true);
       }
     };
 

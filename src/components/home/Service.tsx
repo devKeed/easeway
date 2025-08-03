@@ -1,7 +1,8 @@
+"use client";
+
 import React, { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
-import image from "/images/faq.png";
 import { MyFillButton } from "../reusables/Button";
 
 interface Service {
@@ -124,7 +125,7 @@ const LandingPage: React.FC = () => {
           </div>
           <div className="w-full md:w-1/2 mt-8 md:mt-0 flex justify-center">
             <img
-              src={image}
+              src="/images/faq.png"
               alt="Background"
               className="w-full max-w-md md:max-w-none h-auto object-cover"
             />

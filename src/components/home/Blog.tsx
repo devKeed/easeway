@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import BlogCard from "./BlogCard";
 import { usePosts } from "../../hooks/usePosts";
@@ -33,11 +35,11 @@ const Blog: React.FC = () => {
             <BlogCard
               key={post.id}
               id={post.id}
-              image={
-                (post as any).featured_media ||
-                (post as any).featured_image ||
-                "/images/default-blog.png"
-              }
+              image={String(
+                (post as Record<string, unknown>).featured_media ||
+                  (post as Record<string, unknown>).featured_image ||
+                  "/images/default-blog.png"
+              )}
               title={
                 typeof post.title === "string"
                   ? post.title

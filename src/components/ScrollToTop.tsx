@@ -1,4 +1,6 @@
 // src/components/ScrollToTop.tsx
+"use client";
+
 import React, { useEffect } from "react";
 
 const ScrollToTop: React.FC = () => {

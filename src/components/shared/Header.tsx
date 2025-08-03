@@ -1,4 +1,5 @@
-import Logo from "/images/easeway_logo.png";
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Phone, MapPin } from "lucide-react";
@@ -37,7 +38,7 @@ const Header = () => {
             <div className="flex items-center space-x-2 md:space-x-3">
               <div className="relative">
                 <img
-                  src={Logo}
+                  src="/images/easeway_logo.png"
                   alt="Easeway Medicare Physiotherapy Clinic"
                   className="w-8 md:w-10 rounded-xl"
                 />

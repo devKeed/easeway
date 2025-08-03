@@ -10,7 +10,7 @@ export interface WPPost {
   featured_media: string | null;
 }
 
-const API_BASE = import.meta.env.VITE_WP_API_BASE;
+const API_BASE = process.env.NEXT_PUBLIC_WP_API_BASE;
 
 const fetchWithTimeout = async (
   url: string,
