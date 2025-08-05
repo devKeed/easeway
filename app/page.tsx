@@ -18,13 +18,13 @@ export default function HomePage() {
       <main className="flex-1">
         <div className="flex flex-col">
           <HeroSection />
-          <div className="max-w-[1280px] mx-auto">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
             <Info />
             <RevealOnScroll>
               <AboutUs />
             </RevealOnScroll>
           </div>
-          <div className="mt-4 md:mt-20">
+          <div className="mt-6 sm:mt-8 md:mt-12 lg:mt-20">
             <RevealOnScroll>
               <Services />
             </RevealOnScroll>
@@ -33,7 +33,7 @@ export default function HomePage() {
           <RevealOnScroll>
             <Testimonials />
           </RevealOnScroll>
-          <div className="max-w-[1280px] mx-auto">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
             <RevealOnScroll>
               <Contact />
             </RevealOnScroll>

@@ -107,7 +107,7 @@ const Services = () => {
           </motion.div>
 
           <motion.h2
-            className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-8 mt-4 tracking-tight max-w-xl mx-auto"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-6 sm:mb-8 mt-4 tracking-tight max-w-xl mx-auto leading-tight"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -117,7 +117,7 @@ const Services = () => {
           </motion.h2>
 
           <motion.p
-            className="text-sm text-gray-600 mx-auto leading-relaxed font-light max-w-md"
+            className="text-xs sm:text-sm text-gray-600 mx-auto leading-relaxed font-light max-w-md px-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -130,7 +130,7 @@ const Services = () => {
         </div>
 
         {/* Navigation Arrows */}
-        <div className="absolute left-6 right-6 top-1/3 -translate-y-1/2 flex justify-between items-center pointer-events-none z-20">
+        <div className="hidden sm:flex absolute left-6 right-6 top-1/3 -translate-y-1/2 justify-between items-center pointer-events-none z-20">
           <button
             onClick={scrollLeft}
             className="w-12 h-12 bg-[#FF3133]/40 backdrop-blur-md border border-[#FF3133]/30 rounded-2xl flex items-center justify-center hover:bg-[#FF3133]/60 transition-all duration-300 pointer-events-auto group"
@@ -148,7 +148,7 @@ const Services = () => {
         {/* Horizontal Scrollable Services */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide px-6 lg:px-8 pb-4"
+          className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide px-4 sm:px-6 lg:px-8 pb-4"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
@@ -157,7 +157,7 @@ const Services = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className="group relative bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl overflow-hidden transition-all duration-500 hover:bg-white/50 hover:backdrop-blur-lg flex-shrink-0 w-80 ring-1 ring-gray-300/50"
+              className="group relative bg-white/30 backdrop-blur-md border border-white/20 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 hover:bg-white/50 hover:backdrop-blur-lg flex-shrink-0 w-72 sm:w-80 ring-1 ring-gray-300/50"
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{
@@ -175,7 +175,7 @@ const Services = () => {
               )}
 
               {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-40 sm:h-48 overflow-hidden">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -184,19 +184,19 @@ const Services = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
                 {/* Icon */}
-                <div className="absolute bottom-4 left-4">
-                  <div className="w-12 h-12 bg-white/40 backdrop-blur-md border border-white/30 rounded-xl flex items-center justify-center">
-                    <service.icon className="w-6 h-6 text-gray-800" />
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/40 backdrop-blur-md border border-white/30 rounded-lg sm:rounded-xl flex items-center justify-center">
+                    <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800" />
                   </div>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 leading-tight">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 sm:mb-3 leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-xs leading-relaxed font-light">
+                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed font-light">
                   {service.description}
                 </p>
               </div>
@@ -209,14 +209,14 @@ const Services = () => {
 
         {/* Call to Action */}
         <motion.div
-          className="text-center mt-16 px-6"
+          className="text-center mt-12 sm:mt-16 px-4 sm:px-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
           <MyFillButton
-            text="Book Your Consultation"
+            text="Book Consultation"
             link="https://qr-codes.io/wZKD7d"
           />
         </motion.div>

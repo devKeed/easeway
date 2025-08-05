@@ -6,13 +6,13 @@ import { Mail, Phone, Globe, MapPin } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-gray-900 to-black border-t border-gray-800/50">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className="py-16 grid lg:grid-cols-3 gap-12">
+        <div className="py-12 sm:py-14 md:py-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
           {/* Brand Section */}
-          <div className="lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-1">
             <motion.div
-              className="flex items-center mb-6"
+              className="flex items-center mb-4 sm:mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -22,21 +22,21 @@ const Footer = () => {
                 <img
                   src="/images/logo.png"
                   alt="Easeway Medicare Physiotherapy Clinic"
-                  className="h-10 w-10 rounded-lg mr-3"
+                  className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg mr-3"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-medium text-white">
+                <h3 className="text-lg sm:text-xl font-medium text-white">
                   Easeway Medicare
                 </h3>
-                <p className="text-gray-400 text-[16px] font-light">
+                <p className="text-gray-400 text-sm sm:text-base font-light">
                   Physiotherapy Clinic
                 </p>
               </div>
             </motion.div>
 
             <motion.p
-              className="text-gray-400 leading-relaxed mb-8 max-w-sm font-light"
+              className="text-gray-400 leading-relaxed mb-6 sm:mb-8 max-w-sm font-light text-sm sm:text-base"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -50,7 +50,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <motion.h4
-              className="text-lg font-medium mb-6 text-white"
+              className="text-base sm:text-lg font-medium mb-4 sm:mb-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -59,7 +59,7 @@ const Footer = () => {
               Quick Links
             </motion.h4>
             <motion.ul
-              className="space-y-3"
+              className="space-y-2 sm:space-y-3"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -82,7 +82,7 @@ const Footer = () => {
                       if (link === "Book Now")
                         window.open("https://qr-codes.io/wZKD7d", "_blank");
                     }}
-                    className="text-gray-400 hover:text-white transition-all duration-300 font-light text-[16px] block"
+                    className="text-gray-400 hover:text-white transition-all duration-300 font-light text-sm sm:text-base block"
                   >
                     {link}
                   </button>
@@ -92,9 +92,9 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <motion.h4
-              className="text-lg font-medium mb-6 text-white"
+              className="text-base sm:text-lg font-medium mb-4 sm:mb-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -103,7 +103,7 @@ const Footer = () => {
               Contact
             </motion.h4>
             <motion.div
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -127,10 +127,10 @@ const Footer = () => {
                 <div className="w-5 h-5 bg-gray-800 rounded-lg flex items-center justify-center mt-0.5">
                   <Mail className="text-gray-400 w-3 h-3" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <a
                     href="mailto:easeway.physiotherapy@easewaymedicare.co.uk"
-                    className="text-white hover:text-gray-300 transition-colors text-[16px] font-light"
+                    className="text-white hover:text-gray-300 transition-colors text-xs sm:text-sm font-light break-all"
                   >
                     easeway.physiotherapy@easewaymedicare.co.uk
                   </a>
@@ -142,7 +142,7 @@ const Footer = () => {
                   <MapPin className="text-gray-400 w-3 h-3" />
                 </div>
                 <div>
-                  <p className="text-white text-[16px] font-light leading-relaxed">
+                  <p className="text-white text-sm sm:text-base font-light leading-relaxed">
                     Manor Leisure Centre
                     <br />
                     PE7 1UA, Whittlesey
@@ -161,7 +161,7 @@ const Footer = () => {
                     href="https://www.easewaymedicare.co.uk"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white hover:text-gray-300 transition-colors text-[16px] font-light"
+                    className="text-white hover:text-gray-300 transition-colors text-sm sm:text-base font-light"
                   >
                     www.easewaymedicare.co.uk
                   </a>
@@ -173,13 +173,13 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <motion.div
-          className="border-t border-gray-800/50 py-6 text-center"
+          className="border-t border-gray-800/50 py-4 sm:py-6 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-500 text-[16px] font-light">
+          <p className="text-gray-500 text-sm sm:text-base font-light px-4">
             &copy; 2025 Easeway Medicare Physiotherapy Clinic. All rights
             reserved.
           </p>

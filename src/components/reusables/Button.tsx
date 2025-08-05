@@ -56,7 +56,7 @@ export const MyFillButton: FC<TButtonProps> = ({
     e.currentTarget.style.color = color;
   };
 
-  const className = `inline-flex items-center gap-2 px-10 py-3 rounded-2xl transition-colors duration-300`;
+  const className = `inline-flex items-center gap-2 px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-colors duration-300 text-sm sm:text-base`;
 
   return (
     <a
@@ -70,7 +70,7 @@ export const MyFillButton: FC<TButtonProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       {text}
-      {arrow && <FiArrowUpRight size={24} />}
+      {arrow && <FiArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6" />}
     </a>
   );
 };
@@ -106,7 +106,7 @@ export const MyOutlinedButton: FC<TButtonProps> = ({
     e.currentTarget.style.color = color;
   };
 
-  const className = `inline-flex items-center gap-2 px-10 py-3 rounded-2xl border-2 transition-colors duration-300`;
+  const className = `inline-flex items-center gap-2 px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border-2 transition-colors duration-300 text-sm sm:text-base`;
 
   return (
     <a
@@ -120,7 +120,7 @@ export const MyOutlinedButton: FC<TButtonProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       {text}
-      {arrow && <FiArrowUpRight size={24} />}
+      {arrow && <FiArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6" />}
     </a>
   );
 };

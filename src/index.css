@@ -6,11 +6,18 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-size: 24px;
+  font-size: clamp(16px, 4vw, 24px);
   font-family: "Uber Move", sans-serif;
   scroll-behavior: smooth;
   font-weight: 500;
   line-height: 1.5;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  * {
+    font-size: clamp(14px, 4vw, 18px);
+  }
 }
 
 /* Hide scrollbar for horizontal scroll */
@@ -41,6 +48,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  :root {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent zoom on input focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 h1,

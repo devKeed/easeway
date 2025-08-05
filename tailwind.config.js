@@ -2,7 +2,11 @@ const { join } = require("path");
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", join(__dirname, "./src/**/*.{js,ts,jsx,tsx}")],
+  content: [
+    "./index.html",
+    join(__dirname, "./src/**/*.{js,ts,jsx,tsx}"),
+    join(__dirname, "./app/**/*.{js,ts,jsx,tsx}"),
+  ],
   theme: {
     extend: {
       colors: {
@@ -22,6 +26,15 @@ export default {
         body: ["16px", { fontWeight: "400" }],
         small: ["14px", { fontWeight: "500" }],
         button: ["16px", { fontWeight: "600" }],
+      },
+      screens: {
+        xs: "475px",
+      },
+      spacing: {
+        "safe-top": "env(safe-area-inset-top)",
+        "safe-bottom": "env(safe-area-inset-bottom)",
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
       },
     },
   },

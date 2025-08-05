@@ -4,33 +4,33 @@ import { motion } from "framer-motion";
 
 const AboutUs = () => {
   return (
-    <section className="py-4 md:py-4 ">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-8 sm:py-12 md:py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
           >
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center px-4 py-2 bg-[#FF3133]/5 border border-[#FF3133]/10 rounded-full"
+              className="inline-flex items-center px-3 sm:px-4 py-2 bg-[#FF3133]/5 border border-[#FF3133]/10 rounded-full"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <span className="text-[#FF3133] text-sm font-medium">
+              <span className="text-[#FF3133] text-xs sm:text-sm font-medium">
                 🩺 About Us
               </span>
             </motion.div>
 
             <div>
               <motion.h2
-                className="text-3xl lg:text-5xl font-bold text-[#0E2127] leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0E2127] leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
@@ -39,7 +39,7 @@ const AboutUs = () => {
                 Your Well-being is Our Priority
               </motion.h2>
 
-              <p className="text-gray-600 leading-relaxed mt-2">
+              <p className="text-gray-600 leading-relaxed mt-3 sm:mt-4 text-sm sm:text-base">
                 At Easeway Medicare Physiotherapy Clinic, we believe that
                 everyone deserves to live without pain and move freely. Our
                 dedicated team is committed to providing personalized,
@@ -50,32 +50,32 @@ const AboutUs = () => {
 
             {/* Stats Grid */}
             <motion.div
-              className="grid grid-cols-3 gap-3"
+              className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white p-2  rounded-xl text-center border border-gray-100">
-                <div className="text-2xl font-bold text-[#FF3133] mb-2">
+              <div className="bg-white p-3 sm:p-4 rounded-xl text-center border border-gray-100">
+                <div className="text-xl sm:text-2xl font-bold text-[#FF3133] mb-1 sm:mb-2">
                   500+
                 </div>
-                <div className="text-[12px] text-gray-600 font-medium">
+                <div className="text-xs sm:text-sm text-gray-600 font-medium">
                   Patients Treated
                 </div>
               </div>
-              <div className="bg-white p-2  rounded-xl text-center border border-gray-100">
-                <div className="text-2xl font-bold text-[#FF3133] mb-2">
+              <div className="bg-white p-3 sm:p-4 rounded-xl text-center border border-gray-100">
+                <div className="text-xl sm:text-2xl font-bold text-[#FF3133] mb-1 sm:mb-2">
                   10+
                 </div>
-                <div className="text-[12px] text-gray-600 font-medium">
+                <div className="text-xs sm:text-sm text-gray-600 font-medium">
                   Years Experience
                 </div>
               </div>
             </motion.div>
 
             <motion.div
-              className="flex flex-wrap gap-1"
+              className="flex flex-wrap gap-2 sm:gap-3"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -89,10 +89,10 @@ const AboutUs = () => {
               ].map((feature) => (
                 <div
                   key={feature}
-                  className="flex items-center space-x-2 bg-[#0E2127]/10 px-4 py-2 rounded-full border border-gray-100"
+                  className="flex items-center space-x-2 bg-[#0E2127]/10 px-3 sm:px-4 py-2 rounded-full border border-gray-100"
                 >
                   <div className="w-1 h-1 bg-[#FF3133] rounded-full"></div>
-                  <span className="text-[12px] font-medium text-[#0E2127]">
+                  <span className="text-xs sm:text-sm font-medium text-[#0E2127]">
                     {feature}
                   </span>
                 </div>
@@ -108,10 +108,10 @@ const AboutUs = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {/* Large image top-left */}
               <motion.div
-                className="relative rounded-2xl overflow-hidden shadow-xl row-span-2"
+                className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl row-span-2"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
@@ -125,7 +125,7 @@ const AboutUs = () => {
 
               {/* Small image top-right */}
               <motion.div
-                className="relative rounded-2xl overflow-hidden"
+                className="relative rounded-xl sm:rounded-2xl overflow-hidden"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
