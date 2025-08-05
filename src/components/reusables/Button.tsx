@@ -31,9 +31,9 @@ export const MyFillButton: FC<TButtonProps> = ({
   text,
   link,
   color = "white",
-  bgColor = "#F2720D",
+  bgColor = "#E6292C",
   hoverTextColor = "white",
-  hoverBgColor = "#f24a0d",
+  hoverBgColor = "#E6292C",
   ariaLabel,
 }) => {
   const isExternal =
@@ -56,7 +56,7 @@ export const MyFillButton: FC<TButtonProps> = ({
     e.currentTarget.style.color = color;
   };
 
-  const className = `flex items-center gap-2 px-10 py-3 rounded-2xl transition-colors duration-300`;
+  const className = `inline-flex items-center gap-2 px-10 py-3 rounded-2xl transition-colors duration-300`;
 
   return (
     <a
@@ -106,7 +106,7 @@ export const MyOutlinedButton: FC<TButtonProps> = ({
     e.currentTarget.style.color = color;
   };
 
-  const className = `flex items-center gap-2 px-10 py-3 rounded-2xl border-2 transition-colors duration-300`;
+  const className = `inline-flex items-center gap-2 px-10 py-3 rounded-2xl border-2 transition-colors duration-300`;
 
   return (
     <a

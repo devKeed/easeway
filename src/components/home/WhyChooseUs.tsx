@@ -1,14 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  User,
-  Building2,
-  UserCheck,
-  Sprout,
-  Handshake,
-  ArrowUpRight,
-} from "lucide-react";
+import { User, Building2, UserCheck, Sprout, Handshake } from "lucide-react";
+import { MyFillButton } from "../reusables/Button";
 
 const WhyChooseUs = () => {
   const reasons = [
@@ -100,17 +94,15 @@ const WhyChooseUs = () => {
               Experience the difference personalized physiotherapy care can make
               in your life.
             </p>
-            <a
-              href="https://qr-codes.io/wZKD7d"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#FF3133] hover:bg-[#e62a2c] flex items-center gap-3 pr-1 py-1 mx-auto"
-            >
-              Book your appointment
-              <div className="bg-white rounded-full p-1.5 flex items-center justify-center">
-                <ArrowUpRight className="h-4 w-4 text-[#FF3133]" />
-              </div>
-            </a>
+            <MyFillButton
+              text="Book your appointment"
+              link="https://qr-codes.io/wZKD7d"
+              bgColor="#FF3133"
+              hoverBgColor="#e62a2c"
+              color="white"
+              hoverTextColor="white"
+              ariaLabel="Book your appointment"
+            />
           </div>
         </motion.div>
       </div>
