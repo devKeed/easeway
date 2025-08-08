@@ -36,7 +36,7 @@ const AboutUs = () => {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                Your Well-being is Our Priority
+                Who are we?
               </motion.h2>
 
               <p className="text-gray-600 leading-relaxed mt-3 sm:mt-4 text-sm sm:text-base">
@@ -56,19 +56,19 @@ const AboutUs = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white p-3 sm:p-4 rounded-xl text-center border border-gray-100">
+              <div className="bg-white p-2 sm:p-3 rounded-xl text-center border border-gray-100">
                 <div className="text-xl sm:text-2xl font-bold text-[#FF3133] mb-1 sm:mb-2">
                   500+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600 font-medium">
+                <div className="text-xs sm:text-base text-gray-600 font-medium">
                   Patients Treated
                 </div>
               </div>
-              <div className="bg-white p-3 sm:p-4 rounded-xl text-center border border-gray-100">
+              <div className="bg-white p-2 sm:p-3 rounded-xl text-center border border-gray-100">
                 <div className="text-xl sm:text-2xl font-bold text-[#FF3133] mb-1 sm:mb-2">
                   10+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600 font-medium">
+                <div className="text-xs sm:text-base text-gray-600 font-medium">
                   Years Experience
                 </div>
               </div>
@@ -92,7 +92,7 @@ const AboutUs = () => {
                   className="flex items-center space-x-2 bg-[#0E2127]/10 px-3 sm:px-4 py-2 rounded-full border border-gray-100"
                 >
                   <div className="w-1 h-1 bg-[#FF3133] rounded-full"></div>
-                  <span className="text-xs sm:text-sm font-medium text-[#0E2127]">
+                  <span className="text-xs sm:text-base font-medium text-[#0E2127]">
                     {feature}
                   </span>
                 </div>

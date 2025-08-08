@@ -8,12 +8,7 @@ const Testimonials = () => {
     <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-white to-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Testimonials Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
+     
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <div className="inline-flex items-center px-4 sm:px-6 py-2 bg-white/40 backdrop-blur-md border border-white/20 rounded-full mb-6 sm:mb-8">
               <span className="text-gray-700 text-sm font-medium flex items-center gap-2">
@@ -162,7 +157,6 @@ const Testimonials = () => {
               </div>
             </motion.div>
           </div>
-        </motion.div>
       </div>
     </section>
   );

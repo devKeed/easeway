@@ -26,6 +26,7 @@ export default {
         body: ["16px", { fontWeight: "400" }],
         small: ["14px", { fontWeight: "500" }],
         button: ["16px", { fontWeight: "600" }],
+        base: ["16px", { fontWeight: "500" }],
       },
       screens: {
         xs: "475px",

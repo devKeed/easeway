@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
             <div className="absolute inset-0 flex items-center ">
               <div className="max-w-xl sm:max-w-2xl px-6 sm:px-8 md:px-16 lg:px-20">
                 {/* Main Heading */}
-                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-4 sm:mb-6 leading-tight ">
+                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white mb-4 sm:mb-6 leading-tight ">
                   Professional Physiotherapy
                 </p>
 
@@ -31,15 +31,18 @@ const HeroSection: React.FC = () => {
                 </p>
 
                 {/* Single CTA Button */}
-             <div>   <MyFillButton
-                  text="Book Appointment"
-                  link="https://qr-codes.io/wZKD7d"
-                  bgColor="#FF3133"
-                  hoverBgColor="#e62a2c"
-                  color="white"
-                  hoverTextColor="white"
-                  ariaLabel="Book Appointment"
-                /></div>
+                <div>
+                  {" "}
+                  <MyFillButton
+                    text="Book Appointment"
+                    link="https://qr-codes.io/wZKD7d"
+                    bgColor="#FF3133"
+                    hoverBgColor="#e62a2c"
+                    color="white"
+                    hoverTextColor="white"
+                    ariaLabel="Book Appointment"
+                  />
+                </div>
               </div>
             </div>
           </div>
