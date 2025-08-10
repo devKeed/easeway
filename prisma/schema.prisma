@@ -77,3 +77,17 @@ model Booking {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+model ClinicSettings {
+  id            String   @id @default(cuid())
+  openingTime   String   @default("09:00") // Format: "HH:MM"
+  closingTime   String   @default("17:00") // Format: "HH:MM"
+  breakStart    String?  // Format: "HH:MM"
+  breakEnd      String?  // Format: "HH:MM"
+  blockedPeriods Json?   // Array of {start: "HH:MM", end: "HH:MM", reason: "string"}
+  workingDays   Json     @default("[1,2,3,4,5]") // Array of day numbers (0=Sunday, 1=Monday, etc.)
+  timeSlotDuration Int   @default(30) // Duration in minutes
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

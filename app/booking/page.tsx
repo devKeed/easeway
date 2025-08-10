@@ -11,24 +11,20 @@ import {
   Mail,
   MessageSquare,
   Stethoscope,
+  ArrowRight,
+  ChevronLeft,
 } from "lucide-react";
 import Link from "next/link";
+import { BookingProvider, useBooking } from "../../src/contexts/BookingContext";
+import SessionTypeSelection, {
+  SessionType,
+} from "../../src/components/booking/SessionTypeSelection";
+import StepIndicator from "../../src/components/booking/StepIndicator";
 
+// Main booking page component
 const BookingPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    date: "",
-    time: "",
-    message: "",
-    emergencyContact: "",
-    medicalHistory: "",
-    currentMedications: "",
-    previousPhysiotherapy: "",
-  });
-
+  const { bookingData, updateBookingData, currentStep, setCurrentStep } =
+    useBooking();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
@@ -62,15 +58,45 @@ const BookingPage = () => {
     "16:30",
   ];
 
-  const handleChange = (
+  const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    setFormData({
-      ...formData,
+    updateBookingData({
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSessionSelect = (session: SessionType) => {
+    updateBookingData({ sessionType: session });
+  };
+
+  const canProceedToNextStep = () => {
+    switch (currentStep) {
+      case 0:
+        return bookingData.sessionType !== null;
+      case 1:
+        return bookingData.name && bookingData.email && bookingData.phone;
+      case 2:
+        return bookingData.service && bookingData.date && bookingData.time;
+      case 3:
+        return bookingData.message;
+      default:
+        return false;
+    }
+  };
+
+  const handleNext = () => {
+    if (canProceedToNextStep() && currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,25 +104,8 @@ const BookingPage = () => {
     setIsSubmitting(true);
 
     try {
-      // Here you would typically send the data to your backend
-      // For now, we'll simulate a submission
       await new Promise((resolve) => setTimeout(resolve, 2000));
-
       setSubmitStatus("success");
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        service: "",
-        date: "",
-        time: "",
-        message: "",
-        emergencyContact: "",
-        medicalHistory: "",
-        currentMedications: "",
-        previousPhysiotherapy: "",
-      });
     } catch (error) {
       setSubmitStatus("error");
     } finally {
@@ -104,8 +113,238 @@ const BookingPage = () => {
     }
   };
 
-  // Get today's date in YYYY-MM-DD format for min attribute
   const today = new Date().toISOString().split("T")[0];
+
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <SessionTypeSelection
+            selectedSession={bookingData.sessionType}
+            onSessionSelect={handleSessionSelect}
+          />
+        );
+
+      case 1:
+        return (
+          <div className="bg-gray-50 rounded-xl p-6">
+            <h3 className="text-xl font-semibold text-[#0E2127] mb-4 flex items-center gap-2">
+              <User className="w-5 h-5" />
+              Personal Information
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={bookingData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={bookingData.phone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="+44 7XXX XXXXXX"
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={bookingData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Emergency Contact
+                </label>
+                <input
+                  type="text"
+                  name="emergencyContact"
+                  value={bookingData.emergencyContact}
+                  onChange={handleInputChange}
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="Emergency contact name and phone number"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 2:
+        return (
+          <div className="bg-gray-50 rounded-xl p-6">
+            <h3 className="text-xl font-semibold text-[#0E2127] mb-4 flex items-center gap-2">
+              <Calendar className="w-5 h-5" />
+              Appointment Details
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="md:col-span-2">
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Service Required *
+                </label>
+                <select
+                  name="service"
+                  value={bookingData.service}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                >
+                  <option value="">Select a service</option>
+                  {services.map((service, index) => (
+                    <option key={index} value={service}>
+                      {service}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Preferred Date *
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  value={bookingData.date}
+                  onChange={handleInputChange}
+                  min={today}
+                  required
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Preferred Time *
+                </label>
+                <select
+                  name="time"
+                  value={bookingData.time}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                >
+                  <option value="">Select time</option>
+                  {timeSlots.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {bookingData.sessionType && (
+              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Selected:</strong> {bookingData.sessionType.name} (
+                  {bookingData.sessionType.duration} minutes)
+                </p>
+              </div>
+            )}
+          </div>
+        );
+
+      case 3:
+        return (
+          <div className="bg-gray-50 rounded-xl p-6">
+            <h3 className="text-xl font-semibold text-[#0E2127] mb-4 flex items-center gap-2">
+              <Stethoscope className="w-5 h-5" />
+              Medical Information
+            </h3>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Current Medical Condition / Reason for Visit *
+                </label>
+                <textarea
+                  name="message"
+                  value={bookingData.message}
+                  onChange={handleInputChange}
+                  required
+                  rows={3}
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="Please describe your current condition, symptoms, or reason for seeking physiotherapy..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Medical History
+                </label>
+                <textarea
+                  name="medicalHistory"
+                  value={bookingData.medicalHistory}
+                  onChange={handleInputChange}
+                  rows={3}
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="Any relevant medical history, surgeries, chronic conditions..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Current Medications
+                </label>
+                <textarea
+                  name="currentMedications"
+                  value={bookingData.currentMedications}
+                  onChange={handleInputChange}
+                  rows={2}
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="List any medications you are currently taking..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-2">
+                  Previous Physiotherapy Experience
+                </label>
+                <textarea
+                  name="previousPhysiotherapy"
+                  value={bookingData.previousPhysiotherapy}
+                  onChange={handleInputChange}
+                  rows={2}
+                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  placeholder="Have you had physiotherapy before? What treatments worked or didn't work?"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#EDF2F6] to-white">
@@ -184,260 +423,94 @@ const BookingPage = () => {
           transition={{ duration: 0.6 }}
           className="bg-white rounded-2xl shadow-lg p-8"
         >
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-[#FF3133]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Calendar className="w-8 h-8 text-[#FF3133]" />
-            </div>
-            <h2 className="text-3xl font-bold text-[#0E2127] mb-2">
-              Book Your Appointment
-            </h2>
-            <p className="text-gray-600">
-              Fill out the form below and we'll get back to you to confirm your
-              appointment
-            </p>
-          </div>
+          {/* Step Indicator */}
+          <StepIndicator
+            currentStep={currentStep}
+            onStepClick={setCurrentStep}
+          />
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Personal Information */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-[#0E2127] mb-4 flex items-center gap-2">
-                <User className="w-5 h-5" />
-                Personal Information
-              </h3>
+            {/* Step Content */}
+            {renderStepContent()}
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="Your full name"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="+44 7XXX XXXXXX"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Emergency Contact
-                  </label>
-                  <input
-                    type="text"
-                    name="emergencyContact"
-                    value={formData.emergencyContact}
-                    onChange={handleChange}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="Emergency contact name and phone number"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Appointment Details */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-[#0E2127] mb-4 flex items-center gap-2">
-                <Calendar className="w-5 h-5" />
-                Appointment Details
-              </h3>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="md:col-span-2">
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Service Required *
-                  </label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                  >
-                    <option value="">Select a service</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service}>
-                        {service}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Preferred Date *
-                  </label>
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    min={today}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Preferred Time *
-                  </label>
-                  <select
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                  >
-                    <option value="">Select time</option>
-                    {timeSlots.map((time) => (
-                      <option key={time} value={time}>
-                        {time}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Medical Information */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-[#0E2127] mb-4 flex items-center gap-2">
-                <Stethoscope className="w-5 h-5" />
-                Medical Information
-              </h3>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Current Medical Condition / Reason for Visit *
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={3}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="Please describe your current condition, symptoms, or reason for seeking physiotherapy..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Medical History
-                  </label>
-                  <textarea
-                    name="medicalHistory"
-                    value={formData.medicalHistory}
-                    onChange={handleChange}
-                    rows={3}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="Any relevant medical history, surgeries, chronic conditions..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Current Medications
-                  </label>
-                  <textarea
-                    name="currentMedications"
-                    value={formData.currentMedications}
-                    onChange={handleChange}
-                    rows={2}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="List any medications you are currently taking..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-2">
-                    Previous Physiotherapy Experience
-                  </label>
-                  <textarea
-                    name="previousPhysiotherapy"
-                    value={formData.previousPhysiotherapy}
-                    onChange={handleChange}
-                    rows={2}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                    placeholder="Have you had physiotherapy before? What treatments worked or didn't work?"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <motion.button
-              type="submit"
-              disabled={isSubmitting}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`w-full py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl ${
-                isSubmitting
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[#FF3133] hover:bg-[#e62a2c] text-white"
-              }`}
-            >
-              {isSubmitting ? (
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Submitting...
-                </div>
-              ) : (
-                "Submit Booking Request"
-              )}
-            </motion.button>
-
-            <p className="text-sm text-gray-600 text-center">
-              * Required fields. We'll contact you within 24 hours to confirm
-              your appointment.
-              <br />
-              For urgent matters, please call us directly at{" "}
-              <a
-                href="tel:+447460091561"
-                className="text-[#FF3133] hover:underline font-medium"
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between pt-6">
+              <button
+                type="button"
+                onClick={handlePrevious}
+                disabled={currentStep === 0}
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
+                  currentStep === 0
+                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
               >
-                +44 7460 091561
-              </a>
-            </p>
+                <ChevronLeft className="w-4 h-4" />
+                Previous
+              </button>
+
+              {currentStep < 3 ? (
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={!canProceedToNextStep()}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
+                    canProceedToNextStep()
+                      ? "bg-[#FF3133] text-white hover:bg-[#e62a2c]"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                >
+                  Next
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={isSubmitting || !canProceedToNextStep()}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
+                    isSubmitting || !canProceedToNextStep()
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-[#FF3133] hover:bg-[#e62a2c] text-white"
+                  }`}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Booking"
+                  )}
+                </button>
+              )}
+            </div>
           </form>
+
+          <p className="text-sm text-gray-600 text-center mt-6">
+            * Required fields. We'll contact you within 24 hours to confirm your
+            appointment.
+            <br />
+            For urgent matters, please call us directly at{" "}
+            <a
+              href="tel:+447460091561"
+              className="text-[#FF3133] hover:underline font-medium"
+            >
+              +44 7460 091561
+            </a>
+          </p>
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default BookingPage;
+// Wrapper component to provide context
+const BookingPageWrapper = () => {
+  return (
+    <BookingProvider>
+      <BookingPage />
+    </BookingProvider>
+  );
+};
+
+export default BookingPageWrapper;
