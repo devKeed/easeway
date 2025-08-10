@@ -2,7 +2,16 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ArrowLeft, Calendar, Clock, User, Phone, Mail, MessageSquare, Stethoscope } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  User,
+  Phone,
+  Mail,
+  MessageSquare,
+  Stethoscope,
+} from "lucide-react";
 import Link from "next/link";
 
 const BookingPage = () => {
@@ -21,7 +30,9 @@ const BookingPage = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   const services = [
     "Comprehensive Assessment",
@@ -37,12 +48,24 @@ const BookingPage = () => {
   ];
 
   const timeSlots = [
-    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-    "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "14:00",
+    "14:30",
+    "15:00",
+    "15:30",
+    "16:00",
+    "16:30",
   ];
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     setFormData({
       ...formData,
@@ -53,13 +76,13 @@ const BookingPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Here you would typically send the data to your backend
       // For now, we'll simulate a submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setSubmitStatus('success');
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      setSubmitStatus("success");
       // Reset form
       setFormData({
         name: "",
@@ -75,14 +98,14 @@ const BookingPage = () => {
         previousPhysiotherapy: "",
       });
     } catch (error) {
-      setSubmitStatus('error');
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   // Get today's date in YYYY-MM-DD format for min attribute
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#EDF2F6] to-white">
@@ -90,7 +113,7 @@ const BookingPage = () => {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
           <div className="flex items-center justify-between">
-            <Link 
+            <Link
               href="/"
               className="flex items-center gap-3 text-[#0E2127] hover:text-[#FF3133] transition-colors"
             >
@@ -98,8 +121,12 @@ const BookingPage = () => {
               <span className="font-medium">Back to Home</span>
             </Link>
             <div className="text-right">
-              <h1 className="text-2xl font-bold text-[#0E2127]">Book Appointment</h1>
-              <p className="text-gray-600">Schedule your physiotherapy session</p>
+              <h1 className="text-2xl font-bold text-[#0E2127]">
+                Book Appointment
+              </h1>
+              <p className="text-gray-600">
+                Schedule your physiotherapy session
+              </p>
             </div>
           </div>
         </div>
@@ -107,7 +134,7 @@ const BookingPage = () => {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-6 lg:px-12 py-12">
-        {submitStatus === 'success' && (
+        {submitStatus === "success" && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,14 +145,18 @@ const BookingPage = () => {
                 <span className="text-green-600 text-xl">✓</span>
               </div>
               <div>
-                <h3 className="text-green-800 font-semibold">Booking Request Submitted!</h3>
-                <p className="text-green-700">We'll contact you within 24 hours to confirm your appointment.</p>
+                <h3 className="text-green-800 font-semibold">
+                  Booking Request Submitted!
+                </h3>
+                <p className="text-green-700">
+                  We'll contact you within 24 hours to confirm your appointment.
+                </p>
               </div>
             </div>
           </motion.div>
         )}
 
-        {submitStatus === 'error' && (
+        {submitStatus === "error" && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,8 +167,12 @@ const BookingPage = () => {
                 <span className="text-red-600 text-xl">✗</span>
               </div>
               <div>
-                <h3 className="text-red-800 font-semibold">Submission Failed</h3>
-                <p className="text-red-700">Please try again or call us directly at +44 7460 091561</p>
+                <h3 className="text-red-800 font-semibold">
+                  Submission Failed
+                </h3>
+                <p className="text-red-700">
+                  Please try again or call us directly at +44 7460 091561
+                </p>
               </div>
             </div>
           </motion.div>
@@ -153,8 +188,13 @@ const BookingPage = () => {
             <div className="w-16 h-16 bg-[#FF3133]/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <Calendar className="w-8 h-8 text-[#FF3133]" />
             </div>
-            <h2 className="text-3xl font-bold text-[#0E2127] mb-2">Book Your Appointment</h2>
-            <p className="text-gray-600">Fill out the form below and we'll get back to you to confirm your appointment</p>
+            <h2 className="text-3xl font-bold text-[#0E2127] mb-2">
+              Book Your Appointment
+            </h2>
+            <p className="text-gray-600">
+              Fill out the form below and we'll get back to you to confirm your
+              appointment
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -164,7 +204,7 @@ const BookingPage = () => {
                 <User className="w-5 h-5" />
                 Personal Information
               </h3>
-              
+
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[#0E2127] font-medium mb-2">
@@ -233,7 +273,7 @@ const BookingPage = () => {
                 <Calendar className="w-5 h-5" />
                 Appointment Details
               </h3>
-              
+
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
                   <label className="block text-[#0E2127] font-medium mb-2">
@@ -298,7 +338,7 @@ const BookingPage = () => {
                 <Stethoscope className="w-5 h-5" />
                 Medical Information
               </h3>
-              
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-[#0E2127] font-medium mb-2">
@@ -367,8 +407,8 @@ const BookingPage = () => {
               whileTap={{ scale: 0.98 }}
               className={`w-full py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl ${
                 isSubmitting
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-[#FF3133] hover:bg-[#e62a2c] text-white'
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#FF3133] hover:bg-[#e62a2c] text-white"
               }`}
             >
               {isSubmitting ? (
@@ -377,15 +417,19 @@ const BookingPage = () => {
                   Submitting...
                 </div>
               ) : (
-                'Submit Booking Request'
+                "Submit Booking Request"
               )}
             </motion.button>
 
             <p className="text-sm text-gray-600 text-center">
-              * Required fields. We'll contact you within 24 hours to confirm your appointment.
+              * Required fields. We'll contact you within 24 hours to confirm
+              your appointment.
               <br />
-              For urgent matters, please call us directly at{' '}
-              <a href="tel:+447460091561" className="text-[#FF3133] hover:underline font-medium">
+              For urgent matters, please call us directly at{" "}
+              <a
+                href="tel:+447460091561"
+                className="text-[#FF3133] hover:underline font-medium"
+              >
                 +44 7460 091561
               </a>
             </p>

@@ -152,7 +152,8 @@ const Contact = () => {
               </a>
 
               <p className="text-gray-600 font-light mb-6">
-                Click above to book your appointment online or call us directly for immediate assistance.
+                Click above to book your appointment online or call us directly
+                for immediate assistance.
               </p>
 
               <div className="space-y-4">

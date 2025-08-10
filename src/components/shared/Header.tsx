@@ -2,10 +2,14 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, User, LogOut } from "lucide-react";
+import { signIn, signOut } from "next-auth/react";
+import { useAuth } from "../../hooks/useAuth";
+import Link from "next/link";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   const menuItems = [
     { label: "Services", href: "#services" },
@@ -85,14 +89,65 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Book Appointment Button */}
-              <motion.a
-                href="/booking"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Book Appointment
-              </motion.a>
+              {/* Authentication and Book Appointment */}
+              <div className="flex items-center gap-4">
+                {!isLoading && (
+                  <>
+                    {isAuthenticated ? (
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                            <User className="w-4 h-4 text-[#FF3133]" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-xs text-[#0E2127] font-medium">
+                              {user?.name}
+                            </span>
+                            <span className="text-xs text-[#0E2127]/60 capitalize">
+                              {user?.role}
+                            </span>
+                          </div>
+                        </div>
+
+                        {user?.role === "admin" && (
+                          <Link
+                            href="/admin"
+                            className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full hover:bg-blue-200 transition-colors"
+                          >
+                            Admin
+                          </Link>
+                        )}
+
+                        <button
+                          onClick={() => signOut()}
+                          className="p-2 text-[#0E2127]/60 hover:text-[#FF3133] transition-colors"
+                          title="Sign out"
+                        >
+                          <LogOut className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => signIn()}
+                        className="flex items-center gap-2 text-sm text-[#0E2127]/80 hover:text-[#FF3133] transition-colors"
+                      >
+                        <User className="w-4 h-4" />
+                        Sign In
+                      </button>
+                    )}
+                  </>
+                )}
+
+                {/* Book Appointment Button */}
+                <motion.a
+                  href="/booking"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#FF3133] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#e62a2c] transition-colors"
+                >
+                  Book Appointment
+                </motion.a>
+              </div>
             </div>
 
             {/* Hamburger Menu Button */}

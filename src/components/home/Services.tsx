@@ -215,10 +215,7 @@ const Services = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <MyFillButton
-            text="Book Consultation"
-            link="/booking"
-          />
+          <MyFillButton text="Book Consultation" link="/booking" />
         </motion.div>
       </div>
     </section>

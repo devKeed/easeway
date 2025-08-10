@@ -10,8 +10,10 @@
     "export": "next export"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.10.0",
     "@emailjs/browser": "^4.4.1",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "@prisma/client": "^6.13.0",
     "@sindresorhus/slugify": "^2.2.1",
     "@tanstack/react-query": "^5.81.5",
     "clsx": "^2.1.1",
@@ -22,6 +24,8 @@
     "html-to-text": "^9.0.5",
     "lucide-react": "^0.479.0",
     "next": "^14.0.0",
+    "next-auth": "^4.24.11",
+    "prisma": "^6.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",

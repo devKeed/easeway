@@ -2,6 +2,7 @@
 
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SessionProvider } from "next-auth/react";
 import ScrollToTop from "../src/components/ScrollToTop";
 import CustomCursor from "../src/components/CustomCursor";
 
@@ -21,10 +22,12 @@ export default function ClientProviders({
   children: React.ReactNode;
 }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ScrollToTop />
-      <CustomCursor />
-      {children}
-    </QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <ScrollToTop />
+        <CustomCursor />
+        {children}
+      </QueryClientProvider>
+    </SessionProvider>
   );
 }
