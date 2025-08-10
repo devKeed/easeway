@@ -129,7 +129,7 @@ const Header = () => {
                     ) : (
                       <button
                         onClick={() => signIn()}
-                        className="flex items-center gap-2 text-sm text-[#0E2127]/80 hover:text-[#FF3133] transition-colors"
+                        className="flex items-center gap-2 text-[#ffffff]/80 hover:text-[#FF3133] transition-colors font-normal text-xs"
                       >
                         <User className="w-4 h-4" />
                         Sign In

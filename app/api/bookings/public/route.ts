@@ -1,19 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../../lib/auth";
-import { prisma } from "../../../lib/prisma";
+import { prisma } from "../../../../lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-
-    if (!session) {
-      return NextResponse.json(
-        { error: "Authentication required" },
-        { status: 401 }
-      );
-    }
-
     const body = await request.json();
     const {
       name,
@@ -39,10 +28,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 }
+      );
+    }
+
     // Validate session type if provided
     if (sessionType && !["new", "followup"].includes(sessionType)) {
       return NextResponse.json(
         { error: "Invalid session type. Must be 'new' or 'followup'" },
+        { status: 400 }
+      );
+    }
+
+    // Validate date (cannot be in the past)
+    const selectedDate = new Date(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      return NextResponse.json(
+        { error: "Cannot book appointments for past dates" },
         { status: 400 }
       );
     }
@@ -68,10 +79,47 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if clinic settings allow booking for this time
+    const settings = await prisma.clinicSettings.findFirst({
+      orderBy: { createdAt: "desc" },
+    });
+
+    if (settings && !settings.isActive) {
+      return NextResponse.json(
+        {
+          error:
+            "Online booking is currently disabled. Please call +44 7460 091561 to book.",
+        },
+        { status: 503 } // Service Unavailable
+      );
+    }
+
+    // Create a guest user or find existing user by email
+    let userId = "guest-booking"; // Default for guest bookings
+
+    // Try to find existing user by email
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      userId = existingUser.id;
+    } else {
+      // Create a guest user record
+      const guestUser = await prisma.user.create({
+        data: {
+          email,
+          name,
+          role: "client",
+        },
+      });
+      userId = guestUser.id;
+    }
+
     // Create booking in database
     const booking = await prisma.booking.create({
       data: {
-        userId: session.user.id,
+        userId,
         name,
         email,
         phone,
@@ -92,7 +140,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message:
-        "Booking created successfully! We'll contact you within 24 hours to confirm your appointment.",
+        "Booking submitted successfully! We'll contact you within 24 hours to confirm your appointment.",
       booking: {
         id: booking.id,
         status: booking.status,
@@ -101,43 +149,16 @@ export async function POST(request: NextRequest) {
         sessionType: booking.sessionType,
         sessionDuration: booking.sessionDuration,
         service: booking.service,
+        confirmationNumber: booking.id.slice(-8).toUpperCase(),
       },
     });
   } catch (error) {
-    console.error("Error creating booking:", error);
+    console.error("Error creating public booking:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function GET(request: NextRequest) {
-  try {
-    const session = await getServerSession(authOptions);
-
-    if (!session) {
-      return NextResponse.json(
-        { error: "Authentication required" },
-        { status: 401 }
-      );
-    }
-
-    // Get user's bookings
-    const bookings = await prisma.booking.findMany({
-      where: {
-        userId: session.user.id,
+      {
+        error:
+          "Internal server error. Please try again or call us directly at +44 7460 091561.",
       },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    return NextResponse.json({ bookings });
-  } catch (error) {
-    console.error("Error fetching bookings:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
       { status: 500 }
     );
   }

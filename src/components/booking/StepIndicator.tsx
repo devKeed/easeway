@@ -7,6 +7,7 @@ import {
   User,
   Calendar as CalendarIcon,
   Stethoscope,
+  CheckCircle,
 } from "lucide-react";
 
 interface BookingStep {
@@ -40,6 +41,12 @@ const steps: BookingStep[] = [
     title: "Medical Info",
     icon: Stethoscope,
     description: "Health history and requirements",
+  },
+  {
+    id: 4,
+    title: "Confirmation",
+    icon: CheckCircle,
+    description: "Review and submit your booking",
   },
 ];
 

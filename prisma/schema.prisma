@@ -66,6 +66,8 @@ model Booking {
   service         String
   date            String
   time            String
+  sessionType     String?  // "new" or "followup"
+  sessionDuration Int?     // Duration in minutes
   message         String?
   emergencyContact String?
   medicalHistory  String?
