@@ -7,7 +7,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-gray-50 to-white"
+      className="py-16 sm:py-20 md:py-24 "
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
@@ -130,7 +130,7 @@ const Contact = () => {
             className="bg-white/50 backdrop-blur-md border-2 border-gray-300/50 rounded-3xl p-12 text-center"
           >
             <h3 className="text-3xl font-medium text-gray-900 mb-8">
-              � Online Booking
+               Online Booking
             </h3>
 
             <div className="max-w-sm mx-auto">
