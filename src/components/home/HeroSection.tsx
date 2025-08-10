@@ -35,7 +35,7 @@ const HeroSection: React.FC = () => {
                   {" "}
                   <MyFillButton
                     text="Book Appointment"
-                    link="https://qr-codes.io/wZKD7d"
+                    link="/booking"
                     bgColor="#FF3133"
                     hoverBgColor="#e62a2c"
                     color="white"

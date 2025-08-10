@@ -87,9 +87,7 @@ const Header = () => {
 
               {/* Book Appointment Button */}
               <motion.a
-                href="https://qr-codes.io/wZKD7d"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/booking"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -186,9 +184,7 @@ const Header = () => {
                 {/* Mobile Book Appointment Button */}
                 <div className="pt-4">
                   <motion.a
-                    href="https://qr-codes.io/wZKD7d"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/booking"
                     onClick={() => setIsMobileMenuOpen(false)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.95 }}

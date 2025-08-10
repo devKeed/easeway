@@ -80,7 +80,7 @@ const Footer = () => {
                           .getElementById("contact")
                           ?.scrollIntoView({ behavior: "smooth" });
                       if (link === "Book Now")
-                        window.open("https://qr-codes.io/wZKD7d", "_blank");
+                        window.location.href = "/booking";
                     }}
                     className="text-gray-400 hover:text-white transition-all duration-300 font-light text-sm sm:text-base block"
                   >

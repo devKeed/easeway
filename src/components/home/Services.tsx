@@ -217,7 +217,7 @@ const Services = () => {
         >
           <MyFillButton
             text="Book Consultation"
-            link="https://qr-codes.io/wZKD7d"
+            link="/booking"
           />
         </motion.div>
       </div>

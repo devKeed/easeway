@@ -130,14 +130,12 @@ const Contact = () => {
             className="bg-white/50 backdrop-blur-md border-2 border-gray-300/50 rounded-3xl p-12 text-center"
           >
             <h3 className="text-3xl font-medium text-gray-900 mb-8">
-              🔗 Quick Access QR Code
+              � Online Booking
             </h3>
 
             <div className="max-w-sm mx-auto">
               <a
-                href="https://qr-codes.io/wZKD7d"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/booking"
                 className="w-48 h-48 bg-gradient-to-br from-blue-100 to-purple-100 border-4 border-blue-200 rounded-3xl flex items-center justify-center mx-auto mb-6 hover:from-blue-200 hover:to-purple-200 transition-all duration-300 group shadow-xl"
               >
                 <div className="text-center text-gray-800">
@@ -145,17 +143,16 @@ const Contact = () => {
                     <Phone className="w-10 h-10 text-white" />
                   </div>
                   <p className="font-bold text-xl mb-2 text-blue-800">
-                    CLICK HERE
+                    BOOK NOW
                   </p>
                   <p className="text-md text-blue-700 font-medium">
-                    View QR Code
+                    Online Booking
                   </p>
                 </div>
               </a>
 
               <p className="text-gray-600 font-light mb-6">
-                Scan the QR code above to instantly call us or visit our website
-                for more information about our services.
+                Click above to book your appointment online or call us directly for immediate assistance.
               </p>
 
               <div className="space-y-4">

@@ -26,8 +26,8 @@ const BookAppointment = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Redirect to the booking link
-    window.open("https://qr-codes.io/wZKD7d", "_blank");
+    // Redirect to the new booking page
+    window.location.href = "/booking";
   };
 
   const handleChange = (
@@ -72,16 +72,19 @@ const BookAppointment = () => {
           >
             <div className="bg-[#EDF2F6] p-8 rounded-xl shadow-lg">
               <h3 className="text-2xl font-bold text-[#0E2127] mb-6">
-                Quick Book with QR Code
+                Quick Booking Options
               </h3>
 
-              {/* QR Code Placeholder - Replace with actual QR code */}
-              <div className="w-64 h-64 mx-auto bg-white rounded-lg shadow-inner flex items-center justify-center mb-6 border-2 border-gray-200">
-                <div className="text-6xl">📱</div>
+              {/* Call to Action */}
+              <div className="w-64 h-64 mx-auto bg-gradient-to-br from-[#FF3133]/10 to-[#FF3133]/20 rounded-lg shadow-inner flex items-center justify-center mb-6 border-2 border-[#FF3133]/20">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">�</div>
+                  <p className="text-[#FF3133] font-semibold">Book Online</p>
+                </div>
               </div>
 
               <p className="text-gray-600 mb-4">
-                Scan this QR code with your phone to book instantly
+                Click the form to book your appointment online
               </p>
 
               <div className="bg-white p-4 rounded-lg">
