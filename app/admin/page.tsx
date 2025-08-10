@@ -137,7 +137,9 @@ const AdminDashboard = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
         {/* Quick Actions */}
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-[#0E2127] mb-4">Quick Actions</h2>
+          <h2 className="text-xl font-semibold text-[#0E2127] mb-4">
+            Quick Actions
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link
               href="/admin/dashboard"
@@ -146,10 +148,12 @@ const AdminDashboard = () => {
               <Settings className="w-5 h-5" />
               <div>
                 <h3 className="font-semibold">Clinic Settings</h3>
-                <p className="text-sm text-red-100">Manage hours & availability</p>
+                <p className="text-sm text-red-100">
+                  Manage hours & availability
+                </p>
               </div>
             </Link>
-            
+
             <div className="bg-gray-100 text-gray-500 p-4 rounded-xl flex items-center gap-3">
               <Users className="w-5 h-5" />
               <div>
@@ -157,7 +161,7 @@ const AdminDashboard = () => {
                 <p className="text-sm">Coming soon</p>
               </div>
             </div>
-            
+
             <div className="bg-gray-100 text-gray-500 p-4 rounded-xl flex items-center gap-3">
               <Calendar className="w-5 h-5" />
               <div>

@@ -86,10 +86,21 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({
   const [isComplete, setIsComplete] = useState(false);
 
   const updateBookingData = (data: Partial<BookingFormData>) => {
-    setBookingData((prev) => ({
-      ...prev,
-      ...data,
-    }));
+    setBookingData((prev) => {
+      // If date is being changed, clear the selected time
+      if (data.date !== undefined && data.date !== prev.date) {
+        return {
+          ...prev,
+          ...data,
+          time: "", // Clear time when date changes
+        };
+      }
+
+      return {
+        ...prev,
+        ...data,
+      };
+    });
   };
 
   const resetBookingData = () => {

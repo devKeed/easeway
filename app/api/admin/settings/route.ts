@@ -126,8 +126,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate that opening time is before closing time
-    const [openHour, openMin] = openingTime.split(':').map(Number);
-    const [closeHour, closeMin] = closingTime.split(':').map(Number);
+    const [openHour, openMin] = openingTime.split(":").map(Number);
+    const [closeHour, closeMin] = closingTime.split(":").map(Number);
     const openMinutes = openHour * 60 + openMin;
     const closeMinutes = closeHour * 60 + closeMin;
 
@@ -147,8 +147,8 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const [breakStartHour, breakStartMin] = breakStart.split(':').map(Number);
-      const [breakEndHour, breakEndMin] = breakEnd.split(':').map(Number);
+      const [breakStartHour, breakStartMin] = breakStart.split(":").map(Number);
+      const [breakEndHour, breakEndMin] = breakEnd.split(":").map(Number);
       const breakStartMinutes = breakStartHour * 60 + breakStartMin;
       const breakEndMinutes = breakEndHour * 60 + breakEndMin;
 
@@ -178,8 +178,8 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const [startHour, startMin] = period.start.split(':').map(Number);
-        const [endHour, endMin] = period.end.split(':').map(Number);
+        const [startHour, startMin] = period.start.split(":").map(Number);
+        const [endHour, endMin] = period.end.split(":").map(Number);
         const startMinutes = startHour * 60 + startMin;
         const endMinutes = endHour * 60 + endMin;
 
@@ -193,7 +193,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate working days
-    if (!Array.isArray(workingDays) || workingDays.some(day => day < 0 || day > 6)) {
+    if (
+      !Array.isArray(workingDays) ||
+      workingDays.some((day) => day < 0 || day > 6)
+    ) {
       return NextResponse.json(
         { error: "Invalid working days. Must be array of numbers 0-6." },
         { status: 400 }

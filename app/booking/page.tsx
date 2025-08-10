@@ -20,6 +20,7 @@ import SessionTypeSelection, {
   SessionType,
 } from "../../src/components/booking/SessionTypeSelection";
 import StepIndicator from "../../src/components/booking/StepIndicator";
+import TimeSlotSelector from "../../src/components/booking/TimeSlotSelector";
 
 // Main booking page component
 const BookingPage = () => {
@@ -43,21 +44,6 @@ const BookingPage = () => {
     "Mobility Training",
   ];
 
-  const timeSlots = [
-    "09:00",
-    "09:30",
-    "10:00",
-    "10:30",
-    "11:00",
-    "11:30",
-    "14:00",
-    "14:30",
-    "15:00",
-    "15:30",
-    "16:00",
-    "16:30",
-  ];
-
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -70,6 +56,10 @@ const BookingPage = () => {
 
   const handleSessionSelect = (session: SessionType) => {
     updateBookingData({ sessionType: session });
+  };
+
+  const handleTimeSelect = (time: string) => {
+    updateBookingData({ time });
   };
 
   const canProceedToNextStep = () => {
@@ -239,26 +229,16 @@ const BookingPage = () => {
                   className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
                 />
               </div>
+            </div>
 
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
-                  Preferred Time *
-                </label>
-                <select
-                  name="time"
-                  value={bookingData.time}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                >
-                  <option value="">Select time</option>
-                  {timeSlots.map((time) => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            {/* Time Slot Selection */}
+            <div className="mt-6">
+              <TimeSlotSelector
+                selectedDate={bookingData.date}
+                selectedTime={bookingData.time}
+                onTimeSelect={handleTimeSelect}
+                sessionDuration={bookingData.sessionType?.duration || 30}
+              />
             </div>
 
             {bookingData.sessionType && (

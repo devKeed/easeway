@@ -36,12 +36,12 @@ interface ClinicSettings {
 
 const dayNames = [
   "Sunday",
-  "Monday", 
+  "Monday",
   "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday"
+  "Saturday",
 ];
 
 const AdminDashboard = () => {
@@ -120,28 +120,32 @@ const AdminDashboard = () => {
   };
 
   const handleWorkingDayToggle = (dayIndex: number) => {
-    setSettings(prev => ({
+    setSettings((prev) => ({
       ...prev,
       workingDays: prev.workingDays.includes(dayIndex)
-        ? prev.workingDays.filter(day => day !== dayIndex)
-        : [...prev.workingDays, dayIndex].sort()
+        ? prev.workingDays.filter((day) => day !== dayIndex)
+        : [...prev.workingDays, dayIndex].sort(),
     }));
   };
 
   const addBlockedPeriod = () => {
-    if (newBlockedPeriod.start && newBlockedPeriod.end && newBlockedPeriod.reason) {
-      setSettings(prev => ({
+    if (
+      newBlockedPeriod.start &&
+      newBlockedPeriod.end &&
+      newBlockedPeriod.reason
+    ) {
+      setSettings((prev) => ({
         ...prev,
-        blockedPeriods: [...prev.blockedPeriods, { ...newBlockedPeriod }]
+        blockedPeriods: [...prev.blockedPeriods, { ...newBlockedPeriod }],
       }));
       setNewBlockedPeriod({ start: "", end: "", reason: "" });
     }
   };
 
   const removeBlockedPeriod = (index: number) => {
-    setSettings(prev => ({
+    setSettings((prev) => ({
       ...prev,
-      blockedPeriods: prev.blockedPeriods.filter((_, i) => i !== index)
+      blockedPeriods: prev.blockedPeriods.filter((_, i) => i !== index),
     }));
   };
 
@@ -180,7 +184,7 @@ const AdminDashboard = () => {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
           <div className="flex items-center justify-between">
-            <Link 
+            <Link
               href="/admin"
               className="flex items-center gap-3 text-[#0E2127] hover:text-[#FF3133] transition-colors"
             >
@@ -188,8 +192,12 @@ const AdminDashboard = () => {
               <span className="font-medium">Back to Admin</span>
             </Link>
             <div className="text-right">
-              <h1 className="text-2xl font-bold text-[#0E2127]">Clinic Settings</h1>
-              <p className="text-gray-600">Manage opening hours and availability</p>
+              <h1 className="text-2xl font-bold text-[#0E2127]">
+                Clinic Settings
+              </h1>
+              <p className="text-gray-600">
+                Manage opening hours and availability
+              </p>
             </div>
           </div>
         </div>
@@ -232,7 +240,7 @@ const AdminDashboard = () => {
               <Clock className="w-5 h-5" />
               Operating Hours
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[#0E2127] font-medium mb-2">
@@ -241,11 +249,16 @@ const AdminDashboard = () => {
                 <input
                   type="time"
                   value={settings.openingTime}
-                  onChange={(e) => setSettings(prev => ({ ...prev, openingTime: e.target.value }))}
+                  onChange={(e) =>
+                    setSettings((prev) => ({
+                      ...prev,
+                      openingTime: e.target.value,
+                    }))
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-[#0E2127] font-medium mb-2">
                   Closing Time
@@ -253,7 +266,12 @@ const AdminDashboard = () => {
                 <input
                   type="time"
                   value={settings.closingTime}
-                  onChange={(e) => setSettings(prev => ({ ...prev, closingTime: e.target.value }))}
+                  onChange={(e) =>
+                    setSettings((prev) => ({
+                      ...prev,
+                      closingTime: e.target.value,
+                    }))
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
                 />
               </div>
@@ -265,7 +283,12 @@ const AdminDashboard = () => {
               </label>
               <select
                 value={settings.timeSlotDuration}
-                onChange={(e) => setSettings(prev => ({ ...prev, timeSlotDuration: parseInt(e.target.value) }))}
+                onChange={(e) =>
+                  setSettings((prev) => ({
+                    ...prev,
+                    timeSlotDuration: parseInt(e.target.value),
+                  }))
+                }
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
               >
                 <option value={15}>15 minutes</option>
@@ -281,7 +304,7 @@ const AdminDashboard = () => {
             <h3 className="text-xl font-semibold text-[#0E2127] mb-4">
               Break Period (Optional)
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[#0E2127] font-medium mb-2">
@@ -290,11 +313,16 @@ const AdminDashboard = () => {
                 <input
                   type="time"
                   value={settings.breakStart || ""}
-                  onChange={(e) => setSettings(prev => ({ ...prev, breakStart: e.target.value }))}
+                  onChange={(e) =>
+                    setSettings((prev) => ({
+                      ...prev,
+                      breakStart: e.target.value,
+                    }))
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-[#0E2127] font-medium mb-2">
                   Break End Time
@@ -302,7 +330,12 @@ const AdminDashboard = () => {
                 <input
                   type="time"
                   value={settings.breakEnd || ""}
-                  onChange={(e) => setSettings(prev => ({ ...prev, breakEnd: e.target.value }))}
+                  onChange={(e) =>
+                    setSettings((prev) => ({
+                      ...prev,
+                      breakEnd: e.target.value,
+                    }))
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
                 />
               </div>
@@ -315,7 +348,7 @@ const AdminDashboard = () => {
               <Calendar className="w-5 h-5" />
               Working Days
             </h3>
-            
+
             <div className="grid grid-cols-7 gap-2">
               {dayNames.map((day, index) => (
                 <button
@@ -338,10 +371,12 @@ const AdminDashboard = () => {
             <h3 className="text-xl font-semibold text-[#0E2127] mb-4">
               Blocked Time Periods
             </h3>
-            
+
             {/* Add New Blocked Period */}
             <div className="bg-gray-50 rounded-lg p-4 mb-4">
-              <h4 className="font-medium text-[#0E2127] mb-3">Add Blocked Period</h4>
+              <h4 className="font-medium text-[#0E2127] mb-3">
+                Add Blocked Period
+              </h4>
               <div className="grid md:grid-cols-4 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -350,7 +385,12 @@ const AdminDashboard = () => {
                   <input
                     type="time"
                     value={newBlockedPeriod.start}
-                    onChange={(e) => setNewBlockedPeriod(prev => ({ ...prev, start: e.target.value }))}
+                    onChange={(e) =>
+                      setNewBlockedPeriod((prev) => ({
+                        ...prev,
+                        start: e.target.value,
+                      }))
+                    }
                     className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
                   />
                 </div>
@@ -361,7 +401,12 @@ const AdminDashboard = () => {
                   <input
                     type="time"
                     value={newBlockedPeriod.end}
-                    onChange={(e) => setNewBlockedPeriod(prev => ({ ...prev, end: e.target.value }))}
+                    onChange={(e) =>
+                      setNewBlockedPeriod((prev) => ({
+                        ...prev,
+                        end: e.target.value,
+                      }))
+                    }
                     className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
                   />
                 </div>
@@ -372,7 +417,12 @@ const AdminDashboard = () => {
                   <input
                     type="text"
                     value={newBlockedPeriod.reason}
-                    onChange={(e) => setNewBlockedPeriod(prev => ({ ...prev, reason: e.target.value }))}
+                    onChange={(e) =>
+                      setNewBlockedPeriod((prev) => ({
+                        ...prev,
+                        reason: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., Lunch break"
                     className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent"
                   />
@@ -392,7 +442,9 @@ const AdminDashboard = () => {
             {/* Current Blocked Periods */}
             {settings.blockedPeriods.length > 0 && (
               <div className="space-y-2">
-                <h4 className="font-medium text-[#0E2127] mb-2">Current Blocked Periods</h4>
+                <h4 className="font-medium text-[#0E2127] mb-2">
+                  Current Blocked Periods
+                </h4>
                 {settings.blockedPeriods.map((period, index) => (
                   <div
                     key={index}
@@ -402,7 +454,9 @@ const AdminDashboard = () => {
                       <span className="font-medium text-red-800">
                         {period.start} - {period.end}
                       </span>
-                      <span className="text-red-600 ml-2">({period.reason})</span>
+                      <span className="text-red-600 ml-2">
+                        ({period.reason})
+                      </span>
                     </div>
                     <button
                       onClick={() => removeBlockedPeriod(index)}
@@ -421,12 +475,17 @@ const AdminDashboard = () => {
             <h3 className="text-xl font-semibold text-[#0E2127] mb-4">
               Clinic Status
             </h3>
-            
+
             <label className="flex items-center gap-3">
               <input
                 type="checkbox"
                 checked={settings.isActive}
-                onChange={(e) => setSettings(prev => ({ ...prev, isActive: e.target.checked }))}
+                onChange={(e) =>
+                  setSettings((prev) => ({
+                    ...prev,
+                    isActive: e.target.checked,
+                  }))
+                }
                 className="w-5 h-5 text-[#FF3133] rounded focus:ring-[#FF3133] focus:ring-2"
               />
               <span className="text-[#0E2127] font-medium">
