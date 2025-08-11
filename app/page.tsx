@@ -30,9 +30,9 @@ export default function HomePage() {
             </RevealOnScroll>
             <WhyChooseUs />
           </div>
-          <RevealOnScroll>
+          {/* <RevealOnScroll>
             <Testimonials />
-          </RevealOnScroll>
+          </RevealOnScroll> */}
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
             <RevealOnScroll>
               <Contact />
