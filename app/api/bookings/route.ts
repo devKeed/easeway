@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../lib/auth";
 import { prisma } from "../../../lib/prisma";
+import {
+  sendAdminBookingNotification,
+  sendPatientConfirmationEmail,
+} from "../../../lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -89,6 +93,39 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    const confirmationNumber = booking.id.slice(-8).toUpperCase();
+
+    // Prepare notification data
+    const notificationData = {
+      bookingId: booking.id,
+      name,
+      email,
+      phone,
+      service,
+      date,
+      time,
+      sessionType,
+      sessionDuration,
+      message,
+      emergencyContact,
+      medicalHistory,
+      currentMedications,
+      previousPhysiotherapy,
+      confirmationNumber,
+    };
+
+    // Send email notifications (don't block the response if email fails)
+    try {
+      // Send admin notification
+      await sendAdminBookingNotification(notificationData);
+
+      // Send patient confirmation
+      await sendPatientConfirmationEmail(notificationData);
+    } catch (emailError) {
+      console.error("Email notification failed:", emailError);
+      // Continue with the response even if email fails
+    }
+
     return NextResponse.json({
       success: true,
       message:
@@ -101,6 +138,7 @@ export async function POST(request: NextRequest) {
         sessionType: booking.sessionType,
         sessionDuration: booking.sessionDuration,
         service: booking.service,
+        confirmationNumber,
       },
     });
   } catch (error) {

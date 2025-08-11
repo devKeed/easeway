@@ -1,0 +1,208 @@
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export interface BookingNotificationData {
+  bookingId: string;
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  date: string;
+  time: string;
+  sessionType?: string;
+  sessionDuration?: number;
+  message: string;
+  emergencyContact?: string;
+  medicalHistory?: string;
+  currentMedications?: string;
+  previousPhysiotherapy?: string;
+  confirmationNumber: string;
+}
+
+export async function sendAdminBookingNotification(
+  bookingData: BookingNotificationData
+) {
+  try {
+    const adminEmail =
+      process.env.ADMIN_EMAIL || "admin@easeway-medicare.co.uk";
+
+    const emailContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background-color: #FF3133; color: white; padding: 20px; text-align: center;">
+          <h1 style="margin: 0;">New Booking Notification</h1>
+          <p style="margin: 5px 0;">Easeway Medicare Physiotherapy Clinic</p>
+        </div>
+        
+        <div style="padding: 20px; background-color: #f9f9f9;">
+          <h2 style="color: #0E2127; margin-bottom: 20px;">Booking Details</h2>
+          
+          <div style="background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+            <h3 style="color: #FF3133; margin-top: 0;">Patient Information</h3>
+            <p><strong>Name:</strong> ${bookingData.name}</p>
+            <p><strong>Email:</strong> ${bookingData.email}</p>
+            <p><strong>Phone:</strong> ${bookingData.phone}</p>
+            ${
+              bookingData.emergencyContact
+                ? `<p><strong>Emergency Contact:</strong> ${bookingData.emergencyContact}</p>`
+                : ""
+            }
+          </div>
+          
+          <div style="background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+            <h3 style="color: #FF3133; margin-top: 0;">Appointment Details</h3>
+            <p><strong>Service:</strong> ${bookingData.service}</p>
+            <p><strong>Date:</strong> ${bookingData.date}</p>
+            <p><strong>Time:</strong> ${bookingData.time}</p>
+            ${
+              bookingData.sessionType
+                ? `<p><strong>Session Type:</strong> ${bookingData.sessionType}</p>`
+                : ""
+            }
+            ${
+              bookingData.sessionDuration
+                ? `<p><strong>Duration:</strong> ${bookingData.sessionDuration} minutes</p>`
+                : ""
+            }
+            <p><strong>Confirmation Number:</strong> ${
+              bookingData.confirmationNumber
+            }</p>
+          </div>
+          
+          <div style="background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+            <h3 style="color: #FF3133; margin-top: 0;">Message</h3>
+            <p>${bookingData.message}</p>
+          </div>
+          
+          ${
+            bookingData.medicalHistory ||
+            bookingData.currentMedications ||
+            bookingData.previousPhysiotherapy
+              ? `
+          <div style="background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+            <h3 style="color: #FF3133; margin-top: 0;">Medical Information</h3>
+            ${
+              bookingData.medicalHistory
+                ? `<p><strong>Medical History:</strong> ${bookingData.medicalHistory}</p>`
+                : ""
+            }
+            ${
+              bookingData.currentMedications
+                ? `<p><strong>Current Medications:</strong> ${bookingData.currentMedications}</p>`
+                : ""
+            }
+            ${
+              bookingData.previousPhysiotherapy
+                ? `<p><strong>Previous Physiotherapy:</strong> ${bookingData.previousPhysiotherapy}</p>`
+                : ""
+            }
+          </div>
+          `
+              : ""
+          }
+          
+          <div style="text-align: center; margin-top: 20px;">
+            <a href="${process.env.NEXTAUTH_URL}/admin/dashboard" 
+               style="background-color: #FF3133; color: white; padding: 12px 24px; 
+                      text-decoration: none; border-radius: 5px; display: inline-block;">
+              View in Admin Dashboard
+            </a>
+          </div>
+        </div>
+        
+        <div style="text-align: center; padding: 20px; color: #666; font-size: 12px;">
+          <p>This is an automated notification from your booking system.</p>
+          <p>Please contact the patient within 24 hours to confirm the appointment.</p>
+        </div>
+      </div>
+    `;
+
+    const data = await resend.emails.send({
+      from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
+      to: [adminEmail],
+      subject: `New Booking: ${bookingData.name} - ${bookingData.date} at ${bookingData.time}`,
+      html: emailContent,
+    });
+
+    console.log("Admin notification email sent:", data);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Failed to send admin notification email:", error);
+    return { success: false, error };
+  }
+}
+
+export async function sendPatientConfirmationEmail(
+  bookingData: BookingNotificationData
+) {
+  try {
+    const emailContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background-color: #FF3133; color: white; padding: 20px; text-align: center;">
+          <h1 style="margin: 0;">Booking Confirmation</h1>
+          <p style="margin: 5px 0;">Easeway Medicare Physiotherapy Clinic</p>
+        </div>
+        
+        <div style="padding: 20px; background-color: #f9f9f9;">
+          <h2 style="color: #0E2127;">Dear ${bookingData.name},</h2>
+          <p>Thank you for booking an appointment with Easeway Medicare Physiotherapy Clinic. 
+             We have received your booking request and will contact you within 24 hours to confirm your appointment.</p>
+          
+          <div style="background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="color: #FF3133; margin-top: 0;">Your Booking Details</h3>
+            <p><strong>Service:</strong> ${bookingData.service}</p>
+            <p><strong>Date:</strong> ${bookingData.date}</p>
+            <p><strong>Time:</strong> ${bookingData.time}</p>
+            <p><strong>Confirmation Number:</strong> ${
+              bookingData.confirmationNumber
+            }</p>
+            ${
+              bookingData.sessionType
+                ? `<p><strong>Session Type:</strong> ${bookingData.sessionType}</p>`
+                : ""
+            }
+            ${
+              bookingData.sessionDuration
+                ? `<p><strong>Duration:</strong> ${bookingData.sessionDuration} minutes</p>`
+                : ""
+            }
+          </div>
+          
+          <div style="background-color: #e8f4fd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h4 style="color: #0E2127; margin-top: 0;">Important Notes:</h4>
+            <ul style="margin: 0; padding-left: 20px;">
+              <li>Please arrive 10 minutes early for your appointment</li>
+              <li>Bring any relevant medical documents or previous scan results</li>
+              <li>Wear comfortable clothing suitable for physical examination</li>
+              <li>If you need to cancel or reschedule, please call us at least 24 hours in advance</li>
+            </ul>
+          </div>
+          
+          <div style="text-align: center; margin: 20px 0;">
+            <p><strong>Contact Information:</strong></p>
+            <p>Phone: <a href="tel:+447460091561" style="color: #FF3133;">+44 7460 091561</a></p>
+            <p>Email: <a href="mailto:info@easeway-medicare.co.uk" style="color: #FF3133;">info@easeway-medicare.co.uk</a></p>
+          </div>
+        </div>
+        
+        <div style="text-align: center; padding: 20px; color: #666; font-size: 12px;">
+          <p>We look forward to helping you with your physiotherapy needs.</p>
+          <p>Easeway Medicare Physiotherapy Clinic</p>
+        </div>
+      </div>
+    `;
+
+    const data = await resend.emails.send({
+      from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
+      to: [bookingData.email],
+      subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
+      html: emailContent,
+    });
+
+    console.log("Patient confirmation email sent:", data);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Failed to send patient confirmation email:", error);
+    return { success: false, error };
+  }
+}
