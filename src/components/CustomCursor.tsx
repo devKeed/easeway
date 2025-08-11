@@ -162,7 +162,7 @@ const CustomCursor: React.FC = () => {
 
   const getCursorClasses = () => {
     const baseClasses =
-      ">fixed top-0 left-0 pointer-events-none z-[9999] transition-all duration-200 ease-out will-change-transform";
+      "fixed top-0 left-0 pointer-events-none z-[99999] transition-all duration-200 ease-out will-change-transform";
 
     switch (cursorVariant) {
       case "hover":

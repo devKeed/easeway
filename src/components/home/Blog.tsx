@@ -31,7 +31,7 @@ const Blog: React.FC = () => {
  </div>
 
  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-0 md:px-8">
- {recentPosts.map((post) => (
+ {recentPosts.map((post: any) => (
  <BlogCard
  key={post.id}
  id={post.id}
