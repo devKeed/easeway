@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import {
   ArrowLeft,
@@ -14,6 +14,8 @@ import {
   ArrowRight,
   ChevronLeft,
   CheckCircle,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
 import Link from "next/link";
 import { BookingProvider, useBooking } from "../../src/contexts/BookingContext";
@@ -22,17 +24,23 @@ import SessionTypeSelection, {
 } from "../../src/components/booking/SessionTypeSelection";
 import StepIndicator from "../../src/components/booking/StepIndicator";
 import TimeSlotSelector from "../../src/components/booking/TimeSlotSelector";
+import LoadingSpinner from "../../src/components/ui/LoadingSpinner";
+import ErrorState from "../../src/components/ui/ErrorState";
+import ProgressStepper from "../../src/components/ui/ProgressStepper";
+import { useToast } from "../../src/contexts/ToastContext";
 
 // Main booking page component
 const BookingPage = () => {
   const { bookingData, updateBookingData, currentStep, setCurrentStep } =
     useBooking();
+  const { showSuccess, showError, showWarning } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
   const [bookingResponse, setBookingResponse] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const services = [
     "Comprehensive Assessment",
@@ -47,14 +55,92 @@ const BookingPage = () => {
     "Mobility Training",
   ];
 
+  const stepTitles = [
+    "Session Type",
+    "Personal Info",
+    "Select Date",
+    "Select Time",
+    "Medical Info",
+    "Review & Confirm",
+  ];
+
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    updateBookingData({
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    updateBookingData({ [name]: value });
+
+    // Clear form error when user starts typing
+    if (formErrors[name]) {
+      setFormErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const validateStep = () => {
+    const errors: Record<string, string> = {};
+
+    switch (currentStep) {
+      case 0: // Session Type
+        if (!bookingData.sessionType) {
+          errors.sessionType = "Please select a session type";
+        }
+        break;
+
+      case 1: // Personal Info
+        if (!bookingData.name.trim()) {
+          errors.name = "Full name is required";
+        }
+        if (!bookingData.email.trim()) {
+          errors.email = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(bookingData.email)) {
+          errors.email = "Please enter a valid email address";
+        }
+        if (!bookingData.phone.trim()) {
+          errors.phone = "Phone number is required";
+        }
+        if (!bookingData.service) {
+          errors.service = "Please select a service";
+        }
+        break;
+
+      case 2: // Date
+        if (!bookingData.date) {
+          errors.date = "Please select a date";
+        }
+        break;
+
+      case 3: // Time
+        if (!bookingData.time) {
+          errors.time = "Please select a time slot";
+        }
+        break;
+
+      case 4: // Medical Info - Optional fields, no validation
+        break;
+
+      case 5: // Review - Final validation
+        const allRequiredFields = {
+          sessionType: "Session type",
+          name: "Full name",
+          email: "Email address",
+          phone: "Phone number",
+          service: "Service",
+          date: "Date",
+          time: "Time",
+        };
+
+        Object.entries(allRequiredFields).forEach(([field, label]) => {
+          if (!bookingData[field as keyof typeof bookingData]) {
+            errors[field] = `${label} is required`;
+          }
+        });
+        break;
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSessionSelect = (session: SessionType) => {
@@ -83,14 +169,22 @@ const BookingPage = () => {
   };
 
   const handleNext = () => {
-    if (canProceedToNextStep() && currentStep < 4) {
-      setCurrentStep(currentStep + 1);
+    if (validateStep()) {
+      if (currentStep < 5) {
+        setCurrentStep(currentStep + 1);
+      }
+    } else {
+      showWarning(
+        "Please fill in all required fields",
+        "Check the highlighted fields and try again."
+      );
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+      setFormErrors({}); // Clear errors when going back
     }
   };
 
@@ -132,6 +226,11 @@ const BookingPage = () => {
         setBookingResponse(data);
         setErrorMessage("");
 
+        showSuccess(
+          "Booking confirmed successfully!",
+          `Your appointment for ${bookingData.service} on ${bookingData.date} at ${bookingData.time} has been booked.`
+        );
+
         // Reset form after successful submission
         setTimeout(() => {
           window.location.href = "/";
@@ -139,27 +238,30 @@ const BookingPage = () => {
       } else {
         console.error("Booking submission failed:", data);
         setSubmitStatus("error");
-        setErrorMessage(
-          data.error || "Failed to submit booking. Please try again."
-        );
+        const errorMsg =
+          data.error || "Failed to submit booking. Please try again.";
+        setErrorMessage(errorMsg);
 
         // Show specific error message if time slot is no longer available
         if (response.status === 409) {
-          // Time slot conflict - refresh available slots
-          setErrorMessage(
-            "This time slot is no longer available. The page will refresh to show updated availability."
+          showError(
+            "Time slot no longer available",
+            "This time slot has been taken by another patient. The page will refresh to show updated availability."
           );
           setTimeout(() => {
             window.location.reload();
           }, 3000);
+        } else {
+          showError("Booking failed", errorMsg);
         }
       }
     } catch (error) {
       console.error("Error submitting booking:", error);
       setSubmitStatus("error");
-      setErrorMessage(
-        "Network error. Please check your connection and try again."
-      );
+      const errorMsg =
+        "Network error. Please check your connection and try again.";
+      setErrorMessage(errorMsg);
+      showError("Connection error", errorMsg);
     } finally {
       setIsSubmitting(false);
     }
@@ -196,9 +298,19 @@ const BookingPage = () => {
                   value={bookingData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
+                    formErrors.name
+                      ? "border-red-300 focus:ring-red-500 bg-red-50"
+                      : "border-gray-300 focus:ring-[#FF3133]"
+                  }`}
                   placeholder="Your full name"
                 />
+                {formErrors.name && (
+                  <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle className="w-4 h-4" />
+                    {formErrors.name}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -211,9 +323,19 @@ const BookingPage = () => {
                   value={bookingData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
+                    formErrors.phone
+                      ? "border-red-300 focus:ring-red-500 bg-red-50"
+                      : "border-gray-300 focus:ring-[#FF3133]"
+                  }`}
                   placeholder="+44 7XXX XXXXXX"
                 />
+                {formErrors.phone && (
+                  <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle className="w-4 h-4" />
+                    {formErrors.phone}
+                  </p>
+                )}
               </div>
 
               <div className="md:col-span-2">
@@ -226,9 +348,19 @@ const BookingPage = () => {
                   value={bookingData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
+                    formErrors.email
+                      ? "border-red-300 focus:ring-red-500 bg-red-50"
+                      : "border-gray-300 focus:ring-[#FF3133]"
+                  }`}
                   placeholder="your.email@example.com"
                 />
+                {formErrors.email && (
+                  <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle className="w-4 h-4" />
+                    {formErrors.email}
+                  </p>
+                )}
               </div>
 
               <div className="md:col-span-2">
@@ -647,7 +779,12 @@ const BookingPage = () => {
           transition={{ duration: 0.6 }}
           className="bg-white rounded-2xl shadow-lg p-8"
         >
-          {/* Step Indicator */}
+          {/* Progress Stepper */}
+          <div className="mb-8">
+            <ProgressStepper steps={stepTitles} currentStep={currentStep} />
+          </div>
+
+          {/* Step Indicator (For backward compatibility) */}
           <StepIndicator
             currentStep={currentStep}
             onStepClick={setCurrentStep}

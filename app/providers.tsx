@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import ScrollToTop from "../src/components/ScrollToTop";
 import CustomCursor from "../src/components/CustomCursor";
+import { ToastProvider } from "../src/contexts/ToastContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,9 +25,11 @@ export default function ClientProviders({
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        <ScrollToTop />
-        <CustomCursor />
-        {children}
+        <ToastProvider>
+          <ScrollToTop />
+          <CustomCursor />
+          {children}
+        </ToastProvider>
       </QueryClientProvider>
     </SessionProvider>
   );

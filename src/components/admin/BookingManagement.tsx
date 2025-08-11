@@ -16,6 +16,8 @@ import {
   Eye,
   Filter,
 } from "lucide-react";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import ErrorState from "../ui/ErrorState";
 
 interface Booking {
   id: string;
@@ -469,10 +471,27 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
   if (loading) {
     return (
       <div className="bg-white rounded-lg shadow-sm p-6">
-        <div className="flex items-center justify-center h-64">
-          <RefreshCw className="w-8 h-8 animate-spin text-gray-400" />
-          <span className="ml-2 text-gray-600">Loading bookings...</span>
-        </div>
+        <LoadingSpinner
+          size="lg"
+          text="Loading patient bookings..."
+          className="h-64"
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white rounded-lg shadow-sm p-6">
+        <ErrorState
+          title="Failed to load bookings"
+          message={error}
+          onRetry={() => {
+            setError("");
+            fetchBookings();
+          }}
+          showRetry={true}
+        />
       </div>
     );
   }

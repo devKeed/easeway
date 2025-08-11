@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import BookingManagement from "../../../src/components/admin/BookingManagement";
+import CalendarSchedule from "../../../src/components/admin/CalendarSchedule";
 
 interface BlockedPeriod {
   start: string;
@@ -49,9 +50,9 @@ const dayNames = [
 
 const AdminDashboard = () => {
   const { user, isAuthenticated, isAdmin, isLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"settings" | "bookings">(
-    "bookings"
-  );
+  const [activeTab, setActiveTab] = useState<
+    "settings" | "bookings" | "schedule"
+  >("schedule");
   const [settings, setSettings] = useState<ClinicSettings>({
     openingTime: "09:00",
     closingTime: "17:00",
@@ -214,6 +215,19 @@ const AdminDashboard = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex space-x-8">
             <button
+              onClick={() => setActiveTab("schedule")}
+              className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                activeTab === "schedule"
+                  ? "border-[#FF3133] text-[#FF3133]"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                Schedule & Calendar
+              </div>
+            </button>
+            <button
               onClick={() => setActiveTab("bookings")}
               className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                 activeTab === "bookings"
@@ -245,6 +259,7 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
+        {activeTab === "schedule" && <CalendarSchedule />}
         {activeTab === "bookings" && <BookingManagement />}
         {activeTab === "settings" && (
           <div className="max-w-4xl mx-auto">

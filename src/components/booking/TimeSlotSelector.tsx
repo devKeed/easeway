@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Clock, Loader2, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Clock, Loader2, AlertCircle, RefreshCw } from "lucide-react";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import ErrorState from "../ui/ErrorState";
 
 interface TimeSlotSelectorProps {
   selectedDate: string;
@@ -124,10 +126,11 @@ const TimeSlotSelector: React.FC<TimeSlotSelectorProps> = ({
         <label className="block text-[#0E2127] font-medium mb-2">
           Available Time Slots *
         </label>
-        <div className="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
-          <Loader2 className="w-6 h-6 animate-spin text-[#FF3133] mr-2" />
-          <span className="text-gray-600">Loading available times...</span>
-        </div>
+        <LoadingSpinner
+          size="md"
+          text="Loading available times..."
+          className="p-8"
+        />
       </div>
     );
   }
@@ -139,10 +142,57 @@ const TimeSlotSelector: React.FC<TimeSlotSelectorProps> = ({
         <label className="block text-[#0E2127] font-medium mb-2">
           Available Time Slots *
         </label>
-        <div className="flex items-center p-4 bg-red-50 border border-red-200 rounded-lg">
-          <AlertCircle className="w-5 h-5 text-red-600 mr-2" />
-          <span className="text-red-800">{error}</span>
-        </div>
+        <ErrorState
+          title="Unable to load time slots"
+          message={error}
+          onRetry={() => {
+            setError("");
+            if (selectedDate) {
+              // Trigger refetch by updating the dependency
+              const fetchAvailableSlots = async () => {
+                setLoading(true);
+                setError("");
+                setMessage("");
+
+                try {
+                  const response = await fetch(
+                    `/api/available-slots?date=${selectedDate}`
+                  );
+                  const data: AvailableSlotsResponse = await response.json();
+
+                  if (response.ok) {
+                    setAvailableSlots(data.availableSlots);
+                    setClinicInfo(data.clinicInfo || null);
+
+                    if (data.message) {
+                      setMessage(data.message);
+                    }
+
+                    if (
+                      selectedTime &&
+                      !data.availableSlots.includes(selectedTime)
+                    ) {
+                      onTimeSelect("");
+                    }
+                  } else {
+                    setError(
+                      data.error || "Failed to fetch available time slots"
+                    );
+                    setAvailableSlots([]);
+                  }
+                } catch (err) {
+                  setError("Error fetching available time slots");
+                  setAvailableSlots([]);
+                } finally {
+                  setLoading(false);
+                }
+              };
+              fetchAvailableSlots();
+            }
+          }}
+          showRetry={true}
+          className="py-4"
+        />
       </div>
     );
   }

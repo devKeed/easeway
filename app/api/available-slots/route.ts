@@ -149,8 +149,16 @@ export async function GET(request: NextRequest) {
         }
       }
 
-      // Check blocked periods
+      // Check blocked periods from settings
       const isBlocked = isTimeSlotBlocked(slotStart, slotEnd, blockedPeriods);
+
+      // Check database-level blocked slots for this specific date and time
+      const blockedSlot = await prisma.blockedSlot.findFirst({
+        where: {
+          date: date,
+          time: minutesToTime(slotStart),
+        },
+      });
 
       // Check existing bookings for this date and time slot
       const existingBooking = await prisma.booking.findFirst({
@@ -164,7 +172,7 @@ export async function GET(request: NextRequest) {
       });
 
       // Add slot if it's available
-      if (!isInBreakTime && !isBlocked && !existingBooking) {
+      if (!isInBreakTime && !isBlocked && !blockedSlot && !existingBooking) {
         availableSlots.push(minutesToTime(slotStart));
       }
     }
