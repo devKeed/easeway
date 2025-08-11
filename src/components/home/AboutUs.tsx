@@ -23,14 +23,14 @@ const AboutUs = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <span className="text-[#FF3133] text-xs sm:text-sm font-medium">
+              <span className="text-[#FF3133] text-body-xs sm:text-body-sm font-medium">
                 🩺 About Us
               </span>
             </motion.div>
 
             <div>
               <motion.h2
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0E2127] leading-tight"
+                className="text-h2-mobile sm:text-h2-desktop md:text-h1-mobile lg:text-h1-desktop font-axiforma text-[#0E2127] leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
@@ -39,7 +39,7 @@ const AboutUs = () => {
                 Who are we?
               </motion.h2>
 
-              <p className="text-gray-600 leading-relaxed mt-3 sm:mt-4 text-sm sm:text-base">
+              <p className="text-body text-gray-600 leading-relaxed mt-3 sm:mt-4 font-uber">
                 At Easeway Medicare Physiotherapy Clinic, we believe that
                 everyone deserves to live without pain and move freely. Our
                 dedicated team is committed to providing personalized,
@@ -57,18 +57,18 @@ const AboutUs = () => {
               viewport={{ once: true }}
             >
               <div className="bg-white p-2 sm:p-3 rounded-xl text-center border border-gray-100">
-                <div className="text-xl sm:text-2xl font-bold text-[#FF3133] mb-1 sm:mb-2">
+                <div className="text-body-lg sm:text-h3-mobile md:text-h2-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
                   500+
                 </div>
-                <div className="text-xs sm:text-base text-gray-600 font-medium">
+                <div className="text-xs sm:text-body text-gray-600 font-uber font-medium">
                   Patients Treated
                 </div>
               </div>
               <div className="bg-white p-2 sm:p-3 rounded-xl text-center border border-gray-100">
-                <div className="text-xl sm:text-2xl font-bold text-[#FF3133] mb-1 sm:mb-2">
+                <div className="text-body-lg sm:text-h3-mobile md:text-h2-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
                   10+
                 </div>
-                <div className="text-xs sm:text-base text-gray-600 font-medium">
+                <div className="text-xs sm:text-body text-gray-600 font-uber font-medium">
                   Years Experience
                 </div>
               </div>
@@ -153,8 +153,10 @@ const AboutUs = () => {
             {/* Floating element */}
             <motion.div className="absolute -top-4 -right-4 bg-[#FF3133] text-white p-4 rounded-2xl shadow-2xl">
               <div className="text-center">
-                <div className="text-2xl font-bold">98%</div>
-                <div className="text-xs font-medium">Success Rate</div>
+                <div className="text-h3-mobile md:text-h2-desktop font-axiforma">
+                  98%
+                </div>
+                <div className="text-body-xs font-axiforma">Success Rate</div>
               </div>
             </motion.div>
           </motion.div>

@@ -36,7 +36,7 @@ const ReviewSlider = () => {
             <SwiperSlide key={index}>
               <div
                 className={clsx(
-                  "h-[380px] bg-gray-100 p-6 rounded-2xl border-l-8",
+                  ">h-[380px] bg-gray-100 p-6 rounded-2xl border-l-8",
                   color.border
                 )}
               >
@@ -46,10 +46,12 @@ const ReviewSlider = () => {
                   ))}
                 </div>
                 <h6 className="font-semibold text-left mb-2">{review.title}</h6>
-                <p className="text-left text-[16px] italic line-clamp-6">
+                <p className="text-left text-body italic line-clamp-6 font-uber">
                   "{review.text}"
                 </p>
-                <p className="mt-4 font-bold text-left">- {review.name}</p>
+                <p className="mt-4 font-bold text-left text-body font-uber">
+                  - {review.name}
+                </p>
               </div>
             </SwiperSlide>
           );

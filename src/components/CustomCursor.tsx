@@ -114,7 +114,7 @@ const CustomCursor: React.FC = () => {
 
     // Add hover effects to interactive elements
     const interactiveElements = document.querySelectorAll(
-      "a, button, input, textarea, select, [role='button'], .cursor-pointer"
+      'a, button, input, textarea, select, [role="button"], .cursor-pointer'
     );
 
     interactiveElements.forEach((element) => {
@@ -125,7 +125,7 @@ const CustomCursor: React.FC = () => {
     // Observe for dynamically added elements
     const observer = new MutationObserver(() => {
       const newInteractiveElements = document.querySelectorAll(
-        "a, button, input, textarea, select, [role='button'], .cursor-pointer"
+        'a, button, input, textarea, select, [role="button"], .cursor-pointer'
       );
 
       newInteractiveElements.forEach((element) => {
@@ -162,7 +162,7 @@ const CustomCursor: React.FC = () => {
 
   const getCursorClasses = () => {
     const baseClasses =
-      "fixed top-0 left-0 pointer-events-none z-[9999] transition-all duration-200 ease-out will-change-transform";
+      ">fixed top-0 left-0 pointer-events-none z-[9999] transition-all duration-200 ease-out will-change-transform";
 
     switch (cursorVariant) {
       case "hover":

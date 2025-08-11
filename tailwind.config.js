@@ -15,8 +15,38 @@ export default {
       },
       fontFamily: {
         uber: ["Uber Move", "sans-serif"],
+        axiforma: ["Axiforma", "sans-serif"],
+        american: ["American Purpose", "serif"],
       },
       fontSize: {
+        // Desktop heading sizes
+        "h1-desktop": ["3.5rem", { lineHeight: "1.1", fontWeight: "700" }], // 56px
+        "h2-desktop": ["2.5rem", { lineHeight: "1.2", fontWeight: "600" }], // 40px
+        "h3-desktop": ["2rem", { lineHeight: "1.3", fontWeight: "600" }], // 32px
+        "h4-desktop": ["1.5rem", { lineHeight: "1.4", fontWeight: "600" }], // 24px
+        "h5-desktop": ["1.25rem", { lineHeight: "1.4", fontWeight: "500" }], // 20px
+        "h6-desktop": ["1.125rem", { lineHeight: "1.4", fontWeight: "500" }], // 18px
+
+        // Mobile heading sizes
+        "h1-mobile": ["2.5rem", { lineHeight: "1.1", fontWeight: "700" }], // 40px
+        "h2-mobile": ["2rem", { lineHeight: "1.2", fontWeight: "600" }], // 32px
+        "h3-mobile": ["1.5rem", { lineHeight: "1.3", fontWeight: "600" }], // 24px
+        "h4-mobile": ["1.25rem", { lineHeight: "1.4", fontWeight: "600" }], // 20px
+        "h5-mobile": ["1.125rem", { lineHeight: "1.4", fontWeight: "500" }], // 18px
+        "h6-mobile": ["1rem", { lineHeight: "1.4", fontWeight: "500" }], // 16px
+
+        // Body text sizes
+        "body-lg": ["1.125rem", { lineHeight: "1.6", fontWeight: "400" }], // 18px
+        body: ["1rem", { lineHeight: "1.6", fontWeight: "400" }], // 16px
+        "body-sm": ["0.875rem", { lineHeight: "1.5", fontWeight: "400" }], // 14px
+        "body-xs": ["0.75rem", { lineHeight: "1.4", fontWeight: "400" }], // 12px
+
+        // Button text sizes
+        "button-lg": ["1rem", { lineHeight: "1.5", fontWeight: "600" }], // 16px
+        button: ["0.875rem", { lineHeight: "1.5", fontWeight: "600" }], // 14px
+        "button-sm": ["0.75rem", { lineHeight: "1.4", fontWeight: "600" }], // 12px
+
+        // Legacy compatibility
         h1: ["2.5rem", { fontWeight: "700" }],
         h2: ["1.8rem", { fontWeight: "700" }],
         h3: ["1.5rem", { fontWeight: "700" }],
