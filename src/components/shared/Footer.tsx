@@ -142,7 +142,7 @@ const Footer = () => {
                   <MapPin className="text-gray-400 w-3 h-3" />
                 </div>
                 <div>
-                  <p className="text-white text-body font-uber font-light text-body leading-relaxed text-body font-uber">
+                  <p className="text-white font-light leading-relaxed text-body font-uber">
                     Manor Leisure Centre
                     <br />
                     PE7 1UA, Whittlesey

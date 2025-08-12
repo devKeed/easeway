@@ -95,17 +95,22 @@ npm run build
 ## 🎨 Customization
 
 ### Colors
+
 The primary color scheme uses:
+
 - Primary Red: `#FF3133`
 - Background: `#EDF2F6`
 - Text: `#0E2127`
 
 ### Fonts
+
 - **Axiforma**: Primary font family
 - **American Purpose**: Display font for headings
 
 ### Content
+
 Update content in:
+
 - `src/data/data.ts` - Services, testimonials, contact info
 - `src/data/blogData.ts` - Blog posts data
 

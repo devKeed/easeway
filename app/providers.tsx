@@ -1,34 +1,34 @@
 "use client";
 
-import React from"react";
-import { QueryClient, QueryClientProvider } from"@tanstack/react-query";
-import { SessionProvider } from"next-auth/react";
-import ScrollToTop from"../src/components/ScrollToTop";
-import { ToastProvider } from"../src/contexts/ToastContext";
+import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SessionProvider } from "next-auth/react";
+import ScrollToTop from "../src/components/ScrollToTop";
+import { ToastProvider } from "../src/contexts/ToastContext";
 
 const queryClient = new QueryClient({
- defaultOptions: {
- queries: {
- retry: 1,
- staleTime: 5 * 60 * 1000, // 5 minutes
- refetchOnWindowFocus: false,
- },
- },
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
 });
 
 export default function ClientProviders({
- children,
+  children,
 }: {
- children: React.ReactNode;
+  children: React.ReactNode;
 }) {
- return (
- <SessionProvider>
- <QueryClientProvider client={queryClient}>
- <ToastProvider>
- <ScrollToTop />
- {children}
- </ToastProvider>
- </QueryClientProvider>
- </SessionProvider>
- );
+  return (
+    <SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <ToastProvider>
+          <ScrollToTop />
+          {children}
+        </ToastProvider>
+      </QueryClientProvider>
+    </SessionProvider>
+  );
 }

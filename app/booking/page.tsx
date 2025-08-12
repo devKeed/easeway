@@ -305,7 +305,7 @@ const BookingPage = () => {
                   placeholder="Your full name"
                 />
                 {formErrors.name && (
-                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 text-body font-uber">
+                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 font-uber">
                     <AlertCircle className="w-4 h-4" />
                     {formErrors.name}
                   </p>
@@ -330,7 +330,7 @@ const BookingPage = () => {
                   placeholder="+44 7XXX XXXXXX"
                 />
                 {formErrors.phone && (
-                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 text-body font-uber">
+                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 font-uber">
                     <AlertCircle className="w-4 h-4" />
                     {formErrors.phone}
                   </p>
@@ -355,7 +355,7 @@ const BookingPage = () => {
                   placeholder="your.email@example.com"
                 />
                 {formErrors.email && (
-                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 text-body font-uber">
+                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 font-uber">
                     <AlertCircle className="w-4 h-4" />
                     {formErrors.email}
                   </p>
@@ -436,7 +436,7 @@ const BookingPage = () => {
 
             {bookingData.sessionType && (
               <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-body text-blue-800 text-body font-uber">
+                <p className="text-body text-blue-800 font-uber">
                   <strong>Selected:</strong> {bookingData.sessionType.name} (
                   {bookingData.sessionType.duration} minutes)
                 </p>
@@ -613,7 +613,7 @@ const BookingPage = () => {
                     <span className="text-gray-600 text-sm">
                       Condition/Reason for visit:
                     </span>
-                    <p className="text-body mt-1 p-2 bg-gray-50 rounded text-body font-uber">
+                    <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
                       {bookingData.message}
                     </p>
                   </div>
@@ -622,7 +622,7 @@ const BookingPage = () => {
                       <span className="text-gray-600 text-sm">
                         Medical History:
                       </span>
-                      <p className="text-body mt-1 p-2 bg-gray-50 rounded text-body font-uber">
+                      <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
                         {bookingData.medicalHistory}
                       </p>
                     </div>
@@ -632,7 +632,7 @@ const BookingPage = () => {
                       <span className="text-gray-600 text-sm">
                         Current Medications:
                       </span>
-                      <p className="text-body mt-1 p-2 bg-gray-50 rounded text-body font-uber">
+                      <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
                         {bookingData.currentMedications}
                       </p>
                     </div>
@@ -642,7 +642,7 @@ const BookingPage = () => {
                       <span className="text-gray-600 text-sm">
                         Previous Physiotherapy:
                       </span>
-                      <p className="text-body mt-1 p-2 bg-gray-50 rounded text-body font-uber">
+                      <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
                         {bookingData.previousPhysiotherapy}
                       </p>
                     </div>
@@ -725,19 +725,19 @@ const BookingPage = () => {
                 </p>
                 {bookingResponse.booking && (
                   <div className="mt-3 p-3 bg-green-100 rounded-lg">
-                    <p className="text-body text-green-800 text-body font-uber">
+                    <p className="text-body text-green-800 font-uber">
                       <strong>Confirmation Number:</strong>
                       {""}
                       {bookingResponse.booking.confirmationNumber}
                     </p>
-                    <p className="text-body text-green-800 text-body font-uber">
+                    <p className="text-body text-green-800 font-uber">
                       <strong>Date & Time:</strong>
                       {""}
                       {bookingResponse.booking.date} at{""}
                       {bookingResponse.booking.time}
                     </p>
                     {bookingResponse.booking.sessionType && (
-                      <p className="text-body text-green-800 text-body font-uber">
+                      <p className="text-body text-green-800 font-uber">
                         <strong>Session:</strong>
                         {""}
                         {bookingResponse.booking.sessionType} session (
@@ -746,7 +746,7 @@ const BookingPage = () => {
                     )}
                   </div>
                 )}
-                <p className="text-body text-green-600 mt-2 text-body font-uber">
+                <p className="text-body text-green-600 mt-2 font-uber">
                   Redirecting to home page in 5 seconds...
                 </p>
               </div>
@@ -851,7 +851,7 @@ const BookingPage = () => {
             </div>
           </form>
 
-          <p className="text-body text-gray-600 text-center mt-6 text-body font-uber">
+          <p className="text-body text-gray-600 text-center mt-6 font-uber">
             * Required fields. We'll contact you within 24 hours to confirm your
             appointment.
             <br />

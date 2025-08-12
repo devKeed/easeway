@@ -47,7 +47,7 @@ const WhyChooseUs = () => {
               {""}
               Why Choose Us?
             </h2>
-            <p className="text-body text-gray-200 max-w-xl mx-auto px-4 font-uber text-body font-uber">
+            <p className="text-body text-gray-200 max-w-xl mx-auto px-4 font-uber">
               Your health and recovery are our priority. Here's what sets us
               apart.
             </p>
@@ -70,7 +70,7 @@ const WhyChooseUs = () => {
               <h3 className="text-h6-mobile sm:text-h5-desktop font-axiforma text-[#0E2127] mb-3 sm:mb-4">
                 {reason.title}
               </h3>
-              <p className="text-body text-gray-600 text-body leading-relaxed font-uber text-body font-uber">
+              <p className="text-body text-gray-600 leading-relaxed font-uber">
                 {reason.description}
               </p>
 
@@ -92,7 +92,7 @@ const WhyChooseUs = () => {
             <h3 className="text-body-lg sm:text-h4-small font-axiforma text-[#0E2127] mb-3 sm:mb-4">
               Ready to Start Your Recovery Journey?
             </h3>
-            <p className="text-gray-600 mb-4 sm:mb-6 text-body font-uber px-2 text-body font-uber">
+            <p className="text-gray-600 mb-4 sm:mb-6 text-body font-uber px-2">
               Experience the difference personalized physiotherapy care can make
               in your life.
             </p>

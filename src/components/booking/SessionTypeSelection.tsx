@@ -43,7 +43,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
         <Clock className="w-5 h-5" />
         Session Type & Duration
       </h3>
-      <p className="text-body text-gray-600 mb-6 font-uber text-body font-uber">
+      <p className="text-body text-gray-600 mb-6 font-uber">
         Please select the type of session you would like to book
       </p>
 
@@ -112,7 +112,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
                   )}
                 </div>
 
-                <p className="text-body text-gray-600 font-uber text-body leading-relaxed text-body font-uber">
+                <p className="text-body text-gray-600 font-uber leading-relaxed">
                   {session.description}
                 </p>
               </div>
@@ -144,7 +144,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
               Selected: {selectedSession.name}
             </span>
           </div>
-          <p className="text-body text-gray-600 font-uber text-body font-uber">
+          <p className="text-body text-gray-600 font-uber">
             Duration: {selectedSession.duration} minutes |{""}
             {selectedSession.price}
           </p>

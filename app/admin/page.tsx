@@ -150,7 +150,7 @@ const AdminDashboard = () => {
               <Settings className="w-5 h-5" />
               <div>
                 <h3 className="font-semibold">Clinic Settings</h3>
-                <p className="text-body text-red-100 text-body font-uber">
+                <p className="text-body text-red-100 font-uber">
                   Manage hours & availability
                 </p>
               </div>

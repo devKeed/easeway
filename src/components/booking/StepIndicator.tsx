@@ -113,7 +113,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
                 >
                   {step.title}
                 </h4>
-                <p className="text-body text-gray-500 max-w-20 leading-tight hidden sm:block text-body font-uber">
+                <p className="text-body text-gray-500 max-w-20 leading-tight hidden sm:block font-uber">
                   {step.description}
                 </p>
               </div>
@@ -142,7 +142,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
         <h3 className="text-h6-mobile md:text-h5-small font-axiforma text-[#0E2127] mb-1">
           {steps[currentStep]?.title}
         </h3>
-        <p className="text-body text-gray-600 font-uber text-body font-uber">
+        <p className="text-body text-gray-600 font-uber">
           {steps[currentStep]?.description}
         </p>
       </div>

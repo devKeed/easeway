@@ -196,7 +196,7 @@ const Services = () => {
                 <h3 className="text-button-sm sm:text-button font-uber font-semibold text-gray-900 mb-2 sm:mb-3 leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-body leading-relaxed font-light text-body font-uber">
+                <p className="text-gray-600 text-body leading-relaxed font-light font-uber">
                   {service.description}
                 </p>
               </div>
