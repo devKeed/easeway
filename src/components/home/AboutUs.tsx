@@ -57,7 +57,7 @@ const AboutUs = () => {
               viewport={{ once: true }}
             >
               <div className="bg-white p-2 sm:p-3 rounded-xl text-center border border-gray-100">
-                <div className="text-body-lg sm:text-h3-mobile md:text-h2-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
+                <div className="text-body-lg sm:text-h3-mobile md:text-h4-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
                   500+
                 </div>
                 <div className="text-xs sm:text-body text-gray-600 font-uber font-medium">
@@ -65,7 +65,7 @@ const AboutUs = () => {
                 </div>
               </div>
               <div className="bg-white p-2 sm:p-3 rounded-xl text-center border border-gray-100">
-                <div className="text-body-lg sm:text-h3-mobile md:text-h2-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
+                <div className="text-body-lg sm:text-h3-mobile md:text-h4-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
                   10+
                 </div>
                 <div className="text-xs sm:text-body text-gray-600 font-uber font-medium">
@@ -92,7 +92,7 @@ const AboutUs = () => {
                   className="flex items-center space-x-2 bg-[#0E2127]/10 px-3 sm:px-4 py-2 rounded-full border border-gray-100"
                 >
                   <div className="w-1 h-1 bg-[#FF3133] rounded-full"></div>
-                  <span className="text-xs sm:text-base font-medium text-[#0E2127]">
+                  <span className="text-xs sm:text-[14px] font-medium text-[#0E2127]">
                     {feature}
                   </span>
                 </div>
@@ -153,7 +153,7 @@ const AboutUs = () => {
             {/* Floating element */}
             <motion.div className="absolute -top-4 -right-4 bg-[#FF3133] text-white p-4 rounded-2xl shadow-2xl">
               <div className="text-center">
-                <div className="text-h3-mobile md:text-h2-desktop font-axiforma">
+                <div className="text-h3-mobile md:text-h4-desktop font-axiforma">
                   98%
                 </div>
                 <div className="text-body-xs font-axiforma">Success Rate</div>

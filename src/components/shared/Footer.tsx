@@ -6,13 +6,13 @@ import { Mail, Phone, Globe, MapPin } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-gray-900 to-black border-t border-gray-800/50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-12 sm:py-14 md:py-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
           {/* Brand Section */}
           <div className="sm:col-span-2 lg:col-span-1">
             <motion.div
-              className="flex items-center mb-4 sm:mb-6"
+              className="flex flex-col items-start mb-4 sm:mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -26,10 +26,10 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <h3 className="text-h5-mobile sm:text-h4-desktop font-axiforma text-white">
+                <h3 className="text-h6-mobile sm:text-h6-desktop font-axiforma text-white">
                   Easeway Medicare
                 </h3>
-                <p className="text-body text-gray-400 font-uber text-body font-uber">
+                <p className="text-body text-gray-400 font-uber">
                   Physiotherapy Clinic
                 </p>
               </div>
@@ -50,7 +50,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <motion.h4
-              className="text-base sm:text-h5-mobile md:text-h4-desktop font-axiforma mb-4 sm:mb-6 text-white"
+              className="text-base sm:text-h6-mobile md:text-h6-desktop font-axiforma mb-4 sm:mb-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -94,7 +94,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div className="sm:col-span-2 lg:col-span-1">
             <motion.h4
-              className="text-base sm:text-h5-mobile md:text-h4-desktop font-axiforma mb-4 sm:mb-6 text-white"
+              className="text-base sm:text-h6-mobile md:text-h6-desktop font-axiforma mb-4 sm:mb-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -179,8 +179,8 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-500 text-body font-uber font-light px-4 text-body font-uber">
-            &copy; 2025 Easeway Medicare Physiotherapy Clinic. All rights
+          <p className="text-gray-500 font-light px-4 text-body font-uber">
+            &copy; {new Date().getFullYear()} Easeway Medicare Physiotherapy Clinic. All rights
             reserved.
           </p>
         </motion.div>

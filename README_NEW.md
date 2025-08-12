@@ -24,7 +24,7 @@ npm start
 - **Server-Side Rendering** for better SEO and performance
 - **Responsive Design** with Tailwind CSS
 - **Smooth Animations** using Framer Motion
-- **Interactive Components** including custom cursor, testimonials carousel
+- **Interactive Components** including testimonials carousel
 - **Blog Integration** with WordPress API
 - **Contact Forms** with EmailJS integration
 - **Newsletter Signup** with Mailchimp integration
