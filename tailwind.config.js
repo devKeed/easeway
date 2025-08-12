@@ -35,6 +35,14 @@ export default {
         "h5-mobile": ["1.125rem", { lineHeight: "1.4", fontWeight: "500" }], // 18px
         "h6-mobile": ["1rem", { lineHeight: "1.4", fontWeight: "500" }], // 16px
 
+        // Smaller heading sizes for non-hero sections
+        "h1-small": ["2rem", { lineHeight: "1.1", fontWeight: "700" }], // 32px
+        "h2-small": ["1.75rem", { lineHeight: "1.2", fontWeight: "600" }], // 28px
+        "h3-small": ["1.5rem", { lineHeight: "1.3", fontWeight: "600" }], // 24px
+        "h4-small": ["1.25rem", { lineHeight: "1.4", fontWeight: "600" }], // 20px
+        "h5-small": ["1.125rem", { lineHeight: "1.4", fontWeight: "500" }], // 18px
+        "h6-small": ["1rem", { lineHeight: "1.4", fontWeight: "500" }], // 16px
+
         // Body text sizes
         "body-lg": ["1.125rem", { lineHeight: "1.6", fontWeight: "400" }], // 18px
         body: ["1rem", { lineHeight: "1.6", fontWeight: "400" }], // 16px

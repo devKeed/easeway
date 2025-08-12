@@ -30,13 +30,13 @@ const AboutUs = () => {
 
             <div>
               <motion.h2
-                className="text-h2-mobile sm:text-h2-desktop md:text-h1-mobile lg:text-h1-desktop font-axiforma text-[#0E2127] leading-tight"
+                className="text-h3-mobile sm:text-h2-small font-axiforma text-[#0E2127] leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                Who are we?
+                About Easeway Medicare Physiotherapy Clinic
               </motion.h2>
 
               <p className="text-body text-gray-600 leading-relaxed mt-3 sm:mt-4 font-uber">

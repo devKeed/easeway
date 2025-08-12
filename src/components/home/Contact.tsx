@@ -19,7 +19,7 @@ const Contact = () => {
                 <Mail className="w-4 h-4" /> Get in Touch
               </span>
             </div>
-            <h2 className="text-h2-mobile md:text-h2-desktop lg:text-h1-mobile xl:text-h1-desktop font-axiforma text-gray-900 mb-6 sm:mb-8 tracking-tight">
+            <h2 className="text-h3-mobile md:text-h2-small font-axiforma text-gray-900 mb-6 sm:mb-8 tracking-tight">
               Contact Us
             </h2>
           </motion.div>
@@ -35,7 +35,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-h3-mobile md:text-h3-desktop font-axiforma text-gray-900 mb-6 sm:mb-8">
+              <h3 className="text-h4-mobile md:text-h3-small font-axiforma text-gray-900 mb-6 sm:mb-8">
                 Get In Touch
               </h3>
 
@@ -103,7 +103,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="text-center flex flex-col items-center space-y-6"
           >
-            <h3 className="text-h3-mobile md:text-h3-desktop font-axiforma text-gray-900 mb-8">
+            <h3 className="text-h4-mobile md:text-h3-small font-axiforma text-gray-900 mb-8">
               Online Booking
             </h3>
 
