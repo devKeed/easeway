@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
             // You can add logic here to make certain GitHub users admins
             // For example, check if email is in admin list
             const adminEmails = [
-              "your-admin-email@example.com", // Replace with actual admin emails
+              "4tuneadebiyi@gmail.com", // Your GitHub email - update if different
               // Add more admin emails here
             ];
 
