@@ -1,133 +1,129 @@
 "use client";
 
-import { motion } from"framer-motion";
-import { Check } from"lucide-react";
+import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 
 interface ProgressStepperProps {
- steps: string[];
- currentStep: number;
- className?: string;
+  steps: string[];
+  currentStep: number;
+  className?: string;
 }
 
 const ProgressStepper: React.FC<ProgressStepperProps> = ({
- steps,
- currentStep,
- className ="",
+  steps,
+  currentStep,
+  className = "",
 }) => {
- return (
- <div className={`w-full ${className}`}>
- {/* Desktop Stepper */}
- <div className="hidden md:block">
- <nav aria-label="Progress">
- <ol className="flex items-center">
- {steps.map((step, index) => {
- const isCompleted = index < currentStep;
- const isCurrent = index === currentStep;
- const isUpcoming = index > currentStep;
+  return (
+    <div className={`w-full ${className}`}>
+      {/* Desktop/Tablet Linear Stepper */}
+      <div className="hidden sm:block">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-xs font-medium text-gray-900">
+            Step {currentStep + 1} of {steps.length}
+          </span>
+          <span className="text-xs text-gray-600">
+            {Math.round(((currentStep + 1) / steps.length) * 100)}%
+          </span>
+        </div>
 
- return (
- <li
- key={step}
- className={`relative ${
- index !== steps.length - 1 ?"pr-8 sm:pr-20" :""
- } ${index !== 0 ?"pl-8 sm:pl-20" :""}`}
- >
- {/* Line */}
- {index !== steps.length - 1 && (
- <div
- className="absolute top-4 right-0 w-8 sm:w-20 h-0.5 transition-colors duration-300"
- style={{
- backgroundColor: isCompleted ?"#065f46" :"#e5e7eb",
- }}
- />
- )}
+        {/* Progress Bar */}
+        <div className="relative">
+          <div className="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{
+                width: `${((currentStep + 1) / steps.length) * 100}%`,
+              }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="bg-[#FF3133] h-1.5 rounded-full"
+            />
+          </div>
 
- {/* Step Circle */}
- <div className="relative flex items-center justify-center">
- <motion.div
- initial={false}
- animate={{
- backgroundColor: isCompleted
- ?"#065f46"
- : isCurrent
- ?"#065f46"
- :"#e5e7eb",
- scale: isCurrent ? 1.1 : 1,
- }}
- transition={{ duration: 0.3 }}
- className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${
- isCompleted || isCurrent
- ?"border-[#065f46]"
- :"border-gray-300"
- }`}
- >
- {isCompleted ? (
- <Check className="w-4 h-4 text-white" />
- ) : (
- <span
- className={`text-body-sm font-axiforma ${
- isCurrent ?"text-white" :"text-gray-500"
- }`}
- >
- {index + 1}
- </span>
- )}
- </motion.div>
+          {/* Step Dots */}
+          <div className="flex justify-between absolute -top-0.5 w-full">
+            {steps.map((step, index) => {
+              const isCompleted = index < currentStep;
+              const isCurrent = index === currentStep;
 
- {/* Step Label */}
- <div className="absolute top-10 w-32 text-center">
- <span
- className={`text-body-xs font-axiforma ${
- isCompleted || isCurrent
- ?"text-[#065f46]"
- :"text-gray-500"
- }`}
- >
- {step}
- </span>
- </div>
- </div>
- </li>
- );
- })}
- </ol>
- </nav>
- </div>
+              return (
+                <div key={index} className="relative">
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      backgroundColor:
+                        isCompleted || isCurrent ? "#FF3133" : "#e5e7eb",
+                      scale: isCurrent ? 1.1 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className={`w-3 h-3 rounded-full flex items-center justify-center border ${
+                      isCompleted || isCurrent
+                        ? "border-[#FF3133]"
+                        : "border-gray-300"
+                    } bg-white`}
+                  >
+                    {isCompleted ? (
+                      <Check className="w-2 h-2 text-white" />
+                    ) : (
+                      <div
+                        className={`w-1 h-1 rounded-full ${
+                          isCurrent ? "bg-white" : "bg-gray-400"
+                        }`}
+                      />
+                    )}
+                  </motion.div>
 
- {/* Mobile Stepper */}
- <div className="md:hidden">
- <div className="mb-4">
- <div className="flex items-center justify-between mb-2">
- <span className="text-body-sm font-axiforma text-gray-900">
- Step {currentStep + 1} of {steps.length}
- </span>
- <span className="text-body-sm text-gray-600 font-uber">
- {Math.round(((currentStep + 1) / steps.length) * 100)}% Complete
- </span>
- </div>
+                  {/* Step Label */}
+                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-16 text-center">
+                    <span
+                      className={`text-xs font-medium truncate block ${
+                        isCompleted || isCurrent
+                          ? "text-[#FF3133]"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {step.split(" ")[0]}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
- {/* Progress Bar */}
- <div className="w-full bg-gray-200 rounded-full h-2">
- <motion.div
- initial={{ width: 0 }}
- animate={{
- width: `${((currentStep + 1) / steps.length) * 100}%`,
- }}
- transition={{ duration: 0.5, ease:"easeInOut" }}
- className="bg-[#065f46] h-2 rounded-full"
- />
- </div>
+      {/* Mobile Stepper */}
+      <div className="sm:hidden">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-medium text-gray-900">
+            Step {currentStep + 1} of {steps.length}
+          </span>
+          <span className="text-xs text-gray-600">
+            {Math.round(((currentStep + 1) / steps.length) * 100)}%
+          </span>
+        </div>
 
- {/* Current Step Label */}
- <div className="mt-2">
- <span className="text-body-sm font-axiforma text-[#065f46]">
- {steps[currentStep]}
- </span>
- </div>
- </div>
- </div>
- </div>
- );
+        {/* Progress Bar */}
+        <div className="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{
+              width: `${((currentStep + 1) / steps.length) * 100}%`,
+            }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="bg-[#FF3133] h-1.5 rounded-full"
+          />
+        </div>
+
+        {/* Current Step Label */}
+        <div className="text-center">
+          <span className="text-xs font-medium text-[#FF3133]">
+            {steps[currentStep]}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProgressStepper;

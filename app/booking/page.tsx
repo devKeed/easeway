@@ -281,64 +281,71 @@ const BookingPage = () => {
 
       case 1:
         return (
-          <div className="bg-gray-50 rounded-xl p-6">
-            <h3 className="text-h5-mobile md:text-h4-small font-axiforma text-[#0E2127] mb-4 flex items-center gap-2">
-              <User className="w-5 h-5" />
-              Personal Information
-            </h3>{" "}
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={bookingData.name}
-                  onChange={handleInputChange}
-                  required
-                  className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
-                    formErrors.name
-                      ? "border-red-300 focus:ring-red-500 bg-red-50"
-                      : "border-gray-300 focus:ring-[#FF3133]"
-                  }`}
-                  placeholder="Your full name"
-                />
-                {formErrors.name && (
-                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 font-uber">
-                    <AlertCircle className="w-4 h-4" />
-                    {formErrors.name}
-                  </p>
-                )}
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                <User className="w-5 h-5 text-[#FF3133]" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+                Personal Information
+              </h3>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="sm:col-span-2 sm:grid sm:grid-cols-2 sm:gap-6">
+                <div>
+                  <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={bookingData.name}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-sm ${
+                      formErrors.name
+                        ? "border-red-300 focus:ring-red-500 bg-red-50"
+                        : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
+                    }`}
+                    placeholder="Your full name"
+                  />
+                  {formErrors.name && (
+                    <p className="mt-2 text-sm text-red-600 flex items-center gap-1 font-uber">
+                      <AlertCircle className="w-4 h-4" />
+                      {formErrors.name}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={bookingData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-sm ${
+                      formErrors.phone
+                        ? "border-red-300 focus:ring-red-500 bg-red-50"
+                        : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
+                    }`}
+                    placeholder="+44 7XXX XXXXXX"
+                  />
+                  {formErrors.phone && (
+                    <p className="mt-2 text-sm text-red-600 flex items-center gap-1 font-uber">
+                      <AlertCircle className="w-4 h-4" />
+                      {formErrors.phone}
+                    </p>
+                  )}
+                </div>
               </div>
 
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
-                  Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={bookingData.phone}
-                  onChange={handleInputChange}
-                  required
-                  className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
-                    formErrors.phone
-                      ? "border-red-300 focus:ring-red-500 bg-red-50"
-                      : "border-gray-300 focus:ring-[#FF3133]"
-                  }`}
-                  placeholder="+44 7XXX XXXXXX"
-                />
-                {formErrors.phone && (
-                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 font-uber">
-                    <AlertCircle className="w-4 h-4" />
-                    {formErrors.phone}
-                  </p>
-                )}
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-[#0E2127] font-medium mb-2">
+              <div className="sm:col-span-2">
+                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
                   Email Address *
                 </label>
                 <input
@@ -347,23 +354,23 @@ const BookingPage = () => {
                   value={bookingData.email}
                   onChange={handleInputChange}
                   required
-                  className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-sm ${
                     formErrors.email
                       ? "border-red-300 focus:ring-red-500 bg-red-50"
-                      : "border-gray-300 focus:ring-[#FF3133]"
+                      : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
                   }`}
                   placeholder="your.email@example.com"
                 />
                 {formErrors.email && (
-                  <p className="mt-1 text-body text-red-600 flex items-center gap-1 font-uber">
+                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1 font-uber">
                     <AlertCircle className="w-4 h-4" />
                     {formErrors.email}
                   </p>
                 )}
               </div>
 
-              <div className="md:col-span-2">
-                <label className="block text-[#0E2127] font-medium mb-2">
+              <div className="sm:col-span-2">
+                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
                   Emergency Contact
                 </label>
                 <input
@@ -371,7 +378,7 @@ const BookingPage = () => {
                   name="emergencyContact"
                   value={bookingData.emergencyContact}
                   onChange={handleInputChange}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm"
                   placeholder="Emergency contact name and phone number"
                 />
               </div>
@@ -381,15 +388,19 @@ const BookingPage = () => {
 
       case 2:
         return (
-          <div className="bg-gray-50 rounded-xl p-6">
-            <h3 className="text-h4-mobile md:text-h3-desktop font-axiforma text-[#0E2127] mb-4 flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              Appointment Details
-            </h3>
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                <Calendar className="w-5 h-5 text-[#FF3133]" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+                Appointment Details
+              </h3>
+            </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="block text-[#0E2127] font-medium mb-2">
+            <div className="space-y-6">
+              <div>
+                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
                   Service Required *
                 </label>
                 <select
@@ -397,7 +408,7 @@ const BookingPage = () => {
                   value={bookingData.service}
                   onChange={handleInputChange}
                   required
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm"
                 >
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
@@ -408,54 +419,61 @@ const BookingPage = () => {
                 </select>
               </div>
 
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+                    Preferred Date *
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    value={bookingData.date}
+                    onChange={handleInputChange}
+                    min={today}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm"
+                  />
+                </div>
+              </div>
+
+              {/* Time Slot Selection */}
               <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
-                  Preferred Date *
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  value={bookingData.date}
-                  onChange={handleInputChange}
-                  min={today}
-                  required
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                <TimeSlotSelector
+                  selectedDate={bookingData.date}
+                  selectedTime={bookingData.time}
+                  onTimeSelect={handleTimeSelect}
+                  sessionDuration={bookingData.sessionType?.duration || 30}
                 />
               </div>
-            </div>
 
-            {/* Time Slot Selection */}
-            <div className="mt-6">
-              <TimeSlotSelector
-                selectedDate={bookingData.date}
-                selectedTime={bookingData.time}
-                onTimeSelect={handleTimeSelect}
-                sessionDuration={bookingData.sessionType?.duration || 30}
-              />
+              {bookingData.sessionType && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-blue-800 font-uber">
+                    <span className="font-semibold">Selected:</span>{" "}
+                    {bookingData.sessionType.name} (
+                    {bookingData.sessionType.duration} minutes)
+                  </p>
+                </div>
+              )}
             </div>
-
-            {bookingData.sessionType && (
-              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-body text-blue-800 font-uber">
-                  <strong>Selected:</strong> {bookingData.sessionType.name} (
-                  {bookingData.sessionType.duration} minutes)
-                </p>
-              </div>
-            )}
           </div>
         );
 
       case 3:
         return (
-          <div className="bg-gray-50 rounded-xl p-6">
-            <h3 className="text-h4-mobile md:text-h3-desktop font-axiforma text-[#0E2127] mb-4 flex items-center gap-2">
-              <Stethoscope className="w-5 h-5" />
-              Medical Information
-            </h3>
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                <Stethoscope className="w-5 h-5 text-[#FF3133]" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+                Medical Information
+              </h3>
+            </div>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
+                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
                   Current Medical Condition / Reason for Visit *
                 </label>
                 <textarea
@@ -463,14 +481,14 @@ const BookingPage = () => {
                   value={bookingData.message}
                   onChange={handleInputChange}
                   required
-                  rows={3}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  rows={4}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
                   placeholder="Please describe your current condition, symptoms, or reason for seeking physiotherapy..."
                 />
               </div>
 
               <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
+                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
                   Medical History
                 </label>
                 <textarea
@@ -478,37 +496,39 @@ const BookingPage = () => {
                   value={bookingData.medicalHistory}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
                   placeholder="Any relevant medical history, surgeries, chronic conditions..."
                 />
               </div>
 
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
-                  Current Medications
-                </label>
-                <textarea
-                  name="currentMedications"
-                  value={bookingData.currentMedications}
-                  onChange={handleInputChange}
-                  rows={2}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                  placeholder="List any medications you are currently taking..."
-                />
-              </div>
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+                    Current Medications
+                  </label>
+                  <textarea
+                    name="currentMedications"
+                    value={bookingData.currentMedications}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
+                    placeholder="List any medications you are currently taking..."
+                  />
+                </div>
 
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-2">
-                  Previous Physiotherapy Experience
-                </label>
-                <textarea
-                  name="previousPhysiotherapy"
-                  value={bookingData.previousPhysiotherapy}
-                  onChange={handleInputChange}
-                  rows={2}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all"
-                  placeholder="Have you had physiotherapy before? What treatments worked or didn't work?"
-                />
+                <div>
+                  <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+                    Previous Physiotherapy Experience
+                  </label>
+                  <textarea
+                    name="previousPhysiotherapy"
+                    value={bookingData.previousPhysiotherapy}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
+                    placeholder="Have you had physiotherapy before? What treatments worked or didn't work?"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -516,51 +536,59 @@ const BookingPage = () => {
 
       case 4:
         return (
-          <div className="bg-gray-50 rounded-xl p-6">
-            <h3 className="text-h4-mobile md:text-h3-desktop font-axiforma text-[#0E2127] mb-4 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5" />
-              Booking Confirmation
-            </h3>
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+                Booking Confirmation
+              </h3>
+            </div>
 
-            <div className="bg-white rounded-lg p-6 space-y-6">
+            <div className="bg-gray-50 rounded-lg p-6 space-y-6">
               <div className="text-center mb-6">
-                <h4 className="text-h5-mobile md:text-h4-desktop font-axiforma text-[#0E2127] mb-2">
+                <h4 className="text-lg font-axiforma text-[#0E2127] mb-2">
                   Please review your booking details
                 </h4>
-                <p className="text-gray-600 text-body font-uber">
+                <p className="text-gray-600 text-sm font-uber">
                   Make sure all information is correct before submitting
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid gap-6 lg:grid-cols-2">
                 {/* Session Details */}
-                <div className="space-y-3">
-                  <h5 className="font-semibold text-[#0E2127] border-b pb-1">
+                <div className="space-y-4">
+                  <h5 className="font-semibold text-[#0E2127] text-sm uppercase tracking-wide border-b border-gray-200 pb-2">
                     Session Details
                   </h5>
                   {bookingData.sessionType && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Session Type:</span>
-                      <span className="font-medium">
+                    <div className="flex justify-between items-start py-2">
+                      <span className="text-gray-600 text-sm">
+                        Session Type:
+                      </span>
+                      <span className="font-medium text-sm text-right">
                         {bookingData.sessionType.name}
                       </span>
                     </div>
                   )}
                   {bookingData.sessionType && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Duration:</span>
-                      <span className="font-medium">
+                    <div className="flex justify-between items-start py-2">
+                      <span className="text-gray-600 text-sm">Duration:</span>
+                      <span className="font-medium text-sm">
                         {bookingData.sessionType.duration} minutes
                       </span>
                     </div>
                   )}
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Service:</span>
-                    <span className="font-medium">{bookingData.service}</span>
+                  <div className="flex justify-between items-start py-2">
+                    <span className="text-gray-600 text-sm">Service:</span>
+                    <span className="font-medium text-sm text-right">
+                      {bookingData.service}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Date:</span>
-                    <span className="font-medium">
+                  <div className="flex justify-between items-start py-2">
+                    <span className="text-gray-600 text-sm">Date:</span>
+                    <span className="font-medium text-sm text-right">
                       {new Date(bookingData.date).toLocaleDateString("en-GB", {
                         weekday: "long",
                         year: "numeric",
@@ -569,33 +597,43 @@ const BookingPage = () => {
                       })}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Time:</span>
-                    <span className="font-medium">{bookingData.time}</span>
+                  <div className="flex justify-between items-start py-2">
+                    <span className="text-gray-600 text-sm">Time:</span>
+                    <span className="font-medium text-sm">
+                      {bookingData.time}
+                    </span>
                   </div>
                 </div>
 
                 {/* Personal Details */}
-                <div className="space-y-3">
-                  <h5 className="font-semibold text-[#0E2127] border-b pb-1">
+                <div className="space-y-4">
+                  <h5 className="font-semibold text-[#0E2127] text-sm uppercase tracking-wide border-b border-gray-200 pb-2">
                     Personal Details
                   </h5>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Name:</span>
-                    <span className="font-medium">{bookingData.name}</span>
+                  <div className="flex justify-between items-start py-2">
+                    <span className="text-gray-600 text-sm">Name:</span>
+                    <span className="font-medium text-sm text-right">
+                      {bookingData.name}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Email:</span>
-                    <span className="font-medium">{bookingData.email}</span>
+                  <div className="flex justify-between items-start py-2">
+                    <span className="text-gray-600 text-sm">Email:</span>
+                    <span className="font-medium text-sm text-right break-all">
+                      {bookingData.email}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Phone:</span>
-                    <span className="font-medium">{bookingData.phone}</span>
+                  <div className="flex justify-between items-start py-2">
+                    <span className="text-gray-600 text-sm">Phone:</span>
+                    <span className="font-medium text-sm">
+                      {bookingData.phone}
+                    </span>
                   </div>
                   {bookingData.emergencyContact && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Emergency Contact:</span>
-                      <span className="font-medium text-sm">
+                    <div className="flex justify-between items-start py-2">
+                      <span className="text-gray-600 text-sm">
+                        Emergency Contact:
+                      </span>
+                      <span className="font-medium text-sm text-right">
                         {bookingData.emergencyContact}
                       </span>
                     </div>
@@ -605,44 +643,44 @@ const BookingPage = () => {
 
               {/* Medical Information */}
               {bookingData.message && (
-                <div className="space-y-3">
-                  <h5 className="font-semibold text-[#0E2127] border-b pb-1">
+                <div className="space-y-4 pt-4 border-t border-gray-200">
+                  <h5 className="font-semibold text-[#0E2127] text-sm uppercase tracking-wide">
                     Medical Information
                   </h5>
                   <div>
-                    <span className="text-gray-600 text-sm">
+                    <span className="text-gray-600 text-sm block mb-2">
                       Condition/Reason for visit:
                     </span>
-                    <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
+                    <p className="text-sm bg-white p-3 rounded border text-gray-700 font-uber">
                       {bookingData.message}
                     </p>
                   </div>
                   {bookingData.medicalHistory && (
                     <div>
-                      <span className="text-gray-600 text-sm">
+                      <span className="text-gray-600 text-sm block mb-2">
                         Medical History:
                       </span>
-                      <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
+                      <p className="text-sm bg-white p-3 rounded border text-gray-700 font-uber">
                         {bookingData.medicalHistory}
                       </p>
                     </div>
                   )}
                   {bookingData.currentMedications && (
                     <div>
-                      <span className="text-gray-600 text-sm">
+                      <span className="text-gray-600 text-sm block mb-2">
                         Current Medications:
                       </span>
-                      <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
+                      <p className="text-sm bg-white p-3 rounded border text-gray-700 font-uber">
                         {bookingData.currentMedications}
                       </p>
                     </div>
                   )}
                   {bookingData.previousPhysiotherapy && (
                     <div>
-                      <span className="text-gray-600 text-sm">
+                      <span className="text-gray-600 text-sm block mb-2">
                         Previous Physiotherapy:
                       </span>
-                      <p className="text-body mt-1 p-2 bg-gray-50 rounded font-uber">
+                      <p className="text-sm bg-white p-3 rounded border text-gray-700 font-uber">
                         {bookingData.previousPhysiotherapy}
                       </p>
                     </div>
@@ -650,21 +688,21 @@ const BookingPage = () => {
                 </div>
               )}
 
-              <div className="border-t pt-4">
+              <div className="border-t border-gray-200 pt-4">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <h6 className="font-semibold text-blue-800 mb-2">
+                  <h6 className="font-semibold text-blue-800 mb-3 text-sm">
                     Important Notice
                   </h6>
-                  <ul className="text-sm text-blue-700 space-y-1">
+                  <ul className="text-sm text-blue-700 space-y-2 list-disc list-inside">
                     <li>
-                      • We'll contact you within 24 hours to confirm your
+                      We'll contact you within 24 hours to confirm your
                       appointment
                     </li>
-                    <li>• Please arrive 10 minutes early for your session</li>
-                    <li>• Bring comfortable clothing suitable for movement</li>
+                    <li>Please arrive 10 minutes early for your session</li>
+                    <li>Bring comfortable clothing suitable for movement</li>
                     <li>
-                      • If you need to cancel, please call us at least 24 hours
-                      in advance
+                      If you need to cancel, please call us at least 24 hours in
+                      advance
                     </li>
                   </ul>
                 </div>
@@ -679,24 +717,24 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
-          <div className="flex items-center justify-between">
+      <div className="bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <Link
               href="/"
-              className="flex items-center gap-3 text-[#0E2127] hover:text-[#FF3133] transition-colors"
+              className="flex items-center gap-3 text-[#0E2127] hover:text-[#FF3133] transition-colors group"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
               <span className="font-medium">Back to Home</span>
             </Link>
 
-            <div className="text-right">
-              <h1 className="text-h4-mobile md:text-h3-small font-axiforma text-[#0E2127]">
+            <div className="sm:text-right">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-axiforma text-[#0E2127] mb-1">
                 Book Appointment
               </h1>
-              <p className="text-gray-600 text-body font-uber">
+              <p className="text-gray-600 text-sm sm:text-base font-uber">
                 Schedule your physiotherapy session
               </p>
             </div>
@@ -705,48 +743,47 @@ const BookingPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-6 lg:px-12 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         {submitStatus === "success" && bookingResponse && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8"
+            className="bg-green-50 border-l-4 border-green-400 rounded-r-lg p-6 mb-8"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-green-600 text-body-lg">✓</span>
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
-              <div className="flex-1">
-                <h3 className="text-green-800 font-semibold">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-semibold text-green-800 mb-2">
                   Booking Submitted Successfully!
                 </h3>
-                <p className="text-green-700 text-body font-uber">
+                <p className="text-green-700 text-sm mb-4 font-uber">
                   {bookingResponse.message}
                 </p>
                 {bookingResponse.booking && (
-                  <div className="mt-3 p-3 bg-green-100 rounded-lg">
-                    <p className="text-body text-green-800 font-uber">
-                      <strong>Confirmation Number:</strong>
-                      {""}
+                  <div className="bg-green-100 rounded-lg p-4 space-y-2">
+                    <p className="text-sm text-green-800 font-uber">
+                      <span className="font-semibold">
+                        Confirmation Number:
+                      </span>{" "}
                       {bookingResponse.booking.confirmationNumber}
                     </p>
-                    <p className="text-body text-green-800 font-uber">
-                      <strong>Date & Time:</strong>
-                      {""}
-                      {bookingResponse.booking.date} at{""}
+                    <p className="text-sm text-green-800 font-uber">
+                      <span className="font-semibold">Date & Time:</span>{" "}
+                      {bookingResponse.booking.date} at{" "}
                       {bookingResponse.booking.time}
                     </p>
                     {bookingResponse.booking.sessionType && (
-                      <p className="text-body text-green-800 font-uber">
-                        <strong>Session:</strong>
-                        {""}
+                      <p className="text-sm text-green-800 font-uber">
+                        <span className="font-semibold">Session:</span>{" "}
                         {bookingResponse.booking.sessionType} session (
                         {bookingResponse.booking.sessionDuration} minutes)
                       </p>
                     )}
                   </div>
                 )}
-                <p className="text-body text-green-600 mt-2 font-uber">
+                <p className="text-sm text-green-600 mt-3 font-uber">
                   Redirecting to home page in 5 seconds...
                 </p>
               </div>
@@ -758,17 +795,17 @@ const BookingPage = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8"
+            className="bg-red-50 border-l-4 border-red-400 rounded-r-lg p-6 mb-8"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                <span className="text-red-600 text-body-lg">✗</span>
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <AlertCircle className="w-6 h-6 text-red-600" />
               </div>
-              <div className="flex-1">
-                <h3 className="text-red-800 font-semibold">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-semibold text-red-800 mb-2">
                   Booking Submission Failed
                 </h3>
-                <p className="text-red-700 text-body font-uber">
+                <p className="text-red-700 text-sm font-uber">
                   {errorMessage ||
                     "Please try again or call us directly at +44 7460 091561"}
                 </p>
@@ -777,93 +814,88 @@ const BookingPage = () => {
           </motion.div>
         )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="bg-white rounded-2xl shadow-lg p-8"
-        >
-          {/* Progress Stepper */}
-          <div className="mb-8">
-            <ProgressStepper steps={stepTitles} currentStep={currentStep} />
-          </div>
+        {/* Progress Stepper - Clean and Separated */}
+        <div className="mb-6 pb-6">
+          <ProgressStepper steps={stepTitles} currentStep={currentStep} />
+        </div>
 
-          {/* Step Indicator (For backward compatibility) */}
-          <StepIndicator
-            currentStep={currentStep}
-            onStepClick={setCurrentStep}
-          />
+        <div className="bg-white border  border-gray-200 rounded-xl overflow-hidden">
+          {/* Form Container */}
+          <div className="p-4 sm:p-6 lg:p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Step Content */}
+              <div className="min-h-[300px]">{renderStepContent()}</div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Step Content */}
-            {renderStepContent()}
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-6">
-              <button
-                type="button"
-                onClick={handlePrevious}
-                disabled={currentStep === 0}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                  currentStep === 0
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-              >
-                <ChevronLeft className="w-4 h-4" />
-                Previous
-              </button>
-
-              {currentStep < 4 ? (
+              {/* Navigation Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-100">
                 <button
                   type="button"
-                  onClick={handleNext}
-                  disabled={!canProceedToNextStep()}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                    canProceedToNextStep()
-                      ? "bg-[#FF3133] text-white hover:bg-[#e62a2c]"
-                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  onClick={handlePrevious}
+                  disabled={currentStep === 0}
+                  className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
+                    currentStep === 0
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200"
                   }`}
                 >
-                  {currentStep === 3 ? "Review Booking" : "Next"}
-                  <ArrowRight className="w-4 h-4" />
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
                 </button>
-              ) : (
-                <button
-                  type="submit"
-                  disabled={isSubmitting || !canProceedToNextStep()}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                    isSubmitting || !canProceedToNextStep()
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-[#FF3133] hover:bg-[#e62a2c] text-white"
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Submitting...
-                    </>
-                  ) : (
-                    "Submit Booking"
-                  )}
-                </button>
-              )}
-            </div>
-          </form>
 
-          <p className="text-body text-gray-600 text-center mt-6 font-uber">
-            * Required fields. We'll contact you within 24 hours to confirm your
-            appointment.
-            <br />
-            For urgent matters, please call us directly at{""}
-            <a
-              href="tel:+447460091561"
-              className="text-[#FF3133] hover:underline font-medium"
-            >
-              +44 7460 091561
-            </a>
-          </p>
-        </motion.div>
+                {currentStep < 4 ? (
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    disabled={!canProceedToNextStep()}
+                    className={`w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-medium transition-all ${
+                      canProceedToNextStep()
+                        ? "bg-[#FF3133] text-white hover:bg-[#e62a2c] border border-[#FF3133]"
+                        : "bg-gray-300 text-gray-500 cursor-not-allowed border border-gray-300"
+                    }`}
+                  >
+                    {currentStep === 3 ? "Review Booking" : "Next"}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !canProceedToNextStep()}
+                    className={`w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-medium transition-all ${
+                      isSubmitting || !canProceedToNextStep()
+                        ? "bg-gray-400 cursor-not-allowed border border-gray-400"
+                        : "bg-[#FF3133] hover:bg-[#e62a2c] text-white border border-[#FF3133]"
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Submitting...
+                      </>
+                    ) : (
+                      "Submit Booking"
+                    )}
+                  </button>
+                )}
+              </div>
+            </form>
+
+            {/* Footer Notice */}
+            <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+              <p className="text-sm text-gray-600 font-uber leading-relaxed">
+                * Required fields. We'll contact you within 24 hours to confirm
+                your appointment.
+                <br />
+                For urgent matters, please call us directly at{" "}
+                <a
+                  href="tel:+447460091561"
+                  className="text-[#FF3133] hover:underline font-medium"
+                >
+                  +44 7460 091561
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

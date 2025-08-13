@@ -38,16 +38,21 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
   onSessionSelect,
 }) => {
   return (
-    <div className="bg-gray-50 rounded-xl p-6">
-      <h3 className="text-h5-mobile md:text-h4-small font-axiforma text-[#0E2127] mb-4 flex items-center gap-2">
-        <Clock className="w-5 h-5" />
-        Session Type & Duration
-      </h3>
-      <p className="text-body text-gray-600 mb-6 font-uber">
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+          <Clock className="w-5 h-5 text-[#FF3133]" />
+        </div>
+        <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+          Session Type & Duration
+        </h3>
+      </div>
+
+      <p className="text-sm text-gray-600 mb-6 font-uber">
         Please select the type of session you would like to book
       </p>
 
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         {sessionTypes.map((session) => {
           const isSelected = selectedSession?.id === session.id;
           const Icon = session.id === "new" ? UserPlus : RefreshCw;
@@ -56,12 +61,12 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
             <motion.button
               key={session.id}
               onClick={() => onSessionSelect(session)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`relative p-6 rounded-lg border-2 transition-all duration-300 text-left ${
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className={`relative p-5 rounded-lg border-2 transition-all duration-200 text-left ${
                 isSelected
-                  ? "border-[#FF3133] bg-[#FF3133]/5 shadow-lg"
-                  : "border-gray-200 bg-white hover:border-[#FF3133]/50 hover:shadow-md"
+                  ? "border-[#FF3133] bg-[#FF3133]/5"
+                  : "border-gray-200 bg-white hover:border-[#FF3133]/50"
               }`}
             >
               {/* Selection Indicator */}
@@ -77,12 +82,12 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
 
               {/* Icon */}
               <div
-                className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+                className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 ${
                   isSelected ? "bg-[#FF3133]" : "bg-gray-100"
                 }`}
               >
                 <Icon
-                  className={`w-6 h-6 ${
+                  className={`w-5 h-5 ${
                     isSelected ? "text-white" : "text-gray-600"
                   }`}
                 />
@@ -91,7 +96,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
               {/* Content */}
               <div>
                 <h4
-                  className={`font-semibold mb-2 ${
+                  className={`font-semibold mb-3 text-base ${
                     isSelected ? "text-[#FF3133]" : "text-[#0E2127]"
                   }`}
                 >
@@ -101,18 +106,18 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
                 <div className="space-y-2 mb-3">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-gray-500" />
-                    <span className="text-body-sm text-gray-600 font-uber">
+                    <span className="text-sm text-gray-600 font-uber">
                       {session.duration} minutes
                     </span>
                   </div>
                   {session.price && (
-                    <div className="text-body-sm font-axiforma text-[#0E2127]">
+                    <div className="text-sm font-medium text-[#0E2127]">
                       {session.price}
                     </div>
                   )}
                 </div>
 
-                <p className="text-body text-gray-600 font-uber leading-relaxed">
+                <p className="text-sm text-gray-600 font-uber leading-relaxed">
                   {session.description}
                 </p>
               </div>
