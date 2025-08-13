@@ -731,9 +731,9 @@ const BookingPage = () => {
             </Link>
 
             <div className="sm:text-right">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-axiforma text-[#0E2127] mb-1">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-axiforma text-[#0E2127] mb-1">
                 Book Appointment
-              </h1>
+              </h3>
               <p className="text-gray-600 text-sm sm:text-base font-uber">
                 Schedule your physiotherapy session
               </p>
