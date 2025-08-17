@@ -8,15 +8,15 @@ export const metadata: Metadata = {
  process.env.NEXT_PUBLIC_SITE_URL ||"https://easewaymedicare.co.uk"
  ),
  title:
-">Easeway Medicare Physiotherapy Clinic - Professional Physiotherapy Services in Whittlesey",
+"Easeway Medicare Physiotherapy Clinic - Professional Physiotherapy Services in Whittlesey",
  description:
-">Overcome pain, regain mobility and live life to the fullest easily! Professional physiotherapy services including manual therapy, electrotherapy, sports massage and home physiotherapy care in Whittlesey, Peterborough.",
+"Overcome pain, regain mobility and live life to the fullest easily! Professional physiotherapy services including manual therapy, electrotherapy, sports massage and home physiotherapy care in Whittlesey, Peterborough.",
  keywords:
-">physiotherapy, physiotherapist, manual therapy, electrotherapy, sports massage, home physiotherapy, Whittlesey, Peterborough, pain relief, mobility, rehabilitation",
+"physiotherapy, physiotherapist, manual therapy, electrotherapy, sports massage, home physiotherapy, Whittlesey, Peterborough, pain relief, mobility, rehabilitation",
  openGraph: {
  title:"Easeway Medicare Physiotherapy Clinic",
  description:
-">Professional physiotherapy services in Whittlesey, Peterborough",
+"Professional physiotherapy services in Whittlesey, Peterborough",
  url:"https://easewaymedicare.co.uk",
  siteName:"Easeway Medicare Physiotherapy Clinic",
  images: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
  card:"summary_large_image",
  title:"Easeway Medicare Physiotherapy Clinic",
  description:
-">Professional physiotherapy services in Whittlesey, Peterborough",
+"Professional physiotherapy services in Whittlesey, Peterborough",
  images: ["/images/easeway_logo.png"],
  },
  robots: {

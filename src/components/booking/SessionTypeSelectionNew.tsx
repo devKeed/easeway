@@ -58,13 +58,11 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
           const Icon = session.id === "new" ? UserPlus : RefreshCw;
 
           return (
-            <motion.button
+            <button
               key={session.id}
               type="button"
               onClick={() => onSessionSelect(session)}
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              className={`relative p-5 rounded-lg border-2 transition-all duration-200 text-left ${
+              className={`relative p-5 rounded-lg border-2 transition-all duration-200 text-left hover:scale-[1.01] ${
                 isSelected
                   ? "border-[#FF3133] bg-[#FF3133]/5"
                   : "border-gray-200 bg-white hover:border-[#FF3133]/50"
@@ -72,13 +70,9 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
             >
               {/* Selection Indicator */}
               {isSelected && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute top-3 right-3 w-6 h-6 bg-[#FF3133] rounded-full flex items-center justify-center"
-                >
+                <div className="absolute top-3 right-3 w-6 h-6 bg-[#FF3133] rounded-full flex items-center justify-center">
                   <Check className="w-4 h-4 text-white" />
-                </motion.div>
+                </div>
               )}
 
               {/* Icon */}
@@ -125,7 +119,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
 
               {/* Duration Badge */}
               <div
-                className={`absolute bottom-3 right-3 px-2 py-1 rounded-full text-body-xs font-axiforma ${
+                className={`absolute bottom-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${
                   isSelected
                     ? "bg-[#FF3133] text-white"
                     : "bg-gray-200 text-gray-600"
@@ -133,28 +127,24 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
               >
                 {session.duration}min
               </div>
-            </motion.button>
+            </button>
           );
         })}
       </div>
 
       {selectedSession && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-6 p-4 bg-[#FF3133]/5 border border-[#FF3133]/20 rounded-lg"
-        >
+        <div className="mt-6 p-4 bg-[#FF3133]/5 border border-[#FF3133]/20 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
             <Check className="w-4 h-4 text-[#FF3133]" />
             <span className="text-[#FF3133] font-medium text-sm">
               Selected: {selectedSession.name}
             </span>
           </div>
-          <p className="text-body text-gray-600 font-uber">
+          <p className="text-sm text-gray-600 font-uber">
             Duration: {selectedSession.duration} minutes |{" "}
             {selectedSession.price}
           </p>
-        </motion.div>
+        </div>
       )}
     </div>
   );

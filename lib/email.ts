@@ -3,7 +3,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export interface BookingNotificationData {
-  bookingId: string;
+  bookingId?: string;
   name: string;
   email: string;
   phone: string;

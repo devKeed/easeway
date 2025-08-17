@@ -21,7 +21,7 @@ import Link from "next/link";
 import { BookingProvider, useBooking } from "../../src/contexts/BookingContext";
 import SessionTypeSelection, {
   SessionType,
-} from "../../src/components/booking/SessionTypeSelection";
+} from "../../src/components/booking/SessionTypeSelectionNew";
 import StepIndicator from "../../src/components/booking/StepIndicator";
 import TimeSlotSelector from "../../src/components/booking/TimeSlotSelector";
 import LoadingSpinner from "../../src/components/ui/LoadingSpinner";
@@ -58,8 +58,7 @@ const BookingPage = () => {
   const stepTitles = [
     "Session Type",
     "Personal Info",
-    "Select Date",
-    "Select Time",
+    "Appointment Details",
     "Medical Info",
     "Review & Confirm",
   ];
@@ -100,27 +99,24 @@ const BookingPage = () => {
         if (!bookingData.phone.trim()) {
           errors.phone = "Phone number is required";
         }
+        break;
+
+      case 2: // Appointment Details
         if (!bookingData.service) {
           errors.service = "Please select a service";
         }
-        break;
-
-      case 2: // Date
         if (!bookingData.date) {
           errors.date = "Please select a date";
         }
-        break;
-
-      case 3: // Time
         if (!bookingData.time) {
           errors.time = "Please select a time slot";
         }
         break;
 
-      case 4: // Medical Info - Optional fields, no validation
+      case 3: // Medical Info - Optional fields, no validation
         break;
 
-      case 5: // Review - Final validation
+      case 4: // Review - Final validation
         const allRequiredFields = {
           sessionType: "Session type",
           name: "Full name",
@@ -144,6 +140,7 @@ const BookingPage = () => {
   };
 
   const handleSessionSelect = (session: SessionType) => {
+    console.log("Session selected:", session);
     updateBookingData({ sessionType: session });
   };
 
@@ -160,7 +157,7 @@ const BookingPage = () => {
       case 2:
         return bookingData.service && bookingData.date && bookingData.time;
       case 3:
-        return bookingData.message;
+        return true; // Medical info is optional
       case 4:
         return true; // Confirmation step - always allow submission
       default:
@@ -170,7 +167,7 @@ const BookingPage = () => {
 
   const handleNext = () => {
     if (validateStep()) {
-      if (currentStep < 5) {
+      if (currentStep < 4) {
         setCurrentStep(currentStep + 1);
       }
     } else {
@@ -190,6 +187,9 @@ const BookingPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form submitted! Current step:", currentStep);
+    console.log("Booking data:", bookingData);
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -822,78 +822,102 @@ const BookingPage = () => {
         <div className="bg-white border  border-gray-200 rounded-xl overflow-hidden">
           {/* Form Container */}
           <div className="p-4 sm:p-6 lg:p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Step Content */}
-              <div className="min-h-[300px]">{renderStepContent()}</div>
+            {submitStatus !== "success" ? (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Step Content */}
+                <div className="min-h-[300px]">{renderStepContent()}</div>
 
-              {/* Navigation Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={handlePrevious}
-                  disabled={currentStep === 0}
-                  className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                    currentStep === 0
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200"
-                  }`}
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  Previous
-                </button>
-
-                {currentStep < 4 ? (
+                {/* Navigation Buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-100">
                   <button
                     type="button"
-                    onClick={handleNext}
-                    disabled={!canProceedToNextStep()}
-                    className={`w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-medium transition-all ${
-                      canProceedToNextStep()
-                        ? "bg-[#FF3133] text-white hover:bg-[#e62a2c] border border-[#FF3133]"
-                        : "bg-gray-300 text-gray-500 cursor-not-allowed border border-gray-300"
+                    onClick={handlePrevious}
+                    disabled={currentStep === 0}
+                    className={`w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
+                      currentStep === 0
+                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200"
                     }`}
                   >
-                    {currentStep === 3 ? "Review Booking" : "Next"}
-                    <ArrowRight className="w-4 h-4" />
+                    <ChevronLeft className="w-4 h-4" />
+                    Previous
                   </button>
-                ) : (
-                  <button
-                    type="submit"
-                    disabled={isSubmitting || !canProceedToNextStep()}
-                    className={`w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-medium transition-all ${
-                      isSubmitting || !canProceedToNextStep()
-                        ? "bg-gray-400 cursor-not-allowed border border-gray-400"
-                        : "bg-[#FF3133] hover:bg-[#e62a2c] text-white border border-[#FF3133]"
-                    }`}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Submitting...
-                      </>
-                    ) : (
-                      "Submit Booking"
-                    )}
-                  </button>
-                )}
-              </div>
-            </form>
 
-            {/* Footer Notice */}
-            <div className="mt-8 pt-6 border-t border-gray-100 text-center">
-              <p className="text-sm text-gray-600 font-uber leading-relaxed">
-                * Required fields. We'll contact you within 24 hours to confirm
-                your appointment.
-                <br />
-                For urgent matters, please call us directly at{" "}
-                <a
-                  href="tel:+447460091561"
-                  className="text-[#FF3133] hover:underline font-medium"
+                  {currentStep < 4 ? (
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      disabled={!canProceedToNextStep()}
+                      className={`w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-medium transition-all ${
+                        canProceedToNextStep()
+                          ? "bg-[#FF3133] text-white hover:bg-[#e62a2c] border border-[#FF3133]"
+                          : "bg-gray-300 text-gray-500 cursor-not-allowed border border-gray-300"
+                      }`}
+                    >
+                      {currentStep === 3 ? "Review Booking" : "Next"}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={isSubmitting || !canProceedToNextStep()}
+                      className={`w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg font-medium transition-all ${
+                        isSubmitting || !canProceedToNextStep()
+                          ? "bg-gray-400 cursor-not-allowed border border-gray-400"
+                          : "bg-[#FF3133] hover:bg-[#e62a2c] text-white border border-[#FF3133]"
+                      }`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          Submitting...
+                        </>
+                      ) : (
+                        "Submit Booking"
+                      )}
+                    </button>
+                  )}
+                </div>
+              </form>
+            ) : (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-axiforma text-[#0E2127] mb-2">
+                  Booking Completed Successfully!
+                </h3>
+                <p className="text-gray-600 text-sm font-uber mb-6">
+                  Your appointment has been submitted and we'll contact you
+                  within 24 hours to confirm.
+                </p>
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF3133] text-white rounded-lg hover:bg-[#e62a2c] transition-colors font-medium"
                 >
-                  +44 7460 091561
-                </a>
-              </p>
-            </div>
+                  <ArrowLeft className="w-4 h-4" />
+                  Return to Home
+                </Link>
+              </div>
+            )}
+
+            {/* Footer Notice - Only show when form is visible */}
+            {submitStatus !== "success" && (
+              <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+                <p className="text-sm text-gray-600 font-uber leading-relaxed">
+                  * Required fields. We'll contact you within 24 hours to
+                  confirm your appointment.
+                  <br />
+                  For urgent matters, please call us directly at{" "}
+                  <a
+                    href="tel:+447460091561"
+                    className="text-[#FF3133] hover:underline font-medium"
+                  >
+                    +44 7460 091561
+                  </a>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
