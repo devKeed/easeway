@@ -44,7 +44,7 @@ const AboutUs = () => {
                 everyone deserves to live without pain and move freely. Our
                 dedicated team is committed to providing personalized,
                 evidence-based treatment that addresses the root cause of your
-                condition.
+                condition and restore functional capacity.
               </p>
             </div>
 

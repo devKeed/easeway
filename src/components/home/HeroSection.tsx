@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
               <div className="max-w-xl sm:max-w-2xl px-6 sm:px-8 md:px-16 lg:px-20">
                 {/* Main Heading */}
                 <h1 className="text-h1-mobile sm:text-h2-desktop md:text-h1-desktop lg:text-5xl xl:text-6xl font-axiforma text-white mb-4 sm:mb-6 leading-tight">
-                  Professional Physiotherapy
+                  Musculoskeletal Physiotherapy
                 </h1>
 
                 {/* Subtitle */}
