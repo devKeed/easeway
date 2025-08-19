@@ -45,7 +45,7 @@ const Contact = () => {
                     <Phone className="text-gray-700 w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div>
-                    <h4 className="text-h6-mobile md:text-h5-desktop font-axiforma text-gray-900 mb-1">
+                    <h4 className="text-h6-mobile md:text-h5-desktop font-axiforma text-gray-900">
                       Phone
                     </h4>
                     <a
@@ -62,7 +62,7 @@ const Contact = () => {
                     <Mail className="text-gray-700 w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-h6-mobile md:text-h5-desktop font-axiforma text-gray-900 mb-1">
+                    <h4 className="text-h6-mobile md:text-h5-desktop font-axiforma text-gray-900">
                       Email
                     </h4>
                     <a
@@ -79,10 +79,10 @@ const Contact = () => {
                     <MapPin className="text-gray-700 w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div>
-                    <h4 className="text-h6-mobile md:text-h5-desktop font-axiforma text-gray-900 mb-1">
+                    <h4 className="text-h6-mobile md:text-h5-desktop font-axiforma text-gray-900">
                       Location
                     </h4>
-                    <p className="text-body text-gray-600 font-light leading-relaxed font-uber">
+                    <p className="text-body text-gray-600 leading-relaxed font-uber">
                       Manor Leisure Centre
                       <br />
                       PE7 1UA, Whittlesey

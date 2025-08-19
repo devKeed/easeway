@@ -18,7 +18,7 @@ const Footer = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="relative">
+              <div className="relative mb-2">
                 <img
                   src="/images/logo.png"
                   alt="Easeway Medicare Physiotherapy Clinic"

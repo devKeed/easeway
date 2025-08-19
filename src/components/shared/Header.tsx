@@ -58,10 +58,9 @@ const Header = () => {
             </div>
           </motion.div>
 
+    {/* 
           <div className="flex items-center space-x-4">
-            {/* Desktop Contact Info & CTA */}
             <div className="hidden lg:flex items-center space-x-6">
-              {/* Contact Info */}
               <div className="flex items-center space-x-6">
                 <div className="flex items-center space-x-2 text-[#0E2127]">
                   <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
@@ -95,8 +94,7 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Authentication and Book Appointment */}
-              <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
                 {!isLoading && (
                   <>
                     {isAuthenticated ? (
@@ -144,7 +142,6 @@ const Header = () => {
                   </>
                 )}
 
-                {/* Book Appointment Button */}
                 <motion.a
                   href="/booking"
                   whileHover={{ scale: 1.02 }}
@@ -155,6 +152,7 @@ const Header = () => {
                 </motion.a>
               </div>
             </div>
+             */}
 
             {/* Hamburger Menu Button */}
             <motion.button
@@ -200,7 +198,7 @@ const Header = () => {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="px-4 py-6 space-y-4 bg-transparent backdrop-blur-md">
+              <div className="px-4 sm:px-10 py-6 space-y-4 bg-transparent backdrop-blur-md">
                 {/* Mobile Navigation */}
                 <nav className="space-y-3">
                   {menuItems.map((item) => (
@@ -263,7 +261,6 @@ const Header = () => {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
     </motion.header>
   );
 };

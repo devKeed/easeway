@@ -117,7 +117,7 @@ const Services = () => {
           </motion.h2>
 
           <motion.p
-            className="text-body-xs sm:text-body-sm text-gray-600 mx-auto leading-relaxed font-uber max-w-md px-4"
+            className="text-body text-gray-600 leading-relaxed mt-3 sm:mt-4 font-uber mx-auto max-w-md px-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -196,7 +196,7 @@ const Services = () => {
                 <h3 className="text-button-sm sm:text-button font-uber font-semibold text-gray-900 mb-2 sm:mb-3 leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-body leading-relaxed font-light font-uber">
+                <p className="text-body text-gray-600 leading-relaxed mt-3 sm:mt-4 font-uber">
                   {service.description}
                 </p>
               </div>
@@ -207,8 +207,7 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Call to Action */}
-        <motion.div
+        {/* <motion.div
           className="text-center mt-12 sm:mt-16 px-4 sm:px-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -216,7 +215,7 @@ const Services = () => {
           viewport={{ once: true }}
         >
           <MyFillButton text="Book Consultation" link="/booking" />
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
