@@ -13,6 +13,7 @@ const Header = () => {
 
   const menuItems = [
     { label: "Services", href: "#services" },
+    { label: "Pricing", href: "#pricing" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -58,7 +59,7 @@ const Header = () => {
             </div>
           </motion.div>
 
-    {/* 
+          {/* 
           <div className="flex items-center space-x-4">
             <div className="hidden lg:flex items-center space-x-6">
               <div className="flex items-center space-x-6">
@@ -154,113 +155,111 @@ const Header = () => {
             </div>
              */}
 
-            {/* Hamburger Menu Button */}
-            <motion.button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 bg-transparent text-[#0E2127] transition-colors"
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="w-6 h-5 flex flex-col justify-between">
-                <motion.span
-                  className="block h-0.5 bg-[#0E2127] rounded"
-                  animate={
-                    isMobileMenuOpen
-                      ? { rotate: 45, y: 8 }
-                      : { rotate: 0, y: 0 }
-                  }
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.span
-                  className="block h-0.5 bg-[#0E2127] rounded"
-                  animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.span
-                  className="block h-0.5 bg-[#0E2127] rounded"
-                  animate={
-                    isMobileMenuOpen
-                      ? { rotate: -45, y: -8 }
-                      : { rotate: 0, y: 0 }
-                  }
-                  transition={{ duration: 0.2 }}
-                />
-              </div>
-            </motion.button>
-          </div>
+          {/* Hamburger Menu Button */}
+          <motion.button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 bg-transparent text-[#0E2127] transition-colors"
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="w-6 h-5 flex flex-col justify-between">
+              <motion.span
+                className="block h-0.5 bg-[#0E2127] rounded"
+                animate={
+                  isMobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="block h-0.5 bg-[#0E2127] rounded"
+                animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="block h-0.5 bg-[#0E2127] rounded"
+                animate={
+                  isMobileMenuOpen
+                    ? { rotate: -45, y: -8 }
+                    : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.2 }}
+              />
+            </div>
+          </motion.button>
         </div>
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              className="bg-transparent border-t border-white/20"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="px-4 sm:px-10 py-6 space-y-4 bg-transparent backdrop-blur-md">
-                {/* Mobile Navigation */}
-                <nav className="space-y-3">
-                  {menuItems.map((item) => (
-                    <a
-                      key={item.label}
-                      onClick={() => handleMenuClick(item.href)}
-                      className="block w-full cursor-pointer text-left text-[#0E2127] hover:text-[#FF3133] transition-colors text-base font-medium py-2"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </nav>
+      </div>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="bg-transparent border-t border-white/20"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="px-4 sm:px-10 py-6 space-y-4 bg-transparent backdrop-blur-md">
+              {/* Mobile Navigation */}
+              <nav className="space-y-3">
+                {menuItems.map((item) => (
+                  <a
+                    key={item.label}
+                    onClick={() => handleMenuClick(item.href)}
+                    className="block w-full cursor-pointer text-left text-[#0E2127] hover:text-[#FF3133] transition-colors text-base font-medium py-2"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
 
-                {/* Mobile Contact Info */}
-                <div className="pt-4 border-t border-[#0E2127]/10 space-y-3">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
-                      <Phone className="text-[#FF3133] w-4 h-4" />
-                    </div>
-                    <div>
-                      <p className="text-[#0E2127]/60 text-body font-uber">
-                        Call us
-                      </p>
-                      <a
-                        href="tel:+447460091561"
-                        className="text-[#FF3133] font-semibold text-xs hover:text-[#e62a2c] transition-colors"
-                      >
-                        +44 7460 091561
-                      </a>
-                    </div>
+              {/* Mobile Contact Info */}
+              <div className="pt-4 border-t border-[#0E2127]/10 space-y-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                    <Phone className="text-[#FF3133] w-4 h-4" />
                   </div>
-
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
-                      <MapPin className="text-[#FF3133] w-4 h-4" />
-                    </div>
-                    <div>
-                      <p className="text-[#0E2127]/60 text-body font-uber">
-                        Location
-                      </p>
-                      <p className="text-body font-uber">
-                        Whittlesey, Peterborough
-                      </p>
-                    </div>
+                  <div>
+                    <p className="text-[#0E2127]/60 text-body font-uber">
+                      Call us
+                    </p>
+                    <a
+                      href="tel:+447460091561"
+                      className="text-[#FF3133] font-semibold text-xs hover:text-[#e62a2c] transition-colors"
+                    >
+                      +44 7460 091561
+                    </a>
                   </div>
                 </div>
 
-                {/* Mobile Book Appointment Button */}
-                <div className="pt-4">
-                  <motion.a
-                    href="/booking"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Book Appointment
-                  </motion.a>
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
+                    <MapPin className="text-[#FF3133] w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-[#0E2127]/60 text-body font-uber">
+                      Location
+                    </p>
+                    <p className="text-body font-uber">
+                      Whittlesey, Peterborough
+                    </p>
+                  </div>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
+              {/* Mobile Book Appointment Button */}
+              <div className="pt-4">
+                <motion.a
+                  href="/booking"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Book Appointment
+                </motion.a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 };
