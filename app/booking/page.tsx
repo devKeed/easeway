@@ -30,6 +30,7 @@ import ErrorState from "../../src/components/ui/ErrorState";
 import ProgressStepper from "../../src/components/ui/ProgressStepper";
 import { useToast } from "../../src/contexts/ToastContext";
 import HomeVisitBookingForm from "../../src/components/booking/HomeVisitBookingForm";
+import Footer from "@/components/shared/Footer";
 
 // Main booking page component
 const BookingPage = () => {
@@ -59,7 +60,7 @@ const BookingPage = () => {
   ];
 
   const stepTitles = [
-    "Service Type",
+    "Service Selection",
     "Session Type",
     "Personal Info",
     "Appointment Details",
@@ -85,9 +86,16 @@ const BookingPage = () => {
     const errors: Record<string, string> = {};
 
     switch (currentStep) {
-      case 0: // Service Type
+      case 0: // Service Selection
         if (!bookingData.serviceCategory) {
           errors.serviceCategory = "Please select a service type";
+        }
+        if (
+          bookingData.serviceCategory &&
+          bookingData.serviceCategory !== "home" &&
+          !bookingData.service
+        ) {
+          errors.service = "Please select a specific service";
         }
         break;
       case 1: // Session Type
@@ -109,9 +117,6 @@ const BookingPage = () => {
         }
         break;
       case 3: // Appointment Details
-        if (!bookingData.service) {
-          errors.service = "Please select a service";
-        }
         if (!bookingData.date) {
           errors.date = "Please select a date";
         }
@@ -128,7 +133,6 @@ const BookingPage = () => {
           name: "Full name",
           email: "Email address",
           phone: "Phone number",
-          service: "Service",
           date: "Date",
           time: "Time",
         } as const;
@@ -138,6 +142,14 @@ const BookingPage = () => {
             errors[field] = `${label} is required`;
           }
         });
+        // Check if service is required for non-home services
+        if (
+          bookingData.serviceCategory &&
+          bookingData.serviceCategory !== "home" &&
+          !bookingData.service
+        ) {
+          errors.service = "Service is required";
+        }
         break;
     }
 
@@ -157,13 +169,16 @@ const BookingPage = () => {
   const canProceedToNextStep = () => {
     switch (currentStep) {
       case 0:
-        return !!bookingData.serviceCategory;
+        return (
+          !!bookingData.serviceCategory &&
+          (bookingData.serviceCategory === "home" || !!bookingData.service)
+        );
       case 1:
         return bookingData.sessionType !== null;
       case 2:
         return bookingData.name && bookingData.email && bookingData.phone;
       case 3:
-        return bookingData.service && bookingData.date && bookingData.time;
+        return bookingData.date && bookingData.time;
       case 4:
         return true; // medical info optional
       case 5:
@@ -208,7 +223,11 @@ const BookingPage = () => {
         email: bookingData.email,
         phone: bookingData.phone,
         serviceCategory: bookingData.serviceCategory,
-        service: bookingData.service,
+        service:
+          bookingData.service ||
+          (bookingData.serviceCategory === "home"
+            ? "Home Visit"
+            : "General Consultation"),
         date: bookingData.date,
         time: bookingData.time,
         sessionType: bookingData.sessionType?.id || null,
@@ -279,15 +298,19 @@ const BookingPage = () => {
   const today = new Date().toISOString().split("T")[0];
 
   // Handle service category selection with home visit check
-  const handleServiceSelect = (serviceKey: string) => {
+  const handleServiceTypeSelect = (serviceKey: string) => {
     updateBookingData({ serviceCategory: serviceKey as any });
 
     if (serviceKey === "home") {
       setShowHomeVisitForm(true);
     } else {
       setShowHomeVisitForm(false);
-      setCurrentStep(1); // Go to session type selection for other services
     }
+  };
+
+  // Handle specific service selection
+  const handleSpecificServiceSelect = (service: string) => {
+    updateBookingData({ service });
   };
 
   const handleBackFromHomeVisit = () => {
@@ -341,7 +364,9 @@ const BookingPage = () => {
         return (
           <ServiceTypeSelection
             selectedService={bookingData.serviceCategory}
-            onSelect={handleServiceSelect}
+            selectedSpecificService={bookingData.service}
+            onServiceTypeSelect={handleServiceTypeSelect}
+            onSpecificServiceSelect={handleSpecificServiceSelect}
           />
         );
       case 1:
@@ -459,26 +484,6 @@ const BookingPage = () => {
             </div>
 
             <div className="space-y-6">
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
-                  Service Required *
-                </label>
-                <select
-                  name="service"
-                  value={bookingData.service}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm"
-                >
-                  <option value="">Select a service</option>
-                  {services.map((service, index) => (
-                    <option key={index} value={service}>
-                      {service}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <label className="block text-[#0E2127] font-medium mb-3 text-sm">
@@ -568,7 +573,10 @@ const BookingPage = () => {
                   <div className="flex justify-between items-start py-2">
                     <span className="text-gray-600 text-sm">Service:</span>
                     <span className="font-medium text-sm text-right">
-                      {bookingData.service}
+                      {bookingData.service ||
+                        (bookingData.serviceCategory === "home"
+                          ? "Home Visit"
+                          : "Not specified")}
                     </span>
                   </div>
                   <div className="flex justify-between items-start py-2">
@@ -905,6 +913,7 @@ const BookingPageWrapper = () => {
   return (
     <BookingProvider>
       <BookingPage />
+      <Footer />
     </BookingProvider>
   );
 };
