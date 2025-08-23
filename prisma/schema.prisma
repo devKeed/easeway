@@ -65,6 +65,7 @@ model Booking {
   email           String
   phone           String
   service         String
+  serviceCategory String?  // "clinic", "home", "sports"
   date            String
   time            String
   sessionType     String?  // "new" or "followup"

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { BookingProvider, useBooking } from "../../src/contexts/BookingContext";
+import ServiceTypeSelection from "../../src/components/booking/ServiceTypeSelection";
 import SessionTypeSelection, {
   SessionType,
 } from "../../src/components/booking/SessionTypeSelectionNew";
@@ -28,6 +29,7 @@ import LoadingSpinner from "../../src/components/ui/LoadingSpinner";
 import ErrorState from "../../src/components/ui/ErrorState";
 import ProgressStepper from "../../src/components/ui/ProgressStepper";
 import { useToast } from "../../src/contexts/ToastContext";
+import HomeVisitBookingForm from "../../src/components/booking/HomeVisitBookingForm";
 
 // Main booking page component
 const BookingPage = () => {
@@ -41,6 +43,7 @@ const BookingPage = () => {
   const [bookingResponse, setBookingResponse] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [showHomeVisitForm, setShowHomeVisitForm] = useState(false);
 
   const services = [
     "Comprehensive Assessment",
@@ -56,6 +59,7 @@ const BookingPage = () => {
   ];
 
   const stepTitles = [
+    "Service Type",
     "Session Type",
     "Personal Info",
     "Appointment Details",
@@ -81,13 +85,17 @@ const BookingPage = () => {
     const errors: Record<string, string> = {};
 
     switch (currentStep) {
-      case 0: // Session Type
+      case 0: // Service Type
+        if (!bookingData.serviceCategory) {
+          errors.serviceCategory = "Please select a service type";
+        }
+        break;
+      case 1: // Session Type
         if (!bookingData.sessionType) {
           errors.sessionType = "Please select a session type";
         }
         break;
-
-      case 1: // Personal Info
+      case 2: // Personal Info
         if (!bookingData.name.trim()) {
           errors.name = "Full name is required";
         }
@@ -100,8 +108,7 @@ const BookingPage = () => {
           errors.phone = "Phone number is required";
         }
         break;
-
-      case 2: // Appointment Details
+      case 3: // Appointment Details
         if (!bookingData.service) {
           errors.service = "Please select a service";
         }
@@ -112,12 +119,11 @@ const BookingPage = () => {
           errors.time = "Please select a time slot";
         }
         break;
-
-      case 3: // Medical Info - Optional fields, no validation
+      case 4: // Medical Info (optional apart from message already required in form)
         break;
-
-      case 4: // Review - Final validation
+      case 5: // Review - Final validation
         const allRequiredFields = {
+          serviceCategory: "Service type",
           sessionType: "Session type",
           name: "Full name",
           email: "Email address",
@@ -125,10 +131,10 @@ const BookingPage = () => {
           service: "Service",
           date: "Date",
           time: "Time",
-        };
-
+        } as const;
         Object.entries(allRequiredFields).forEach(([field, label]) => {
-          if (!bookingData[field as keyof typeof bookingData]) {
+          // @ts-ignore
+          if (!bookingData[field]) {
             errors[field] = `${label} is required`;
           }
         });
@@ -151,15 +157,17 @@ const BookingPage = () => {
   const canProceedToNextStep = () => {
     switch (currentStep) {
       case 0:
-        return bookingData.sessionType !== null;
+        return !!bookingData.serviceCategory;
       case 1:
-        return bookingData.name && bookingData.email && bookingData.phone;
+        return bookingData.sessionType !== null;
       case 2:
-        return bookingData.service && bookingData.date && bookingData.time;
+        return bookingData.name && bookingData.email && bookingData.phone;
       case 3:
-        return true; // Medical info is optional
+        return bookingData.service && bookingData.date && bookingData.time;
       case 4:
-        return true; // Confirmation step - always allow submission
+        return true; // medical info optional
+      case 5:
+        return true; // review step
       default:
         return false;
     }
@@ -167,7 +175,7 @@ const BookingPage = () => {
 
   const handleNext = () => {
     if (validateStep()) {
-      if (currentStep < 4) {
+      if (currentStep < 5) {
         setCurrentStep(currentStep + 1);
       }
     } else {
@@ -199,6 +207,7 @@ const BookingPage = () => {
         name: bookingData.name,
         email: bookingData.email,
         phone: bookingData.phone,
+        serviceCategory: bookingData.serviceCategory,
         service: bookingData.service,
         date: bookingData.date,
         time: bookingData.time,
@@ -269,17 +278,82 @@ const BookingPage = () => {
 
   const today = new Date().toISOString().split("T")[0];
 
+  // Handle service category selection with home visit check
+  const handleServiceSelect = (serviceKey: string) => {
+    updateBookingData({ serviceCategory: serviceKey as any });
+
+    if (serviceKey === "home") {
+      setShowHomeVisitForm(true);
+    } else {
+      setShowHomeVisitForm(false);
+      setCurrentStep(1); // Go to session type selection for other services
+    }
+  };
+
+  const handleBackFromHomeVisit = () => {
+    setShowHomeVisitForm(false);
+    updateBookingData({ serviceCategory: "" });
+  };
+
+  // If home visit form should be shown, render it instead
+  if (showHomeVisitForm) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {/* Header */}
+        <div className="bg-white border-b border-gray-100">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <Link
+                href="/"
+                className="flex items-center gap-3 text-[#0E2127] hover:text-[#FF3133] transition-colors group"
+              >
+                <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+                <span className="font-medium">Back to Home</span>
+              </Link>
+
+              <div className="sm:text-right">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-axiforma text-[#0E2127] mb-1">
+                  Book Home Visit
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base font-uber">
+                  We'll arrange a convenient time for your home visit
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+            <div className="p-4 sm:p-6 lg:p-8">
+              <HomeVisitBookingForm onBack={handleBackFromHomeVisit} />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
         return (
+          <ServiceTypeSelection
+            selectedService={bookingData.serviceCategory}
+            onSelect={handleServiceSelect}
+          />
+        );
+      case 1:
+        return (
           <SessionTypeSelection
             selectedSession={bookingData.sessionType}
             onSessionSelect={handleSessionSelect}
+            serviceCategory={bookingData.serviceCategory as any}
           />
         );
-
-      case 1:
+      case 2:
+        // Personal Information (was case 1)
         return (
           <div className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
@@ -368,25 +442,11 @@ const BookingPage = () => {
                   </p>
                 )}
               </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
-                  Emergency Contact
-                </label>
-                <input
-                  type="text"
-                  name="emergencyContact"
-                  value={bookingData.emergencyContact}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm"
-                  placeholder="Emergency contact name and phone number"
-                />
-              </div>
             </div>
           </div>
         );
 
-      case 2:
+      case 3:
         return (
           <div className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
@@ -455,81 +515,6 @@ const BookingPage = () => {
                   </p>
                 </div>
               )}
-            </div>
-          </div>
-        );
-
-      case 3:
-        return (
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
-                <Stethoscope className="w-5 h-5 text-[#FF3133]" />
-              </div>
-              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
-                Medical Information
-              </h3>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
-                  Current Medical Condition / Reason for Visit *
-                </label>
-                <textarea
-                  name="message"
-                  value={bookingData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
-                  placeholder="Please describe your current condition, symptoms, or reason for seeking physiotherapy..."
-                />
-              </div>
-
-              <div>
-                <label className="block text-[#0E2127] font-medium mb-3 text-sm">
-                  Medical History
-                </label>
-                <textarea
-                  name="medicalHistory"
-                  value={bookingData.medicalHistory}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
-                  placeholder="Any relevant medical history, surgeries, chronic conditions..."
-                />
-              </div>
-
-              <div className="grid gap-6 sm:grid-cols-2">
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-3 text-sm">
-                    Current Medications
-                  </label>
-                  <textarea
-                    name="currentMedications"
-                    value={bookingData.currentMedications}
-                    onChange={handleInputChange}
-                    rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
-                    placeholder="List any medications you are currently taking..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#0E2127] font-medium mb-3 text-sm">
-                    Previous Physiotherapy Experience
-                  </label>
-                  <textarea
-                    name="previousPhysiotherapy"
-                    value={bookingData.previousPhysiotherapy}
-                    onChange={handleInputChange}
-                    rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3133] focus:border-transparent transition-all hover:border-gray-400 text-sm resize-none"
-                    placeholder="Have you had physiotherapy before? What treatments worked or didn't work?"
-                  />
-                </div>
-              </div>
             </div>
           </div>
         );
@@ -628,16 +613,6 @@ const BookingPage = () => {
                       {bookingData.phone}
                     </span>
                   </div>
-                  {bookingData.emergencyContact && (
-                    <div className="flex justify-between items-start py-2">
-                      <span className="text-gray-600 text-sm">
-                        Emergency Contact:
-                      </span>
-                      <span className="font-medium text-sm text-right">
-                        {bookingData.emergencyContact}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </div>
 
@@ -843,7 +818,7 @@ const BookingPage = () => {
                     Previous
                   </button>
 
-                  {currentStep < 4 ? (
+                  {currentStep < 5 ? (
                     <button
                       type="button"
                       onClick={handleNext}
@@ -854,7 +829,7 @@ const BookingPage = () => {
                           : "bg-gray-300 text-gray-500 cursor-not-allowed border border-gray-300"
                       }`}
                     >
-                      {currentStep === 3 ? "Review Booking" : "Next"}
+                      {currentStep === 4 ? "Review Booking" : "Next"}
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   ) : (

@@ -306,16 +306,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
                       {selectedBooking.phone}
                     </p>
                   </div>
-                  {selectedBooking.emergencyContact && (
-                    <div>
-                      <label className="text-body-sm font-axiforma text-gray-700">
-                        Emergency Contact
-                      </label>
-                      <p className="text-gray-900 text-body font-uber">
-                        {selectedBooking.emergencyContact}
-                      </p>
-                    </div>
-                  )}
+               
                 </div>
               </div>
 

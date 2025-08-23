@@ -8,6 +8,7 @@ export interface BookingNotificationData {
   email: string;
   phone: string;
   service: string;
+  serviceCategory?: string; // added
   date: string;
   time: string;
   sessionType?: string;
@@ -27,6 +28,8 @@ export async function sendAdminBookingNotification(
     const adminEmail =
       process.env.ADMIN_EMAIL || "admin@easeway-medicare.co.uk";
 
+    const isTBD = bookingData.time === "TBD";
+
     const emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background-color: #FF3133; color: white; padding: 20px; text-align: center;">
@@ -42,18 +45,19 @@ export async function sendAdminBookingNotification(
             <p><strong>Name:</strong> ${bookingData.name}</p>
             <p><strong>Email:</strong> ${bookingData.email}</p>
             <p><strong>Phone:</strong> ${bookingData.phone}</p>
-            ${
-              bookingData.emergencyContact
-                ? `<p><strong>Emergency Contact:</strong> ${bookingData.emergencyContact}</p>`
-                : ""
-            }
           </div>
           
           <div style="background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
             <h3 style="color: #FF3133; margin-top: 0;">Appointment Details</h3>
+            <p><strong>Service Category:</strong> ${
+              bookingData.serviceCategory || "N/A"
+            }</p>
             <p><strong>Service:</strong> ${bookingData.service}</p>
-            <p><strong>Date:</strong> ${bookingData.date}</p>
-            <p><strong>Time:</strong> ${bookingData.time}</p>
+            ${
+              isTBD
+                ? `<p><strong>Date / Time:</strong> To Be Confirmed (Home Visit)</p>`
+                : `<p><strong>Date:</strong> ${bookingData.date}</p><p><strong>Time:</strong> ${bookingData.time}</p>`
+            }
             ${
               bookingData.sessionType
                 ? `<p><strong>Session Type:</strong> ${bookingData.sessionType}</p>`
@@ -120,7 +124,11 @@ export async function sendAdminBookingNotification(
     const data = await resend.emails.send({
       from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
       to: [adminEmail],
-      subject: `New Booking: ${bookingData.name} - ${bookingData.date} at ${bookingData.time}`,
+      subject: `New Booking: ${bookingData.name} - ${
+        isTBD
+          ? "Home Visit (TBC)"
+          : bookingData.date + " at " + bookingData.time
+      }`,
       html: emailContent,
     });
 
@@ -136,6 +144,7 @@ export async function sendPatientConfirmationEmail(
   bookingData: BookingNotificationData
 ) {
   try {
+    const isTBD = bookingData.time === "TBD";
     const emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background-color: #FF3133; color: white; padding: 20px; text-align: center;">
@@ -150,9 +159,15 @@ export async function sendPatientConfirmationEmail(
           
           <div style="background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;">
             <h3 style="color: #FF3133; margin-top: 0;">Your Booking Details</h3>
+            <p><strong>Service Category:</strong> ${
+              bookingData.serviceCategory || "N/A"
+            }</p>
             <p><strong>Service:</strong> ${bookingData.service}</p>
-            <p><strong>Date:</strong> ${bookingData.date}</p>
-            <p><strong>Time:</strong> ${bookingData.time}</p>
+            ${
+              isTBD
+                ? `<p><strong>Date / Time:</strong> To Be Confirmed (We will call you to arrange your home visit)</p>`
+                : `<p><strong>Date:</strong> ${bookingData.date}</p><p><strong>Time:</strong> ${bookingData.time}</p>`
+            }
             <p><strong>Confirmation Number:</strong> ${
               bookingData.confirmationNumber
             }</p>

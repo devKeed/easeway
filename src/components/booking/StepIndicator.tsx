@@ -38,7 +38,7 @@ const steps: BookingStep[] = [
   },
   {
     id: 3,
-    title: "Medical Info",
+    title: "Information",
     icon: Stethoscope,
     description: "Health history and requirements",
   },

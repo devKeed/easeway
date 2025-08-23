@@ -120,7 +120,7 @@ const Pricing = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,49,51,0.02),transparent_70%)]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
           <motion.div
@@ -143,7 +143,7 @@ const Pricing = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Transparent Pricing
+            Our Pricing
           </motion.h2>
 
           <motion.p
@@ -245,7 +245,7 @@ const Pricing = () => {
                     className={`inline-flex items-center justify-center px-6 py-2 rounded-full transition-colors duration-300 text-body-sm font-uber ${
                       service.popular
                         ? "bg-[#FF3133] text-white hover:bg-[#e62a2c]"
-                        : "bg-[#6B7280] text-white hover:bg-[#FF3133]"
+                        : "bg-[#0e2127] text-white hover:bg-[#1e1515]"
                     }`}
                   >
                     Book Now

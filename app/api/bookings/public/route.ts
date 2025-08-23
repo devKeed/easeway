@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
       email,
       phone,
       service,
+      serviceCategory, // added
       date,
       time,
       sessionType,
@@ -25,62 +26,60 @@ export async function POST(request: NextRequest) {
     } = body;
 
     // Validate required fields
-    if (!name || !email || !phone || !service || !date || !time) {
+    if (!name || !email || !phone || !service) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    // For home visits, date and time are not required (will be TBD)
+    const isHomeVisit = serviceCategory === "home" || service === "Home Visit";
+    if (!isHomeVisit && (!date || !time)) {
       return NextResponse.json(
-        { error: "Invalid email format" },
+        { error: "Date and time are required for non-home visit bookings" },
         { status: 400 }
       );
     }
 
-    // Validate session type if provided
-    if (sessionType && !["new", "followup"].includes(sessionType)) {
-      return NextResponse.json(
-        { error: "Invalid session type. Must be 'new' or 'followup'" },
-        { status: 400 }
-      );
-    }
+    // For home visits, set TBD values
+    const bookingDate = isHomeVisit ? "TBD" : date;
+    const bookingTime = isHomeVisit ? "TBD" : time;
 
-    // Validate date (cannot be in the past)
-    const selectedDate = new Date(date);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    selectedDate.setHours(0, 0, 0, 0);
+    // Validate date only for non-home visits
+    if (!isHomeVisit) {
+      const selectedDate = new Date(date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      selectedDate.setHours(0, 0, 0, 0);
 
-    if (selectedDate < today) {
-      return NextResponse.json(
-        { error: "Cannot book appointments for past dates" },
-        { status: 400 }
-      );
-    }
+      if (selectedDate < today) {
+        return NextResponse.json(
+          { error: "Cannot book appointments for past dates" },
+          { status: 400 }
+        );
+      }
 
-    // Check if the time slot is still available
-    const existingBooking = await prisma.booking.findFirst({
-      where: {
-        date,
-        time,
-        status: {
-          in: ["pending", "confirmed"],
+      // Check if the time slot is still available (only for scheduled appointments)
+      const existingBooking = await prisma.booking.findFirst({
+        where: {
+          date,
+          time,
+          status: {
+            in: ["pending", "confirmed"],
+          },
         },
-      },
-    });
+      });
 
-    if (existingBooking) {
-      return NextResponse.json(
-        {
-          error:
-            ">This time slot is no longer available. Please select a different time.",
-        },
-        { status: 409 } // Conflict
-      );
+      if (existingBooking) {
+        return NextResponse.json(
+          {
+            error:
+              ">This time slot is no longer available. Please select a different time.",
+          },
+          { status: 409 } // Conflict
+        );
+      }
     }
 
     // Check if clinic settings allow booking for this time
@@ -128,8 +127,8 @@ export async function POST(request: NextRequest) {
         email,
         phone,
         service,
-        date,
-        time,
+        date: bookingDate,
+        time: bookingTime,
         sessionType: sessionType || null,
         sessionDuration: sessionDuration || null,
         message,
@@ -149,8 +148,9 @@ export async function POST(request: NextRequest) {
       email,
       phone,
       service,
-      date,
-      time,
+      serviceCategory,
+      date: bookingDate,
+      time: bookingTime,
       sessionType,
       sessionDuration,
       message,
