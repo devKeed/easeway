@@ -63,17 +63,17 @@ const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
         <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
           <Building2 className="w-5 h-5 text-[#FF3133]" />
         </div>
-        <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+        <h3 className="text-h4-mobile sm:text-h4-desktop font-axiforma text-[#0E2127]">
           Select Service Type & Service
         </h3>
       </div>
 
       {/* Service Type Selection */}
       <div>
-        <h4 className="text-lg font-semibold text-[#0E2127] mb-3">
+        <h4 className="text-h6-mobile sm:text-h6-desktop font-semibold text-[#0E2127] mb-3">
           1. Choose Service Type
         </h4>
-        <p className="text-sm text-gray-600 mb-4 font-uber">
+        <p className="text-base text-gray-600 mb-4 font-uber">
           Choose the type of service you are booking. This will determine
           pricing for new & follow-up sessions.
         </p>
@@ -118,18 +118,18 @@ const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
                 </div>
 
                 <h4
-                  className={`font-semibold mb-2 text-base ${
+                  className={`font-semibold mb-2 text-button-sm sm:text-button ${
                     isSelected ? "text-[#FF3133]" : "text-[#0E2127]"
                   }`}
                 >
                   {service.label}
                 </h4>
-                <p className="text-sm text-gray-600 font-uber leading-relaxed flex-grow">
+                <p className="text-base text-gray-600 font-uber leading-relaxed flex-grow">
                   {service.description}
                 </p>
 
                 {isSelected && (
-                  <div className="mt-4 text-xs text-[#FF3133] font-axiforma">
+                  <div className="mt-4 text-button-sm text-[#FF3133] font-axiforma">
                     Selected
                   </div>
                 )}
@@ -142,10 +142,10 @@ const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
       {/* Specific Service Selection - Only show if service type is selected */}
       {selectedService && selectedService !== "home" && (
         <div>
-          <h4 className="text-lg font-semibold text-[#0E2127] mb-3">
+          <h4 className="text-h6-mobile sm:text-h6-desktop font-semibold text-[#0E2127] mb-3">
             2. Choose Specific Service
           </h4>
-          <p className="text-sm text-gray-600 mb-4 font-uber">
+          <p className="text-base text-gray-600 mb-4 font-uber">
             Select the specific service you need for your appointment.
           </p>
 
@@ -188,7 +188,7 @@ const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
                       />
                     </div>
                     <span
-                      className={`font-medium text-sm ${
+                      className={`font-medium text-button-sm sm:text-button ${
                         isSelected ? "text-[#FF3133]" : "text-[#0E2127]"
                       }`}
                     >

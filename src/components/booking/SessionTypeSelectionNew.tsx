@@ -81,7 +81,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
         <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
           <Clock className="w-5 h-5 text-[#FF3133]" />
         </div>
-        <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+        <h3 className="text-base font-axiforma text-[#0E2127]">
           Session Type & Duration
         </h3>
       </div>
@@ -133,7 +133,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
 
               <div>
                 <h4
-                  className={`font-semibold mb-3 text-base ${
+                  className={`font-semibold mb-3 text-sm ${
                     isSelected ? "text-[#FF3133]" : "text-[#0E2127]"
                   }`}
                 >
