@@ -335,10 +335,10 @@ const BookingPage = () => {
               </Link>
 
               <div className="sm:text-right">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-axiforma text-[#0E2127] mb-1">
+                <h3 className="text-lg sm:text-xl font-axiforma text-[#0E2127] mb-1">
                   Book Home Visit
                 </h3>
-                <p className="text-gray-600 text-sm sm:text-base font-uber">
+                <p className="text-gray-600 text-sm font-uber">
                   We'll arrange a convenient time for your home visit
                 </p>
               </div>
@@ -385,7 +385,7 @@ const BookingPage = () => {
               <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
                 <User className="w-5 h-5 text-[#FF3133]" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+              <h3 className="text-base font-axiforma text-[#0E2127]">
                 Personal Information
               </h3>
             </div>
@@ -478,7 +478,7 @@ const BookingPage = () => {
               <div className="w-10 h-10 bg-[#FF3133]/10 rounded-full flex items-center justify-center">
                 <Calendar className="w-5 h-5 text-[#FF3133]" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+              <h3 className="text-base font-axiforma text-[#0E2127]">
                 Appointment Details
               </h3>
             </div>
@@ -531,7 +531,7 @@ const BookingPage = () => {
               <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                 <CheckCircle className="w-5 h-5 text-green-600" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-axiforma text-[#0E2127]">
+              <h3 className="text-base font-axiforma text-[#0E2127]">
                 Booking Confirmation
               </h3>
             </div>
@@ -714,10 +714,10 @@ const BookingPage = () => {
             </Link>
 
             <div className="sm:text-right">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-axiforma text-[#0E2127] mb-1">
+              <h3 className="text-lg sm:text-xl font-axiforma text-[#0E2127] mb-1">
                 Book Appointment
               </h3>
-              <p className="text-gray-600 text-sm sm:text-base font-uber">
+              <p className="text-gray-600 text-sm font-uber">
                 Schedule your physiotherapy session
               </p>
             </div>
@@ -867,7 +867,7 @@ const BookingPage = () => {
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-axiforma text-[#0E2127] mb-2">
+                <h3 className="text-base font-axiforma text-[#0E2127] mb-2">
                   Booking Completed Successfully!
                 </h3>
                 <p className="text-gray-600 text-sm font-uber mb-6">
