@@ -31,20 +31,12 @@ const Blog: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-0 md:px-8">
-          {recentPosts.map((post: any) => (
+          {recentPosts.map((post) => (
             <BlogCard
               key={post.id}
-              id={post.id}
-              image={String(
-                (post as Record<string, unknown>).featured_media ||
-                  (post as Record<string, unknown>).featured_image ||
-                  ">/images/default-blog.png"
-              )}
-              title={
-                typeof post.title === "string"
-                  ? post.title
-                  : post.title.rendered
-              }
+              id={Number(post.id)}
+              image={post.featured_image || "/images/default-blog.png"}
+              title={post.title || "Untitled"}
             />
           ))}
         </div>

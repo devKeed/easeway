@@ -7,7 +7,7 @@ export interface ServiceTypeOption {
   key: string;
   label: string;
   description: string;
-  icon: any; // lucide icon component
+  icon: React.ComponentType<{ className?: string }>; // lucide icon component
 }
 
 interface ServiceTypeSelectionProps {

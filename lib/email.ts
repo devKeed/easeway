@@ -169,7 +169,7 @@ export async function sendAdminBookingNotification(
       console.log("Admin notification email sent via Resend:", data);
       return { success: true, data: data };
     }
-    return { success: true, data };
+    return { success: true, data: null };
   } catch (error) {
     console.error("Failed to send admin notification email:", error);
     return { success: false, error };

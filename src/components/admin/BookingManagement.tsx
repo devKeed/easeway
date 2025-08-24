@@ -5,16 +5,13 @@ import { useState, useEffect } from "react";
 import {
   Calendar,
   Clock,
-  User,
   Phone,
   Mail,
-  MessageSquare,
   CheckCircle,
   XCircle,
   AlertCircle,
   RefreshCw,
   Eye,
-  Filter,
 } from "lucide-react";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import ErrorState from "../ui/ErrorState";
@@ -111,7 +108,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
         throw new Error("Failed to update booking");
       }
 
-      const data = await response.json();
+      await response.json();
 
       // Update the booking in the local state
       setBookings((prev) =>

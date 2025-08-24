@@ -14,10 +14,8 @@ import {
   ChevronRight,
   Target,
   X,
-  Clock,
   CheckCircle,
 } from "lucide-react";
-import { MyFillButton } from "../reusables/Button";
 
 const Services = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);

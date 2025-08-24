@@ -8,7 +8,6 @@ import {
   Users,
   Clock,
   CheckCircle,
-  XCircle,
   ArrowLeft,
   Settings,
 } from "lucide-react";

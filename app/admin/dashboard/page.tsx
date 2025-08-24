@@ -13,7 +13,6 @@ import {
   ArrowLeft,
   AlertCircle,
   CheckCircle,
-  Users,
   BookOpen,
 } from "lucide-react";
 import Link from "next/link";
@@ -49,7 +48,7 @@ const dayNames = [
 ];
 
 const AdminDashboard = () => {
-  const { user, isAuthenticated, isAdmin, isLoading } = useAuth();
+  const { isAuthenticated, isAdmin, isLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<
     "settings" | "bookings" | "schedule"
   >("schedule");
@@ -63,7 +62,6 @@ const AdminDashboard = () => {
     timeSlotDuration: 30,
     isActive: true,
   });
-  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -88,8 +86,6 @@ const AdminDashboard = () => {
         }
       } catch (err) {
         console.error("Error fetching settings:", err);
-      } finally {
-        setLoading(false);
       }
     };
 

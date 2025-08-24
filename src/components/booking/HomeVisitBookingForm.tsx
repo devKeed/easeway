@@ -2,16 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import {
-  Home,
-  User,
-  Phone,
-  Mail,
-  MessageSquare,
-  Check,
-  ArrowLeft,
-  AlertCircle,
-} from "lucide-react";
+import { Home, Check, ArrowLeft, AlertCircle } from "lucide-react";
 import { useToast } from "../../contexts/ToastContext";
 
 interface HomeVisitFormData {

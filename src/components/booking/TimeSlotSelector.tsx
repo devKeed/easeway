@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Clock, Loader2, AlertCircle, RefreshCw } from "lucide-react";
+import { motion } from "framer-motion";
+import { Clock, AlertCircle } from "lucide-react";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import ErrorState from "../ui/ErrorState";
 

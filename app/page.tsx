@@ -10,7 +10,6 @@ import Footer from "../src/components/shared/Footer";
 import Info from "../src/components/home/Info";
 import RevealOnScroll from "../src/components/animations/Reveal";
 import Contact from "../src/components/home/Contact";
-import Testimonials from "../src/components/home/Testimonials";
 
 export default function HomePage() {
   return (

@@ -5,19 +5,12 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
   Calendar as CalendarIcon,
-  Clock,
   ChevronLeft,
   ChevronRight,
-  Users,
   Ban,
-  Check,
   X,
   AlertCircle,
-  Plus,
-  Trash2,
   RefreshCw,
-  Eye,
-  Filter,
 } from "lucide-react";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import ErrorState from "../ui/ErrorState";
@@ -204,12 +197,6 @@ const CalendarSchedule: React.FC<CalendarScheduleProps> = ({
       month: "short",
       day: "numeric",
     });
-  };
-
-  const isSlotBooked = (date: string, time: string) => {
-    return bookings.some(
-      (booking) => booking.date === date && booking.time === time
-    );
   };
 
   const isSlotBlocked = (date: string, time: string) => {

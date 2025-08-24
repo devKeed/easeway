@@ -1,20 +1,14 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import {
   ArrowLeft,
   Calendar,
-  Clock,
   User,
-  Phone,
-  Mail,
-  MessageSquare,
-  Stethoscope,
   ArrowRight,
   ChevronLeft,
   CheckCircle,
-  Loader2,
   AlertCircle,
 } from "lucide-react";
 import Link from "next/link";
@@ -23,10 +17,7 @@ import ServiceTypeSelection from "../../src/components/booking/ServiceTypeSelect
 import SessionTypeSelection, {
   SessionType,
 } from "../../src/components/booking/SessionTypeSelectionNew";
-import StepIndicator from "../../src/components/booking/StepIndicator";
 import TimeSlotSelector from "../../src/components/booking/TimeSlotSelector";
-import LoadingSpinner from "../../src/components/ui/LoadingSpinner";
-import ErrorState from "../../src/components/ui/ErrorState";
 import ProgressStepper from "../../src/components/ui/ProgressStepper";
 import { useToast } from "../../src/contexts/ToastContext";
 import HomeVisitBookingForm from "../../src/components/booking/HomeVisitBookingForm";
@@ -41,23 +32,23 @@ const BookingPage = () => {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
-  const [bookingResponse, setBookingResponse] = useState<any>(null);
+  const [bookingResponse, setBookingResponse] = useState<{
+    success?: boolean;
+    message?: string;
+    booking?: {
+      id: string;
+      status: string;
+      date: string;
+      time: string;
+      sessionType?: string;
+      sessionDuration?: number;
+      service: string;
+      confirmationNumber: string;
+    };
+  } | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [showHomeVisitForm, setShowHomeVisitForm] = useState(false);
-
-  const services = [
-    "Comprehensive Assessment",
-    "Manual Therapy",
-    "Electrotherapy",
-    "Post-surgical Rehabilitation",
-    "Kinesotaping",
-    "Sports Massage",
-    "Home Physiotherapy Care",
-    "Sports Injury Rehabilitation",
-    "Chronic Pain Management",
-    "Mobility Training",
-  ];
 
   const stepTitles = [
     "Service Selection",
@@ -137,7 +128,7 @@ const BookingPage = () => {
           time: "Time",
         } as const;
         Object.entries(allRequiredFields).forEach(([field, label]) => {
-          // @ts-ignore
+          // @ts-expect-error - Dynamic property access on bookingData
           if (!bookingData[field]) {
             errors[field] = `${label} is required`;
           }
@@ -299,7 +290,7 @@ const BookingPage = () => {
 
   // Handle service category selection with home visit check
   const handleServiceTypeSelect = (serviceKey: string) => {
-    updateBookingData({ serviceCategory: serviceKey as any });
+    updateBookingData({ serviceCategory: serviceKey as "clinic" | "home" });
 
     if (serviceKey === "home") {
       setShowHomeVisitForm(true);
@@ -374,7 +365,7 @@ const BookingPage = () => {
           <SessionTypeSelection
             selectedSession={bookingData.sessionType}
             onSessionSelect={handleSessionSelect}
-            serviceCategory={bookingData.serviceCategory as any}
+            serviceCategory={bookingData.serviceCategory}
           />
         );
       case 2:

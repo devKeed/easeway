@@ -2,14 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Phone, MapPin, User, LogOut } from "lucide-react";
-import { signIn, signOut } from "next-auth/react";
-import { useAuth } from "../../hooks/useAuth";
-import Link from "next/link";
+import { Phone, MapPin } from "lucide-react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, isAuthenticated, isLoading } = useAuth();
 
   const menuItems = [
     { label: "Services", href: "#services" },

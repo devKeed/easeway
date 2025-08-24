@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Building2, Home, Waves, Clock, Star, Users } from "lucide-react";
-import { MyFillButton } from "../reusables/Button";
 
 const Pricing = () => {
   const services = [
