@@ -37,7 +37,7 @@ const SignInPage = () => {
             className="inline-flex items-center gap-2 text-[#0E2127] hover:text-[#FF3133] transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm">Back to Home</span>
+            <span className="text-base">Back to Home</span>
           </Link>
 
           <motion.div

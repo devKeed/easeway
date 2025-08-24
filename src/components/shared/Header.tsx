@@ -105,10 +105,10 @@ const Header = () => {
                             <User className="w-4 h-4 text-[#FF3133]" />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-xs text-[#0E2127] font-medium">
+                            <span className="text-base text-[#0E2127] font-medium">
                               {user?.name}
                             </span>
-                            <span className="text-xs text-[#0E2127]/60 capitalize">
+                            <span className="text-base text-[#0E2127]/60 capitalize">
                               {user?.role}
                             </span>
                           </div>
@@ -117,7 +117,7 @@ const Header = () => {
                         {user?.role === "admin" && (
                           <Link
                             href="/admin"
-                            className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full hover:bg-blue-200 transition-colors"
+                            className="text-base bg-blue-100 text-blue-800 px-2 py-1 rounded-full hover:bg-blue-200 transition-colors"
                           >
                             Admin
                           </Link>
@@ -134,7 +134,7 @@ const Header = () => {
                     ) : (
                       <button
                         onClick={() => signIn()}
-                        className="flex items-center gap-2 text-[#ffffff]/80 hover:text-[#FF3133] transition-colors font-normal text-xs"
+                        className="flex items-center gap-2 text-[#ffffff]/80 hover:text-[#FF3133] transition-colors font-normal text-base"
                       >
                         <User className="w-4 h-4" />
                         Sign In
@@ -223,7 +223,7 @@ const Header = () => {
                     </p>
                     <a
                       href="tel:+447460091561"
-                      className="text-[#FF3133] font-semibold text-xs hover:text-[#e62a2c] transition-colors"
+                      className="text-[#FF3133] font-semibold text-base hover:text-[#e62a2c] transition-colors"
                     >
                       +44 7460 091561
                     </a>

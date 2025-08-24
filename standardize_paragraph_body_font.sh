@@ -16,8 +16,8 @@ find src app -name "*.tsx" -o -name "*.ts" -o -name "*.jsx" -o -name "*.js" | wh
         # Process the file with multiple sed commands
         cat "$file" | \
             # Remove existing font size classes from paragraphs and add text-body
-            sed 's/<p className="\([^"]*\)text-xs\([^"]*\)"/<p className="\1text-body\2"/g' | \
-            sed 's/<p className="\([^"]*\)text-sm\([^"]*\)"/<p className="\1text-body\2"/g' | \
+            sed 's/<p className="\([^"]*\)text-base\([^"]*\)"/<p className="\1text-body\2"/g' | \
+            sed 's/<p className="\([^"]*\)text-base\([^"]*\)"/<p className="\1text-body\2"/g' | \
             sed 's/<p className="\([^"]*\)text-lg\([^"]*\)"/<p className="\1text-body\2"/g' | \
             sed 's/<p className="\([^"]*\)text-xl\([^"]*\)"/<p className="\1text-body\2"/g' | \
             sed 's/<p className="\([^"]*\)text-2xl\([^"]*\)"/<p className="\1text-body\2"/g' | \
@@ -67,7 +67,7 @@ echo "🎉 Paragraph font standardization complete!"
 echo "📝 All paragraph tags now use text-body (16px) font size with font-uber"
 echo ""
 echo "Changes made:"
-echo "- Replaced all various text sizes (text-xs, text-sm, text-lg, etc.) with text-body"
+echo "- Replaced all various text sizes (text-base, text-base, text-lg, etc.) with text-body"
 echo "- Added text-body to paragraphs that didn't have size classes"
 echo "- Ensured font-uber is applied to all paragraph text"
 echo "- Cleaned up duplicate classes and spacing"

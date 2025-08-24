@@ -50,7 +50,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
   // Require service selection first
   if (!serviceCategory) {
     return (
-      <div className="p-4 border border-dashed border-gray-300 rounded-lg text-center text-sm text-gray-600 font-uber">
+      <div className="p-4 border border-dashed border-gray-300 rounded-lg text-center text-base text-gray-600 font-uber">
         Please select a service type first.
       </div>
     );
@@ -86,7 +86,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
         </h3>
       </div>
 
-      <p className="text-sm text-gray-600 mb-6 font-uber">
+      <p className="text-base text-gray-600 mb-6 font-uber">
         Select whether this is a new session or a follow-up for your chosen
         service.
       </p>
@@ -133,7 +133,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
 
               <div>
                 <h4
-                  className={`font-semibold mb-3 text-sm ${
+                  className={`font-semibold mb-3 text-base ${
                     isSelected ? "text-[#FF3133]" : "text-[#0E2127]"
                   }`}
                 >
@@ -142,17 +142,17 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
                 <div className="space-y-2 mb-3">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600 font-uber">
+                    <span className="text-base text-gray-600 font-uber">
                       {session.duration} minutes
                     </span>
                   </div>
                   {session.price && (
-                    <div className="text-sm font-medium text-[#0E2127]">
+                    <div className="text-base font-medium text-[#0E2127]">
                       {session.price}
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-gray-600 font-uber leading-relaxed">
+                <p className="text-base text-gray-600 font-uber leading-relaxed">
                   {session.description}
                 </p>
               </div>
@@ -178,7 +178,7 @@ const SessionTypeSelection: React.FC<SessionTypeSelectionProps> = ({
         >
           <div className="flex items-center gap-2 mb-2">
             <Check className="w-4 h-4 text-[#FF3133]" />
-            <span className="text-[#FF3133] font-medium text-sm">
+            <span className="text-[#FF3133] font-medium text-base">
               Selected: {selectedSession.name}
             </span>
           </div>

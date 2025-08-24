@@ -183,7 +183,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
               {booking.name}
             </h3>
             <span
-              className={`px-2 py-1 text-xs rounded-full border ${
+              className={`px-2 py-1 text-base rounded-full border ${
                 statusColors[booking.status as keyof typeof statusColors]
               }`}
             >
@@ -209,7 +209,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 text-sm">
+      <div className="grid grid-cols-2 gap-4 text-base">
         <div className="flex items-center gap-2 text-gray-600">
           <Calendar className="w-4 h-4" />
           <span>{formatDate(booking.date)}</span>
@@ -237,13 +237,13 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
         <div className="mt-4 flex gap-2">
           <button
             onClick={() => updateBookingStatus(booking.id, "confirmed")}
-            className="flex-1 px-3 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors"
+            className="flex-1 px-3 py-2 bg-green-500 text-white text-base rounded-lg hover:bg-green-600 transition-colors"
           >
             Confirm
           </button>
           <button
             onClick={() => updateBookingStatus(booking.id, "cancelled")}
-            className="flex-1 px-3 py-2 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors"
+            className="flex-1 px-3 py-2 bg-red-500 text-white text-base rounded-lg hover:bg-red-600 transition-colors"
           >
             Cancel
           </button>
@@ -306,7 +306,6 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
                       {selectedBooking.phone}
                     </p>
                   </div>
-               
                 </div>
               </div>
 
@@ -345,7 +344,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
                       Status
                     </label>
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full border ${
+                      className={`inline-flex items-center gap-1 px-2 py-1 text-base rounded-full border ${
                         statusColors[
                           selectedBooking.status as keyof typeof statusColors
                         ]
@@ -531,7 +530,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
           <div className="text-h3-mobile md:text-h2-desktop font-axiforma">
             {totalBookings}
           </div>
-          <div className="text-sm">All Bookings</div>
+          <div className="text-base">All Bookings</div>
         </button>
 
         <button
@@ -545,7 +544,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
           <div className="text-h3-mobile md:text-h2-desktop font-axiforma text-yellow-600">
             {getStatusCount("pending")}
           </div>
-          <div className="text-sm">Pending</div>
+          <div className="text-base">Pending</div>
         </button>
 
         <button
@@ -559,7 +558,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
           <div className="text-h3-mobile md:text-h2-desktop font-axiforma text-green-600">
             {getStatusCount("confirmed")}
           </div>
-          <div className="text-sm">Confirmed</div>
+          <div className="text-base">Confirmed</div>
         </button>
 
         <button
@@ -573,7 +572,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
           <div className="text-h3-mobile md:text-h2-desktop font-axiforma text-red-600">
             {getStatusCount("cancelled")}
           </div>
-          <div className="text-sm">Cancelled</div>
+          <div className="text-base">Cancelled</div>
         </button>
 
         <button
@@ -587,7 +586,7 @@ const BookingManagement: React.FC<BookingManagementProps> = ({
           <div className="text-h3-mobile md:text-h2-desktop font-axiforma text-blue-600">
             {getStatusCount("completed")}
           </div>
-          <div className="text-sm">Completed</div>
+          <div className="text-base">Completed</div>
         </button>
       </div>
 

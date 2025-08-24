@@ -24,8 +24,8 @@ update_file() {
         sed 's/text-md/text-body/g' | \
         sed 's/text-lg\([^-]\|$\)/text-body-lg\1/g' | \
         sed 's/text-xl/text-body-lg/g' | \
-        sed 's/text-sm\([^-]\|$\)/text-body-sm\1/g' | \
-        sed 's/text-xs\([^-]\|$\)/text-body-xs\1/g' | \
+        sed 's/text-base\([^-]\|$\)/text-body-sm\1/g' | \
+        sed 's/text-base\([^-]\|$\)/text-body-xs\1/g' | \
         sed 's/text-\[16px\]/text-body/g' | \
         sed 's/text-\[14px\]/text-body-sm/g' | \
         sed 's/text-\[11px\]/text-body-xs/g' | \
@@ -105,8 +105,8 @@ echo "📋 Summary of changes:"
 echo "   • Converted text-md → text-body"
 echo "   • Converted text-lg → text-body-lg"
 echo "   • Converted text-xl → text-body-lg"
-echo "   • Converted text-sm → text-body-sm"
-echo "   • Converted text-xs → text-body-xs"
+echo "   • Converted text-base → text-body-sm"
+echo "   • Converted text-base → text-body-xs"
 echo "   • Added text-body to paragraphs without font sizing"
 echo "   • Ensured font-uber is used for body text"
 echo ""

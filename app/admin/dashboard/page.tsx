@@ -216,7 +216,7 @@ const AdminDashboard = () => {
           <div className="flex space-x-8">
             <button
               onClick={() => setActiveTab("schedule")}
-              className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+              className={`py-4 px-1 border-b-2 font-medium text-base transition-colors ${
                 activeTab === "schedule"
                   ? "border-[#FF3133] text-[#FF3133]"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
@@ -229,7 +229,7 @@ const AdminDashboard = () => {
             </button>
             <button
               onClick={() => setActiveTab("bookings")}
-              className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+              className={`py-4 px-1 border-b-2 font-medium text-base transition-colors ${
                 activeTab === "bookings"
                   ? "border-[#FF3133] text-[#FF3133]"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
@@ -242,7 +242,7 @@ const AdminDashboard = () => {
             </button>
             <button
               onClick={() => setActiveTab("settings")}
-              className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+              className={`py-4 px-1 border-b-2 font-medium text-base transition-colors ${
                 activeTab === "settings"
                   ? "border-[#FF3133] text-[#FF3133]"
                   : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
@@ -412,7 +412,7 @@ const AdminDashboard = () => {
                     <button
                       key={index}
                       onClick={() => handleWorkingDayToggle(index)}
-                      className={`p-3 rounded-lg text-sm font-medium transition-all ${
+                      className={`p-3 rounded-lg text-base font-medium transition-all ${
                         settings.workingDays.includes(index)
                           ? "bg-[#FF3133] text-white"
                           : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -437,7 +437,7 @@ const AdminDashboard = () => {
                   </h4>
                   <div className="grid md:grid-cols-4 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-base font-medium text-gray-700 mb-1">
                         Start Time
                       </label>
                       <input
@@ -453,7 +453,7 @@ const AdminDashboard = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-base font-medium text-gray-700 mb-1">
                         End Time
                       </label>
                       <input
@@ -469,7 +469,7 @@ const AdminDashboard = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-base font-medium text-gray-700 mb-1">
                         Reason
                       </label>
                       <input

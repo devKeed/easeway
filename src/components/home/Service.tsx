@@ -84,7 +84,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden mt-2 pl-6 text-xs sm:text-sm"
+            className="overflow-hidden mt-2 pl-6 text-base sm:text-base"
           >
             <p>{description}</p>
           </motion.div>

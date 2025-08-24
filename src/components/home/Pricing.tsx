@@ -205,7 +205,7 @@ const Pricing = () => {
                       </h3>
                     </div>
                   </div>
-                  <div className="flex items-center justify-end gap-1 text-xs text-gray-500 mt-4">
+                  <div className="flex items-center justify-end gap-1 text-base text-gray-500 mt-4">
                     <Clock className="w-3 h-3" />
                     <span className="font-uber text-base ">
                       {service.duration

@@ -116,7 +116,7 @@ const Footer = () => {
                 <div>
                   <a
                     href="tel:+447460091561"
-                    className="text-white hover:text-gray-300 font-medium transition-colors text-sm"
+                    className="text-white hover:text-gray-300 font-medium transition-colors text-base"
                   >
                     +44 7460 091561
                   </a>
@@ -130,7 +130,7 @@ const Footer = () => {
                 <div className="flex-1 min-w-0">
                   <a
                     href="mailto:easeway.physiotherapy@easewaymedicare.co.uk"
-                    className="text-white hover:text-gray-300 transition-colors text-xs sm:text-sm font-light break-all"
+                    className="text-white hover:text-gray-300 transition-colors text-base sm:text-base font-light break-all"
                   >
                     easeway.physiotherapy@easewaymedicare.co.uk
                   </a>
@@ -180,8 +180,8 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p className="text-gray-500 font-light px-4 text-body font-uber">
-            &copy; {new Date().getFullYear()} Easeway Medicare Physiotherapy Clinic. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} Easeway Medicare Physiotherapy
+            Clinic. All rights reserved.
           </p>
         </motion.div>
       </div>

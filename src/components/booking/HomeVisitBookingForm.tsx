@@ -164,7 +164,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
           <p className="text-green-800 font-medium mb-2">
             Confirmation Number: {confirmationNumber}
           </p>
-          <p className="text-green-700 text-sm">
+          <p className="text-green-700 text-base">
             Session Type:{" "}
             {formData.sessionType === "new"
               ? "Initial Meeting (40 min) - £80"
@@ -209,7 +209,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Session Type Selection */}
         <div>
-          <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+          <label className="block text-[#0E2127] font-medium mb-3 text-base">
             Session Type *
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -240,7 +240,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
                   <Check className="w-5 h-5 text-[#FF3133]" />
                 )}
               </div>
-              <p className="text-sm text-gray-600 mb-2">40 minutes</p>
+              <p className="text-base text-gray-600 mb-2">40 minutes</p>
               <p className="text-base font-bold text-[#0E2127]">£80</p>
             </motion.button>
 
@@ -271,7 +271,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
                   <Check className="w-5 h-5 text-[#FF3133]" />
                 )}
               </div>
-              <p className="text-sm text-gray-600 mb-2">30 minutes</p>
+              <p className="text-base text-gray-600 mb-2">30 minutes</p>
               <p className="text-base font-bold text-[#0E2127]">£70</p>
             </motion.button>
           </div>
@@ -280,7 +280,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         {/* Personal Information */}
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+            <label className="block text-[#0E2127] font-medium mb-3 text-base">
               Full Name *
             </label>
             <input
@@ -288,7 +288,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-sm ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-base ${
                 formErrors.name
                   ? "border-red-300 focus:ring-red-500 bg-red-50"
                   : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
@@ -296,7 +296,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
               placeholder="Your full name"
             />
             {formErrors.name && (
-              <p className="mt-2 text-sm text-red-600 flex items-center gap-1 font-uber">
+              <p className="mt-2 text-base text-red-600 flex items-center gap-1 font-uber">
                 <AlertCircle className="w-4 h-4" />
                 {formErrors.name}
               </p>
@@ -304,7 +304,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
           </div>
 
           <div>
-            <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+            <label className="block text-[#0E2127] font-medium mb-3 text-base">
               Phone Number *
             </label>
             <input
@@ -312,7 +312,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-sm ${
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-base ${
                 formErrors.phone
                   ? "border-red-300 focus:ring-red-500 bg-red-50"
                   : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
@@ -320,7 +320,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
               placeholder="+44 7XXX XXXXXX"
             />
             {formErrors.phone && (
-              <p className="mt-2 text-sm text-red-600 flex items-center gap-1 font-uber">
+              <p className="mt-2 text-base text-red-600 flex items-center gap-1 font-uber">
                 <AlertCircle className="w-4 h-4" />
                 {formErrors.phone}
               </p>
@@ -329,7 +329,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         </div>
 
         <div>
-          <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+          <label className="block text-[#0E2127] font-medium mb-3 text-base">
             Email Address *
           </label>
           <input
@@ -337,7 +337,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-sm ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-base ${
               formErrors.email
                 ? "border-red-300 focus:ring-red-500 bg-red-50"
                 : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
@@ -345,7 +345,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
             placeholder="your.email@example.com"
           />
           {formErrors.email && (
-            <p className="mt-2 text-sm text-red-600 flex items-center gap-1 font-uber">
+            <p className="mt-2 text-base text-red-600 flex items-center gap-1 font-uber">
               <AlertCircle className="w-4 h-4" />
               {formErrors.email}
             </p>
@@ -353,7 +353,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         </div>
 
         <div>
-          <label className="block text-[#0E2127] font-medium mb-3 text-sm">
+          <label className="block text-[#0E2127] font-medium mb-3 text-base">
             Condition / Reason for Visit *
           </label>
           <textarea
@@ -361,7 +361,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
             value={formData.message}
             onChange={handleInputChange}
             rows={4}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-sm resize-none ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-base resize-none ${
               formErrors.message
                 ? "border-red-300 focus:ring-red-500 bg-red-50"
                 : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
@@ -369,7 +369,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
             placeholder="Please describe your current condition, symptoms, or reason for seeking physiotherapy..."
           />
           {formErrors.message && (
-            <p className="mt-2 text-sm text-red-600 flex items-center gap-1 font-uber">
+            <p className="mt-2 text-base text-red-600 flex items-center gap-1 font-uber">
               <AlertCircle className="w-4 h-4" />
               {formErrors.message}
             </p>
@@ -410,10 +410,10 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
 
       {/* Info Notice */}
       <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <h4 className="font-semibold text-blue-800 mb-2 text-sm">
+        <h4 className="font-semibold text-blue-800 mb-2 text-base">
           Important Information
         </h4>
-        <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
+        <ul className="text-base text-blue-700 space-y-1 list-disc list-inside">
           <li>We'll contact you within 24 hours to schedule your home visit</li>
           <li>Our team will work with you to find a convenient time</li>
           <li>All equipment will be brought to your location</li>

@@ -60,7 +60,7 @@ const AboutUs = () => {
                 <div className="text-body-lg sm:text-h3-mobile md:text-h4-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
                   500+
                 </div>
-                <div className="text-xs sm:text-body text-gray-600 font-uber font-medium">
+                <div className="text-base sm:text-body text-gray-600 font-uber font-medium">
                   Patients Treated
                 </div>
               </div>
@@ -68,7 +68,7 @@ const AboutUs = () => {
                 <div className="text-body-lg sm:text-h3-mobile md:text-h4-desktop font-axiforma text-[#FF3133] mb-1 sm:mb-2">
                   10+
                 </div>
-                <div className="text-xs sm:text-body text-gray-600 font-uber font-medium">
+                <div className="text-base sm:text-body text-gray-600 font-uber font-medium">
                   Years Experience
                 </div>
               </div>
@@ -92,7 +92,7 @@ const AboutUs = () => {
                   className="flex items-center space-x-2 bg-[#0E2127]/10 px-3 sm:px-4 py-2 rounded-full border border-gray-100"
                 >
                   <div className="w-1 h-1 bg-[#FF3133] rounded-full"></div>
-                  <span className="text-xs sm:text-[14px] font-medium text-[#0E2127]">
+                  <span className="text-base sm:text-[14px] font-medium text-[#0E2127]">
                     {feature}
                   </span>
                 </div>
