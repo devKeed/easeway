@@ -1,6 +1,21 @@
 import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// SMTP configuration for Namecheap or other email providers
+const smtpTransporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || "mail.privateemail.com", // Namecheap's SMTP server
+  port: parseInt(process.env.SMTP_PORT || "587"),
+  secure: process.env.SMTP_PORT === "465", // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER, // Your email address
+    pass: process.env.SMTP_PASS, // Your email password
+  },
+});
+
+// Email service type
+const EMAIL_SERVICE = process.env.EMAIL_SERVICE || "resend"; // "resend" or "smtp"
 
 export interface BookingNotificationData {
   bookingId?: string;
@@ -121,18 +136,39 @@ export async function sendAdminBookingNotification(
       </div>
     `;
 
-    const data = await resend.emails.send({
-      from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
-      to: [adminEmail],
-      subject: `New Booking: ${bookingData.name} - ${
-        isTBD
-          ? "Home Visit (TBC)"
-          : bookingData.date + " at " + bookingData.time
-      }`,
-      html: emailContent,
-    });
+    // Send email based on configured service
+    if (EMAIL_SERVICE === "smtp") {
+      // Use SMTP (Namecheap email)
+      const mailOptions = {
+        from: `"Easeway Medicare" <${process.env.SMTP_USER}>`,
+        to: adminEmail,
+        subject: `New Booking: ${bookingData.name} - ${
+          isTBD
+            ? "Home Visit (TBC)"
+            : bookingData.date + " at " + bookingData.time
+        }`,
+        html: emailContent,
+      };
 
-    console.log("Admin notification email sent:", data);
+      const result = await smtpTransporter.sendMail(mailOptions);
+      console.log("Admin notification email sent via SMTP:", result.messageId);
+      return { success: true, messageId: result.messageId };
+    } else {
+      // Use Resend (default)
+      const data = await resend.emails.send({
+        from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
+        to: [adminEmail],
+        subject: `New Booking: ${bookingData.name} - ${
+          isTBD
+            ? "Home Visit (TBC)"
+            : bookingData.date + " at " + bookingData.time
+        }`,
+        html: emailContent,
+      });
+
+      console.log("Admin notification email sent via Resend:", data);
+      return { success: true, data: data };
+    }
     return { success: true, data };
   } catch (error) {
     console.error("Failed to send admin notification email:", error);
@@ -207,15 +243,34 @@ export async function sendPatientConfirmationEmail(
       </div>
     `;
 
-    const data = await resend.emails.send({
-      from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
-      to: [bookingData.email],
-      subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
-      html: emailContent,
-    });
+    // Send email based on configured service
+    if (EMAIL_SERVICE === "smtp") {
+      // Use SMTP (Namecheap email)
+      const mailOptions = {
+        from: `"Easeway Medicare" <${process.env.SMTP_USER}>`,
+        to: bookingData.email,
+        subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
+        html: emailContent,
+      };
 
-    console.log("Patient confirmation email sent:", data);
-    return { success: true, data };
+      const result = await smtpTransporter.sendMail(mailOptions);
+      console.log(
+        "Patient confirmation email sent via SMTP:",
+        result.messageId
+      );
+      return { success: true, messageId: result.messageId };
+    } else {
+      // Use Resend (default)
+      const data = await resend.emails.send({
+        from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
+        to: [bookingData.email],
+        subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
+        html: emailContent,
+      });
+
+      console.log("Patient confirmation email sent via Resend:", data);
+      return { success: true, data: data };
+    }
   } catch (error) {
     console.error("Failed to send patient confirmation email:", error);
     return { success: false, error };
