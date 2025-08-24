@@ -3,6 +3,8 @@ import { prisma } from "../../../../lib/prisma";
 
 // Force dynamic rendering for this API route
 export const dynamic = "force-dynamic";
+// Specify runtime
+export const runtime = "nodejs";
 
 // GET - Fetch time slot details for debugging (admin only)
 export async function GET(request: NextRequest) {

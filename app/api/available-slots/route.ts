@@ -3,6 +3,8 @@ import { prisma } from "../../../lib/prisma";
 
 // Force dynamic rendering for this API route
 export const dynamic = "force-dynamic";
+// Specify runtime (optional but explicit)
+export const runtime = "nodejs";
 
 interface BlockedPeriod {
   start: string;

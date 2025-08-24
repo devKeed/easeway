@@ -1,0 +1,39 @@
+# Ignore development files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore build artifacts
+.next/
+out/
+
+# Ignore dependencies
+node_modules/
+
+# Ignore logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore editor files
+.vscode/
+.idea/
+
+# Ignore git
+.git/
+.gitignore
+
+# Ignore cache
+.cache/
+
+# Ignore test files
+*.test.js
+*.test.ts
+*.test.tsx
+__tests__/
+coverage/

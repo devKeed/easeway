@@ -3,6 +3,8 @@ import { prisma } from "../../../../lib/prisma";
 
 // Force dynamic rendering for this API route
 export const dynamic = "force-dynamic";
+// Specify runtime (optional but explicit)
+export const runtime = "nodejs";
 
 interface BlockedPeriod {
   start: string;
@@ -56,6 +58,14 @@ const DAILY_SCHEDULE: Record<number, { open: string; close: string }> = {
 // GET - Fetch available time slots for a specific date
 export async function GET(request: NextRequest) {
   try {
+    // Prevent execution during build time
+    if (process.env.NODE_ENV === "production" && !process.env.DATABASE_URL) {
+      return NextResponse.json(
+        { error: "Service temporarily unavailable" },
+        { status: 503 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const date = searchParams.get("date");
 
@@ -70,10 +80,19 @@ export async function GET(request: NextRequest) {
     const selectedDate = new Date(date);
     const dayOfWeek = selectedDate.getDay();
 
-    // Get clinic settings
-    const settings = await prisma.clinicSettings.findFirst({
-      orderBy: { createdAt: "desc" },
-    });
+    // Get clinic settings with error handling
+    let settings;
+    try {
+      settings = await prisma.clinicSettings.findFirst({
+        orderBy: { createdAt: "desc" },
+      });
+    } catch (dbError) {
+      console.error("Database error fetching clinic settings:", dbError);
+      return NextResponse.json(
+        { error: "Database connection error" },
+        { status: 500 }
+      );
+    }
 
     if (!settings) {
       return NextResponse.json(
@@ -143,15 +162,22 @@ export async function GET(request: NextRequest) {
       const isBlocked = isTimeSlotBlocked(slotStart, slotEnd, blockedPeriods);
 
       // Check existing bookings for this date and time slot
-      const existingBooking = await prisma.booking.findFirst({
-        where: {
-          date: date,
-          time: minutesToTime(slotStart),
-          status: {
-            in: ["pending", "confirmed"],
+      let existingBooking;
+      try {
+        existingBooking = await prisma.booking.findFirst({
+          where: {
+            date: date,
+            time: minutesToTime(slotStart),
+            status: {
+              in: ["pending", "confirmed"],
+            },
           },
-        },
-      });
+        });
+      } catch (dbError) {
+        console.error("Database error checking existing bookings:", dbError);
+        // Continue processing without this check in case of DB error
+        existingBooking = null;
+      }
 
       // Add slot if it's available
       if (!isInBreakTime && !isBlocked && !existingBooking) {
