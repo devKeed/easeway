@@ -1,7 +1,27 @@
 import { Resend } from "resend";
 import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initializer instead of top-level throw when key is missing
+let _resend: Resend | null | undefined;
+function getResendClient(): Resend | null {
+  if (_resend !== undefined) return _resend; // cached (can be null)
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    console.warn(
+      "[email] RESEND_API_KEY not set. Resend emails will be skipped (will try SMTP fallback if configured)."
+    );
+    _resend = null;
+    return _resend;
+  }
+  try {
+    _resend = new Resend(key);
+    return _resend;
+  } catch (e) {
+    console.error("[email] Failed to initialize Resend client:", e);
+    _resend = null;
+    return _resend;
+  }
+}
 
 // SMTP configuration for Namecheap or other email providers
 const smtpTransporter = nodemailer.createTransport({
@@ -14,8 +34,18 @@ const smtpTransporter = nodemailer.createTransport({
   },
 });
 
-// Email service type
-const EMAIL_SERVICE = process.env.EMAIL_SERVICE || "resend"; // "resend" or "smtp"
+function smtpConfigured() {
+  return !!(process.env.SMTP_USER && process.env.SMTP_PASS);
+}
+
+// Email service type (auto fallback to smtp if resend selected but key missing)
+const RAW_EMAIL_SERVICE = process.env.EMAIL_SERVICE || "resend"; // desired
+const EMAIL_SERVICE =
+  RAW_EMAIL_SERVICE === "resend" &&
+  !process.env.RESEND_API_KEY &&
+  smtpConfigured()
+    ? "smtp"
+    : RAW_EMAIL_SERVICE;
 
 export interface BookingNotificationData {
   bookingId?: string;
@@ -154,8 +184,42 @@ export async function sendAdminBookingNotification(
       console.log("Admin notification email sent via SMTP:", result.messageId);
       return { success: true, messageId: result.messageId };
     } else {
-      // Use Resend (default)
-      const data = await resend.emails.send({
+      // Use Resend (default when key present). If no key, soft skip or fallback.
+      const resendClient = getResendClient();
+      if (!resendClient) {
+        if (smtpConfigured()) {
+          // fallback silently to SMTP
+          const mailOptions = {
+            from: `"Easeway Medicare" <${process.env.SMTP_USER}>`,
+            to: adminEmail,
+            subject: `New Booking: ${bookingData.name} - ${
+              isTBD
+                ? "Home Visit (TBC)"
+                : bookingData.date + " at " + bookingData.time
+            }`,
+            html: emailContent,
+          };
+          const result = await smtpTransporter.sendMail(mailOptions);
+          console.log(
+            "Admin notification email sent via SMTP fallback (missing Resend key):",
+            result.messageId
+          );
+          return {
+            success: true,
+            messageId: result.messageId,
+            fallback: "smtp",
+          };
+        }
+        console.warn(
+          "[email] Skipping admin notification email: no RESEND_API_KEY and SMTP not fully configured."
+        );
+        return {
+          success: false,
+          skipped: true,
+          reason: "No email provider configured",
+        };
+      }
+      const data = await resendClient.emails.send({
         from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
         to: [adminEmail],
         subject: `New Booking: ${bookingData.name} - ${
@@ -260,8 +324,36 @@ export async function sendPatientConfirmationEmail(
       );
       return { success: true, messageId: result.messageId };
     } else {
-      // Use Resend (default)
-      const data = await resend.emails.send({
+      const resendClient = getResendClient();
+      if (!resendClient) {
+        if (smtpConfigured()) {
+          const mailOptions = {
+            from: `"Easeway Medicare" <${process.env.SMTP_USER}>`,
+            to: bookingData.email,
+            subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
+            html: emailContent,
+          };
+          const result = await smtpTransporter.sendMail(mailOptions);
+          console.log(
+            "Patient confirmation email sent via SMTP fallback (missing Resend key):",
+            result.messageId
+          );
+          return {
+            success: true,
+            messageId: result.messageId,
+            fallback: "smtp",
+          };
+        }
+        console.warn(
+          "[email] Skipping patient confirmation email: no RESEND_API_KEY and SMTP not fully configured."
+        );
+        return {
+          success: false,
+          skipped: true,
+          reason: "No email provider configured",
+        };
+      }
+      const data = await resendClient.emails.send({
         from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
         to: [bookingData.email],
         subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
