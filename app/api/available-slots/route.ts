@@ -60,9 +60,9 @@ const DAILY_SCHEDULE: Record<number, { open: string; close: string }> = {
 function safeParseJSON<T>(val: unknown, fallback: T): T {
   if (val == null) return fallback;
   if (typeof val === "string") {
-    try { 
+    try {
       return JSON.parse(val) as T;
-    } catch { 
+    } catch {
       return fallback;
     }
   }
@@ -179,7 +179,10 @@ export async function GET(request: NextRequest) {
     const slotDuration = settings.timeSlotDuration;
 
     const availableSlots: string[] = [];
-    const blockedPeriods = safeParseJSON<BlockedPeriod[]>(settings.blockedPeriods, []);
+    const blockedPeriods = safeParseJSON<BlockedPeriod[]>(
+      settings.blockedPeriods,
+      []
+    );
 
     // Fetch all bookings and blocked slots for the date at once (performance optimization)
     let existingBookings: { time: string }[] = [];
@@ -211,8 +214,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Create sets for O(1) lookup
-    const bookedTimes = new Set(existingBookings.map(b => b.time));
-    const blockedTimes = new Set(blockedSlots.map(b => b.time));
+    const bookedTimes = new Set(existingBookings.map((b) => b.time));
+    const blockedTimes = new Set(blockedSlots.map((b) => b.time));
 
     // Generate time slots
     for (
