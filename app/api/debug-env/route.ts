@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   try {
     // Only show this in development or if authenticated
-    const isDev = process.env.NODE_ENV === 'development';
-    
+    const isDev = process.env.NODE_ENV === "development";
+
     if (!isDev) {
       return NextResponse.json(
         { error: "Environment check not available in production" },
