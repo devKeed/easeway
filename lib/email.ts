@@ -151,7 +151,13 @@ export async function sendAdminBookingNotification(
           }
           
           <div style="text-align: center; margin-top: 20px;">
-            <a href="${process.env.NEXTAUTH_URL}/admin/dashboard" 
+            <a href="${
+              process.env.NEXTAUTH_URL?.startsWith("http")
+                ? process.env.NEXTAUTH_URL
+                : `https://${
+                    process.env.NEXTAUTH_URL || "easewaymedicare.co.uk"
+                  }`
+            }/admin/dashboard" 
                style="background-color: #FF3133; color: white; padding: 12px 24px; 
                       text-decoration: none; border-radius: 5px; display: inline-block;">
               View in Admin Dashboard
