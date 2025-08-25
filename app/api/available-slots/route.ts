@@ -56,9 +56,31 @@ const DAILY_SCHEDULE: Record<number, { open: string; close: string }> = {
   0: { open: "13:00", close: "16:00" }, // Sunday
 };
 
+// Helper function to safely parse JSON
+function safeParseJSON<T>(val: unknown, fallback: T): T {
+  if (val == null) return fallback;
+  if (typeof val === "string") {
+    try { 
+      return JSON.parse(val) as T;
+    } catch { 
+      return fallback;
+    }
+  }
+  return val as T;
+}
+
 // GET - Fetch available time slots for a specific date (public endpoint)
 export async function GET(request: NextRequest) {
   try {
+    // Check if DATABASE_URL is configured
+    if (!process.env.DATABASE_URL) {
+      console.error("DATABASE_URL not configured");
+      return NextResponse.json(
+        { error: "Server configuration error" },
+        { status: 500 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const date = searchParams.get("date");
 
@@ -92,16 +114,25 @@ export async function GET(request: NextRequest) {
 
     const dayOfWeek = selectedDate.getDay();
 
-    // Get clinic settings
-    const settings = await prisma.clinicSettings.findFirst({
-      orderBy: { createdAt: "desc" },
-    });
+    // Get clinic settings with error handling
+    let settings;
+    try {
+      settings = await prisma.clinicSettings.findFirst({
+        orderBy: { createdAt: "desc" },
+      });
+    } catch (dbError) {
+      console.error("Database error fetching clinic settings:", dbError);
+      return NextResponse.json(
+        { error: "Database connection error" },
+        { status: 500 }
+      );
+    }
 
     if (!settings) {
       return NextResponse.json({
         availableSlots: [],
         message:
-          ">Clinic settings not configured. Please contact the clinic directly.",
+          "Clinic settings not configured. Please contact the clinic directly.",
       });
     }
 
@@ -110,24 +141,22 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         availableSlots: [],
         message:
-          ">Clinic is currently closed for online bookings. Please call +44 7460 091561.",
+          "Clinic is currently closed for online bookings. Please call +44 7460 091561.",
       });
     }
 
     // Check if the selected day is a working day
-    const workingDays = Array.isArray(settings.workingDays)
-      ? settings.workingDays
-      : JSON.parse(settings.workingDays as string);
+    const workingDays = safeParseJSON(settings.workingDays, [1, 2, 3, 4, 5]);
 
     if (!workingDays.includes(dayOfWeek)) {
       const dayNames = [
-        ">Sunday",
-        ">Monday",
-        ">Tuesday",
-        ">Wednesday",
-        ">Thursday",
-        ">Friday",
-        ">Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
       ];
       // If a specific daily schedule is defined for this day, treat it as a working day
       if (!DAILY_SCHEDULE[dayOfWeek]) {
@@ -150,9 +179,40 @@ export async function GET(request: NextRequest) {
     const slotDuration = settings.timeSlotDuration;
 
     const availableSlots: string[] = [];
-    const blockedPeriods = Array.isArray(settings.blockedPeriods)
-      ? (settings.blockedPeriods as unknown as BlockedPeriod[])
-      : JSON.parse((settings.blockedPeriods as string) || "[]");
+    const blockedPeriods = safeParseJSON<BlockedPeriod[]>(settings.blockedPeriods, []);
+
+    // Fetch all bookings and blocked slots for the date at once (performance optimization)
+    let existingBookings: { time: string }[] = [];
+    let blockedSlots: { time: string }[] = [];
+
+    try {
+      [existingBookings, blockedSlots] = await Promise.all([
+        prisma.booking.findMany({
+          where: {
+            date: date,
+            status: {
+              in: ["pending", "confirmed"],
+            },
+          },
+          select: { time: true },
+        }),
+        prisma.blockedSlot.findMany({
+          where: {
+            date: date,
+          },
+          select: { time: true },
+        }),
+      ]);
+    } catch (dbError) {
+      console.error("Database error fetching bookings/blocked slots:", dbError);
+      // Continue with empty arrays rather than failing completely
+      existingBookings = [];
+      blockedSlots = [];
+    }
+
+    // Create sets for O(1) lookup
+    const bookedTimes = new Set(existingBookings.map(b => b.time));
+    const blockedTimes = new Set(blockedSlots.map(b => b.time));
 
     // Generate time slots
     for (
@@ -162,6 +222,7 @@ export async function GET(request: NextRequest) {
     ) {
       const slotStart = currentMinutes;
       const slotEnd = currentMinutes + slotDuration;
+      const timeString = minutesToTime(slotStart);
 
       // Check break period
       let isInBreakTime = false;
@@ -177,28 +238,13 @@ export async function GET(request: NextRequest) {
       // Check blocked periods from settings
       const isBlocked = isTimeSlotBlocked(slotStart, slotEnd, blockedPeriods);
 
-      // Check database-level blocked slots for this specific date and time
-      const blockedSlot = await prisma.blockedSlot.findFirst({
-        where: {
-          date: date,
-          time: minutesToTime(slotStart),
-        },
-      });
-
-      // Check existing bookings for this date and time slot
-      const existingBooking = await prisma.booking.findFirst({
-        where: {
-          date: date,
-          time: minutesToTime(slotStart),
-          status: {
-            in: ["pending", "confirmed"],
-          },
-        },
-      });
+      // Check if time is booked or blocked (O(1) lookup)
+      const isBooked = bookedTimes.has(timeString);
+      const isBlockedInDb = blockedTimes.has(timeString);
 
       // Add slot if it's available
-      if (!isInBreakTime && !isBlocked && !blockedSlot && !existingBooking) {
-        availableSlots.push(minutesToTime(slotStart));
+      if (!isInBreakTime && !isBlocked && !isBooked && !isBlockedInDb) {
+        availableSlots.push(timeString);
       }
     }
 
@@ -211,7 +257,10 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Error fetching available time slots:", error);
+    console.error("Error fetching available time slots:", {
+      error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
