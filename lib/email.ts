@@ -220,7 +220,7 @@ export async function sendAdminBookingNotification(
         };
       }
       const data = await resendClient.emails.send({
-        from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
+        from: "Easeway Medicare <onboarding@resend.dev>", // Using Resend's verified domain for testing
         to: [adminEmail],
         subject: `New Booking: ${bookingData.name} - ${
           isTBD
@@ -354,7 +354,7 @@ export async function sendPatientConfirmationEmail(
         };
       }
       const data = await resendClient.emails.send({
-        from: "Easeway Medicare <bookings@easeway-medicare.co.uk>",
+        from: "Easeway Medicare <onboarding@resend.dev>", // Using Resend's verified domain for testing
         to: [bookingData.email],
         subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
         html: emailContent,
