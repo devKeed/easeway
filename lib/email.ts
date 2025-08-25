@@ -251,6 +251,13 @@ export async function sendPatientConfirmationEmail(
 ) {
   try {
     const isTBD = bookingData.time === "TBD";
+
+    // Check if we're redirecting the email to admin in production
+    const isRedirectedEmail =
+      process.env.NODE_ENV === "production" &&
+      process.env.ADMIN_EMAIL &&
+      process.env.ADMIN_EMAIL !== bookingData.email;
+
     const emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background-color: #FF3133; color: white; padding: 20px; text-align: center;">
@@ -259,6 +266,17 @@ export async function sendPatientConfirmationEmail(
         </div>
         
         <div style="padding: 20px; background-color: #f9f9f9;">
+          ${
+            isRedirectedEmail
+              ? `
+          <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+            <p style="margin: 0; color: #856404;"><strong>Note:</strong> This confirmation was meant for ${bookingData.email}. 
+            Please forward this confirmation to the patient or contact them directly.</p>
+          </div>
+          `
+              : ""
+          }
+          
           <h2 style="color: #0E2127;">Dear ${bookingData.name},</h2>
           <p>Thank you for booking an appointment with Easeway Medicare Physiotherapy Clinic. 
              We have received your booking request and will contact you within 24 hours to confirm your appointment.</p>
@@ -359,10 +377,21 @@ export async function sendPatientConfirmationEmail(
           reason: "No email provider configured",
         };
       }
+      // TEMPORARY: Send patient emails to admin email for testing
+      // TODO: Remove this once domain is verified in Resend
+      const patientEmailAddress =
+        process.env.NODE_ENV === "production"
+          ? process.env.ADMIN_EMAIL || bookingData.email // Use admin email in production for testing
+          : bookingData.email; // Use actual email in development
+
       const data = await resendClient.emails.send({
         from: "Easeway Medicare <onboarding@resend.dev>", // Using Resend's verified domain for testing
-        to: [bookingData.email],
-        subject: `Booking Confirmation - ${bookingData.confirmationNumber}`,
+        to: [patientEmailAddress],
+        subject: `Booking Confirmation - ${bookingData.confirmationNumber}${
+          patientEmailAddress !== bookingData.email
+            ? ` (for ${bookingData.email})`
+            : ""
+        }`,
         html: emailContent,
       });
 
