@@ -15,6 +15,14 @@ export const metadata: Metadata = {
     "Overcome pain, regain mobility and live life to the fullest easily! Professional physiotherapy services including manual therapy, electrotherapy, sports massage and home physiotherapy care in Whittlesey, Peterborough.",
   keywords:
     "physiotherapy, physiotherapist, manual therapy, electrotherapy, sports massage, home physiotherapy, Whittlesey, Peterborough, pain relief, mobility, rehabilitation",
+  icons: {
+    icon: [
+      { url: "/images/easeway_logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/easeway_logo.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/images/easeway_logo.png",
+    apple: "/images/easeway_logo.png",
+  },
   openGraph: {
     title: "Easeway Medicare Physiotherapy Clinic",
     description:
