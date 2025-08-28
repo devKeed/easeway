@@ -29,7 +29,7 @@ const pricingConfig: Record<
 > = {
   clinic: {
     new: "£55",
-    followup: "£50",
+    followup: "£45",
     newDuration: 40,
     followupDuration: 30,
   },

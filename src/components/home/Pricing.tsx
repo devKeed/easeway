@@ -23,7 +23,7 @@ const Pricing = () => {
       icon: Building2,
       name: "Follow-up Session",
       duration: "30 minutes",
-      price: "£50",
+      price: "£45",
       description: [
         "Targeted treatment session",
         "Progress evaluation and monitoring",
