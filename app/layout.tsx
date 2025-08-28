@@ -10,8 +10,9 @@ export const metadata: Metadata = {
       : `https://${process.env.NEXT_PUBLIC_SITE_URL || "easewaymedicare.co.uk"}`
   ),
   title: {
-    default: "Easeway Medicare Physiotherapy Clinic - Professional Physiotherapy Services in Whittlesey",
-    template: "%s | Easeway Medicare Physiotherapy Clinic"
+    default:
+      "Easeway Medicare Physiotherapy Clinic - Professional Physiotherapy Services in Whittlesey",
+    template: "%s | Easeway Medicare Physiotherapy Clinic",
   },
   description:
     "Overcome pain, regain mobility and live life to the fullest easily! Professional physiotherapy services including manual therapy, electrotherapy, sports massage and home physiotherapy care in Whittlesey, Peterborough.",
@@ -58,9 +59,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
@@ -89,7 +90,11 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="theme-color" content="#ffffff" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <ClientProviders>{children}</ClientProviders>
