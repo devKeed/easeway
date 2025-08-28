@@ -231,40 +231,22 @@ const Services = () => {
       <div className="relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16 px-6">
-          <motion.div
-            className="inline-flex items-center px-4 py-2 bg-[#FF3133]/5 border border-[#FF3133]/10 rounded-full"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div className="inline-flex items-center px-4 py-2 bg-[#FF3133]/5 border border-[#FF3133]/10 rounded-full">
             <Building2 className="w-4 h-4 mr-2 text-[#FF3133]" />
             <span className="text-[#FF3133] text-body-sm font-axiforma">
               Our Services
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            className="text-h3-mobile sm:text-h2-small font-axiforma text-gray-900 mb-6 sm:mb-8 mt-4 tracking-tight max-w-xl mx-auto leading-tight"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="text-h3-mobile sm:text-h2-small font-axiforma text-gray-900 mb-6 sm:mb-8 mt-4 tracking-tight max-w-xl mx-auto leading-tight">
             Professional Physiotherapy Services
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            className="text-body text-gray-600 leading-relaxed mt-3 sm:mt-4 font-uber mx-auto max-w-md px-4"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <p className="text-body text-gray-600 leading-relaxed mt-3 sm:mt-4 font-uber mx-auto max-w-md px-4">
             Comprehensive physiotherapy treatments designed to help you overcome
             pain, regain mobility, and return to your active lifestyle with
             confidence.
-          </motion.p>
+          </p>
         </div>
 
         {/* Navigation Arrows */}
@@ -293,16 +275,9 @@ const Services = () => {
           }}
         >
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={index}
               className="group relative bg-white/30 backdrop-blur-md border border-white/20 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 hover:bg-white/50 hover:backdrop-blur-lg flex-shrink-0 w-72 sm:w-80 ring-1 ring-gray-300/50 cursor-pointer"
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.1,
-              }}
-              viewport={{ once: true }}
               onClick={() => setSelectedService(index)}
             >
               {service.highlight && (
@@ -342,7 +317,7 @@ const Services = () => {
 
               {/* Subtle hover effect */}
               <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </motion.div>
+            </div>
           ))}
         </div>
 

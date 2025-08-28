@@ -9,16 +9,29 @@ const Header = () => {
 
   const menuItems = [
     { label: "Services", href: "#services" },
-    { label: "Pricing", href: "#pricing" },
     { label: "Contact", href: "#contact" },
   ];
 
   const handleMenuClick = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    // Close mobile menu first
     setIsMobileMenuOpen(false);
+
+    // Add a small delay to ensure the menu animation completes
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        const headerHeight = 80; // Approximate header height
+        const elementPosition =
+          element.getBoundingClientRect().top +
+          window.pageYOffset -
+          headerHeight;
+
+        window.scrollTo({
+          top: elementPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -151,10 +164,36 @@ const Header = () => {
             </div>
              */}
 
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {menuItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleMenuClick(item.href);
+                }}
+                className="text-[#0E2127] hover:text-[#FF3133] transition-colors text-base font-medium"
+              >
+                {item.label}
+              </a>
+            ))}
+
+            <motion.a
+              href="/booking"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-[#FF3133] text-white px-4 py-2 rounded-lg text-body-sm font-axiforma hover:bg-[#e62a2c] transition-colors"
+            >
+              Book Appointment
+            </motion.a>
+          </nav>
+
           {/* Hamburger Menu Button */}
           <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 bg-transparent text-[#0E2127] transition-colors"
+            className="md:hidden p-2 bg-transparent text-[#0E2127] transition-colors"
             whileTap={{ scale: 0.95 }}
           >
             <div className="w-6 h-5 flex flex-col justify-between">
@@ -187,23 +226,27 @@ const Header = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="bg-transparent border-t border-white/20"
+            className="bg-white/95 backdrop-blur-md border-t border-white/20"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="px-4 sm:px-10 py-6 space-y-4 bg-transparent backdrop-blur-md">
+            <div className="px-4 sm:px-10 py-6 space-y-4">
               {/* Mobile Navigation */}
               <nav className="space-y-3">
                 {menuItems.map((item) => (
-                  <a
+                  <div
                     key={item.label}
-                    onClick={() => handleMenuClick(item.href)}
-                    className="block w-full cursor-pointer text-left text-[#0E2127] hover:text-[#FF3133] transition-colors text-base font-medium py-2"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleMenuClick(item.href);
+                    }}
+                    className="block w-full text-left text-[#0E2127] hover:text-[#FF3133] transition-colors text-base font-medium py-2 cursor-pointer"
                   >
                     {item.label}
-                  </a>
+                  </div>
                 ))}
               </nav>
 
@@ -248,6 +291,7 @@ const Header = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.95 }}
+                  className="block w-full bg-[#FF3133] text-white px-4 py-3 rounded-lg text-center text-base font-axiforma hover:bg-[#e62a2c] transition-colors"
                 >
                   Book Appointment
                 </motion.a>
