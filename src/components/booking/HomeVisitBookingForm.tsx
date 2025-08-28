@@ -10,6 +10,7 @@ interface HomeVisitFormData {
   email: string;
   phone: string;
   message: string;
+  howCanWeHelp: string;
   sessionType: "new" | "followup";
 }
 
@@ -26,6 +27,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
     email: "",
     phone: "",
     message: "",
+    howCanWeHelp: "",
     sessionType: "new",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -60,6 +62,17 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
     }
     if (!formData.phone.trim()) {
       errors.phone = "Phone number is required";
+    }
+    if (!formData.howCanWeHelp.trim()) {
+      errors.howCanWeHelp = "Please describe how we can help you";
+    } else {
+      const wordCount = formData.howCanWeHelp
+        .split(" ")
+        .filter((word) => word.length > 0).length;
+      if (wordCount > 100) {
+        errors.howCanWeHelp =
+          "Please limit your description to 100 words or less";
+      }
     }
     if (!formData.message.trim()) {
       errors.message = "Please describe your condition or reason for visit";
@@ -102,6 +115,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         sessionType: formData.sessionType,
         sessionDuration: sessionInfo.duration,
         message: formData.message,
+        howCanWeHelp: formData.howCanWeHelp,
       };
 
       const response = await fetch("/api/bookings/public", {
@@ -341,6 +355,40 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
               {formErrors.email}
             </p>
           )}
+        </div>
+
+        <div>
+          <label className="block text-[#0E2127] font-medium mb-3 text-base">
+            How can we help? *
+          </label>
+          <textarea
+            name="howCanWeHelp"
+            value={formData.howCanWeHelp}
+            onChange={handleInputChange}
+            rows={3}
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-base resize-y ${
+              formErrors.howCanWeHelp
+                ? "border-red-300 focus:ring-red-500 bg-red-50"
+                : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
+            }`}
+            placeholder="Please briefly describe your condition or what you'd like help with (max 100 words)..."
+          />
+          <div className="flex justify-between items-center mt-2">
+            {formErrors.howCanWeHelp && (
+              <p className="text-base text-red-600 flex items-center gap-1 font-uber">
+                <AlertCircle className="w-4 h-4" />
+                {formErrors.howCanWeHelp}
+              </p>
+            )}
+            <p className="text-sm text-gray-500 ml-auto">
+              {
+                formData.howCanWeHelp
+                  .split(" ")
+                  .filter((word) => word.length > 0).length
+              }
+              /100 words
+            </p>
+          </div>
         </div>
 
         <div>

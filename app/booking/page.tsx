@@ -99,6 +99,28 @@ const BookingPage = () => {
         if (!bookingData.phone.trim()) {
           errors.phone = "Phone number is required";
         }
+        if (!bookingData.howCanWeHelp.trim()) {
+          errors.howCanWeHelp = "Please describe how we can help you";
+        } else {
+          const wordCount = bookingData.howCanWeHelp
+            .split(" ")
+            .filter((word) => word.length > 0).length;
+          if (wordCount > 100) {
+            errors.howCanWeHelp =
+              "Please limit your description to 100 words or less";
+          }
+        }
+        if (!bookingData.howCanWeHelp.trim()) {
+          errors.howCanWeHelp = "Please describe how we can help you";
+        } else {
+          const wordCount = bookingData.howCanWeHelp
+            .split(" ")
+            .filter((word) => word.length > 0).length;
+          if (wordCount > 100) {
+            errors.howCanWeHelp =
+              "Please limit your description to 100 words or less";
+          }
+        }
         break;
       case 3: // Appointment Details
         if (!bookingData.date) {
@@ -117,6 +139,7 @@ const BookingPage = () => {
           name: "Full name",
           email: "Email address",
           phone: "Phone number",
+          howCanWeHelp: "How can we help description",
           date: "Date",
           time: "Time",
         } as const;
@@ -216,6 +239,7 @@ const BookingPage = () => {
         sessionType: bookingData.sessionType?.id || null,
         sessionDuration: bookingData.sessionType?.duration || null,
         message: bookingData.message,
+        howCanWeHelp: bookingData.howCanWeHelp,
         emergencyContact: bookingData.emergencyContact,
         medicalHistory: bookingData.medicalHistory,
         currentMedications: bookingData.currentMedications,
@@ -445,6 +469,42 @@ const BookingPage = () => {
                   </p>
                 )}
               </div>
+
+              {/* How can we help field */}
+              <div className="sm:col-span-2">
+                <label className="block text-[#0E2127] font-medium mb-3 text-base">
+                  How can we help? *
+                </label>
+                <textarea
+                  name="howCanWeHelp"
+                  value={bookingData.howCanWeHelp}
+                  onChange={handleInputChange}
+                  required
+                  rows={3}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-base resize-y ${
+                    formErrors.howCanWeHelp
+                      ? "border-red-300 focus:ring-red-500 bg-red-50"
+                      : "border-gray-300 focus:ring-[#FF3133] hover:border-gray-400"
+                  }`}
+                  placeholder="Please briefly describe your condition or what you'd like help with (max 100 words)..."
+                />
+                <div className="flex justify-between items-center mt-2">
+                  {formErrors.howCanWeHelp && (
+                    <p className="text-base text-red-600 flex items-center gap-1 font-uber">
+                      <AlertCircle className="w-4 h-4" />
+                      {formErrors.howCanWeHelp}
+                    </p>
+                  )}
+                  <p className="text-sm text-gray-500 ml-auto">
+                    {
+                      bookingData.howCanWeHelp
+                        .split(" ")
+                        .filter((word) => word.length > 0).length
+                    }
+                    /100 words
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -600,19 +660,31 @@ const BookingPage = () => {
               </div>
 
               {/* Medical Information */}
-              {bookingData.message && (
+              {(bookingData.message || bookingData.howCanWeHelp) && (
                 <div className="space-y-4 pt-4 border-t border-gray-200">
                   <h5 className="font-semibold text-[#0E2127] text-base uppercase tracking-wide">
                     Medical Information
                   </h5>
-                  <div>
-                    <span className="text-gray-600 text-base block mb-2">
-                      Condition/Reason for visit:
-                    </span>
-                    <p className="text-base bg-white p-3 rounded border text-gray-700 font-uber">
-                      {bookingData.message}
-                    </p>
-                  </div>
+                  {bookingData.howCanWeHelp && (
+                    <div>
+                      <span className="text-gray-600 text-base block mb-2">
+                        How can we help:
+                      </span>
+                      <p className="text-base bg-white p-3 rounded border text-gray-700 font-uber">
+                        {bookingData.howCanWeHelp}
+                      </p>
+                    </div>
+                  )}
+                  {bookingData.message && (
+                    <div>
+                      <span className="text-gray-600 text-base block mb-2">
+                        Condition/Reason for visit:
+                      </span>
+                      <p className="text-base bg-white p-3 rounded border text-gray-700 font-uber">
+                        {bookingData.message}
+                      </p>
+                    </div>
+                  )}
                   {bookingData.medicalHistory && (
                     <div>
                       <span className="text-gray-600 text-base block mb-2">

@@ -32,6 +32,7 @@ export interface BookingFormData {
 
   // Medical information
   message: string;
+  howCanWeHelp: string; // New field for "How can we help"
   medicalHistory: string;
   currentMedications: string;
   previousPhysiotherapy: string;
@@ -62,6 +63,7 @@ const initialBookingData: BookingFormData = {
   date: "",
   time: "",
   message: "",
+  howCanWeHelp: "",
   medicalHistory: "",
   currentMedications: "",
   previousPhysiotherapy: "",
