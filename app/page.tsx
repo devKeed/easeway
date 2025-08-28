@@ -2,7 +2,6 @@
 
 import AboutUs from "../src/components/home/AboutUs";
 import Services from "../src/components/home/Services";
-import Pricing from "../src/components/home/Pricing";
 import WhyChooseUs from "../src/components/home/WhyChooseUs";
 import HeroSection from "../src/components/home/HeroSection";
 import Header from "../src/components/shared/Header";
