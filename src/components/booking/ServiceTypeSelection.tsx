@@ -121,8 +121,54 @@ const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
           })}
         </div>
       </div>
+
+      {/* Pricing Information Container */}
+      <BlockOf5Info />
     </div>
   );
 };
 
 export default ServiceTypeSelection;
+
+export const BlockOf5Info = () => {
+  return (
+    <div className="mt-8 p-6 bg-blue-50 border  rounded-lg">
+      <div className="flex items-start gap-3">
+        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+          <Building2 className="w-4 h-4 text-blue-600" />
+        </div>
+        <div className="flex-1">
+          <h4 className="text-base font-semibold text-blue-900 mb-3">
+            Block Session Pricing (5 Sessions)
+          </h4>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <div className="text-base">
+              <div className="text-base font-medium text-blue-800">
+                Clinic Booking
+              </div>
+              <div className="text-base text-blue-600">
+                New: £260 | Follow-up: £235
+              </div>
+            </div>
+            <div className="text-base">
+              <div className="text-base font-medium text-blue-800">
+                Home Visit
+              </div>
+              <div className="text-base text-blue-600">
+                New: £380 | Follow-up: £330
+              </div>
+            </div>
+            <div className="text-base">
+              <div className="text-base font-medium text-blue-800">
+                Sports Massage
+              </div>
+              <div className="text-base text-blue-600">
+                New: £190 | Follow-up: £165
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

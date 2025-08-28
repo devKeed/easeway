@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Home, Check, ArrowLeft, AlertCircle } from "lucide-react";
 import { useToast } from "../../contexts/ToastContext";
+import { BlockOf5Info } from "./ServiceTypeSelection";
 
 interface HomeVisitFormData {
   name: string;
@@ -213,8 +214,10 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Session Type Selection */}
+
         <div>
-          <label className="block text-[#0E2127] font-medium mb-3 text-base">
+           <BlockOf5Info />
+          <label className="block text-[#0E2127] font-medium mb-3 text-base mt-4">
             Session Type *
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
