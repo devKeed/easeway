@@ -10,6 +10,7 @@ import Footer from "../src/components/shared/Footer";
 import Info from "../src/components/home/Info";
 import RevealOnScroll from "../src/components/animations/Reveal";
 import Contact from "../src/components/home/Contact";
+import LeaveReview from "../src/components/home/LeaveReview";
 
 export default function HomePage() {
   return (
@@ -28,15 +29,18 @@ export default function HomePage() {
             <RevealOnScroll>
               <Services />
             </RevealOnScroll>
-            <RevealOnScroll>
+            {/* <RevealOnScroll>
               <Pricing />
-            </RevealOnScroll>
+            </RevealOnScroll> */}
             <WhyChooseUs />
           </div>
           {/* <RevealOnScroll>
  <Testimonials />
  </RevealOnScroll> */}
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+            <RevealOnScroll>
+              <LeaveReview />
+            </RevealOnScroll>
             <RevealOnScroll>
               <Contact />
             </RevealOnScroll>

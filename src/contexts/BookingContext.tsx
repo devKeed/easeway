@@ -26,7 +26,7 @@ export interface BookingFormData {
   emergencyContact: string;
 
   // Appointment details
-  service: string; // specific service from step 1
+  service: string; // auto-generated service name based on category
   date: string;
   time: string;
 

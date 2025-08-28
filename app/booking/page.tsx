@@ -81,13 +81,6 @@ const BookingPage = () => {
         if (!bookingData.serviceCategory) {
           errors.serviceCategory = "Please select a service type";
         }
-        if (
-          bookingData.serviceCategory &&
-          bookingData.serviceCategory !== "home" &&
-          !bookingData.service
-        ) {
-          errors.service = "Please select a specific service";
-        }
         break;
       case 1: // Session Type
         if (!bookingData.sessionType) {
@@ -133,14 +126,6 @@ const BookingPage = () => {
             errors[field] = `${label} is required`;
           }
         });
-        // Check if service is required for non-home services
-        if (
-          bookingData.serviceCategory &&
-          bookingData.serviceCategory !== "home" &&
-          !bookingData.service
-        ) {
-          errors.service = "Service is required";
-        }
         break;
     }
 
@@ -160,10 +145,7 @@ const BookingPage = () => {
   const canProceedToNextStep = () => {
     switch (currentStep) {
       case 0:
-        return (
-          !!bookingData.serviceCategory &&
-          (bookingData.serviceCategory === "home" || !!bookingData.service)
-        );
+        return !!bookingData.serviceCategory;
       case 1:
         return bookingData.sessionType !== null;
       case 2:
@@ -199,6 +181,20 @@ const BookingPage = () => {
     }
   };
 
+  // Helper function to get service name based on category
+  const getServiceName = (serviceCategory: string) => {
+    switch (serviceCategory) {
+      case "home":
+        return "Home Visit";
+      case "clinic":
+        return "Clinic Consultation";
+      case "sports":
+        return "Sports Massage";
+      default:
+        return "General Consultation";
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted! Current step:", currentStep);
@@ -214,11 +210,7 @@ const BookingPage = () => {
         email: bookingData.email,
         phone: bookingData.phone,
         serviceCategory: bookingData.serviceCategory,
-        service:
-          bookingData.service ||
-          (bookingData.serviceCategory === "home"
-            ? "Home Visit"
-            : "General Consultation"),
+        service: getServiceName(bookingData.serviceCategory),
         date: bookingData.date,
         time: bookingData.time,
         sessionType: bookingData.sessionType?.id || null,
@@ -247,7 +239,9 @@ const BookingPage = () => {
 
         showSuccess(
           "Booking confirmed successfully!",
-          `Your appointment for ${bookingData.service} on ${bookingData.date} at ${bookingData.time} has been booked.`
+          `Your appointment for ${getServiceName(
+            bookingData.serviceCategory
+          )} on ${bookingData.date} at ${bookingData.time} has been booked.`
         );
 
         // Reset form after successful submission
@@ -297,11 +291,6 @@ const BookingPage = () => {
     } else {
       setShowHomeVisitForm(false);
     }
-  };
-
-  // Handle specific service selection
-  const handleSpecificServiceSelect = (service: string) => {
-    updateBookingData({ service });
   };
 
   const handleBackFromHomeVisit = () => {
@@ -355,9 +344,7 @@ const BookingPage = () => {
         return (
           <ServiceTypeSelection
             selectedService={bookingData.serviceCategory}
-            selectedSpecificService={bookingData.service}
             onServiceTypeSelect={handleServiceTypeSelect}
-            onSpecificServiceSelect={handleSpecificServiceSelect}
           />
         );
       case 1:
@@ -564,10 +551,7 @@ const BookingPage = () => {
                   <div className="flex justify-between items-start py-2">
                     <span className="text-gray-600 text-base">Service:</span>
                     <span className="font-medium text-base text-right">
-                      {bookingData.service ||
-                        (bookingData.serviceCategory === "home"
-                          ? "Home Visit"
-                          : "Not specified")}
+                      {getServiceName(bookingData.serviceCategory)}
                     </span>
                   </div>
                   <div className="flex justify-between items-start py-2">

@@ -332,9 +332,9 @@ const Services = () => {
 
               {/* Content */}
               <div className="p-4 sm:p-6">
-                <h3 className="text-button-sm sm:text-button font-uber font-semibold text-gray-900 mb-2 sm:mb-3 leading-tight">
+                <p className="text-md font-uber font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
                   {service.title}
-                </h3>
+                </p>
                 <p className="text-body text-gray-600 leading-relaxed mt-3 sm:mt-4 font-uber">
                   {service.description}
                 </p>

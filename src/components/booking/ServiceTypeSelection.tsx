@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, Home, Waves, Check, Stethoscope } from "lucide-react";
+import { Building2, Home, Waves, Check } from "lucide-react";
 
 export interface ServiceTypeOption {
   key: string;
@@ -12,9 +12,7 @@ export interface ServiceTypeOption {
 
 interface ServiceTypeSelectionProps {
   selectedService: string;
-  selectedSpecificService: string;
   onServiceTypeSelect: (serviceKey: string) => void;
-  onSpecificServiceSelect: (service: string) => void;
 }
 
 const serviceTypes: ServiceTypeOption[] = [
@@ -38,24 +36,9 @@ const serviceTypes: ServiceTypeOption[] = [
   },
 ];
 
-const services = [
-  "Comprehensive Assessment",
-  "Manual Therapy",
-  "Electrotherapy",
-  "Post-surgical Rehabilitation",
-  "Kinesotaping",
-  "Sports Massage",
-  "Home Physiotherapy Care",
-  "Sports Injury Rehabilitation",
-  "Chronic Pain Management",
-  "Mobility Training",
-];
-
 const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
   selectedService,
-  selectedSpecificService,
   onServiceTypeSelect,
-  onSpecificServiceSelect,
 }) => {
   return (
     <div className="space-y-8">
@@ -64,14 +47,14 @@ const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
           <Building2 className="w-5 h-5 text-[#FF3133]" />
         </div>
         <h3 className="text-h4-mobile sm:text-h4-desktop font-axiforma text-[#0E2127]">
-          Select Service Type & Service
+          Select Service Type
         </h3>
       </div>
 
       {/* Service Type Selection */}
       <div>
         <h4 className="text-h6-mobile sm:text-h6-desktop font-semibold text-[#0E2127] mb-3">
-          1. Choose Service Type
+          Choose Service Type
         </h4>
         <p className="text-base text-gray-600 mb-4 font-uber">
           Choose the type of service you are booking. This will determine
@@ -138,69 +121,6 @@ const ServiceTypeSelection: React.FC<ServiceTypeSelectionProps> = ({
           })}
         </div>
       </div>
-
-      {/* Specific Service Selection - Only show if service type is selected */}
-      {selectedService && selectedService !== "home" && (
-        <div>
-          <h4 className="text-h6-mobile sm:text-h6-desktop font-semibold text-[#0E2127] mb-3">
-            2. Choose Specific Service
-          </h4>
-          <p className="text-base text-gray-600 mb-4 font-uber">
-            Select the specific service you need for your appointment.
-          </p>
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => {
-              const isSelected = selectedSpecificService === service;
-              return (
-                <motion.button
-                  key={index}
-                  type="button"
-                  onClick={() => onSpecificServiceSelect(service)}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
-                  className={`relative p-4 rounded-lg border-2 transition-all duration-200 text-left ${
-                    isSelected
-                      ? "border-[#FF3133] bg-[#FF3133]/5"
-                      : "border-gray-200 bg-white hover:border-[#FF3133]/50"
-                  }`}
-                >
-                  {isSelected && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="absolute top-3 right-3 w-5 h-5 bg-[#FF3133] rounded-full flex items-center justify-center"
-                    >
-                      <Check className="w-3 h-3 text-white" />
-                    </motion.div>
-                  )}
-
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                        isSelected ? "bg-[#FF3133]" : "bg-gray-100"
-                      }`}
-                    >
-                      <Stethoscope
-                        className={`w-4 h-4 ${
-                          isSelected ? "text-white" : "text-gray-600"
-                        }`}
-                      />
-                    </div>
-                    <span
-                      className={`font-medium text-button-sm sm:text-button ${
-                        isSelected ? "text-[#FF3133]" : "text-[#0E2127]"
-                      }`}
-                    >
-                      {service}
-                    </span>
-                  </div>
-                </motion.button>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
