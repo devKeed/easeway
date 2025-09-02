@@ -48,7 +48,8 @@ const BookingPage = () => {
   } | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-  const [showHomeVisitForm, setShowHomeVisitForm] = useState(false);
+  const [showHomeVisitForm, setShowHomeVisitForm] = useState(false); // used for both home & virtual
+  const [virtualMode, setVirtualMode] = useState(false); // distinguish which variant is active
 
   const stepTitles = [
     "Service Selection",
@@ -209,6 +210,8 @@ const BookingPage = () => {
     switch (serviceCategory) {
       case "home":
         return "Home Visit";
+      case "virtual":
+        return "Virtual Consultation";
       case "clinic":
         return "Clinic Consultation";
       case "sports":
@@ -308,17 +311,22 @@ const BookingPage = () => {
 
   // Handle service category selection with home visit check
   const handleServiceTypeSelect = (serviceKey: string) => {
-    updateBookingData({ serviceCategory: serviceKey as "clinic" | "home" });
+    updateBookingData({
+      serviceCategory: serviceKey as "clinic" | "home" | "virtual" | "sports",
+    });
 
-    if (serviceKey === "home") {
+    if (serviceKey === "home" || serviceKey === "virtual") {
+      setVirtualMode(serviceKey === "virtual");
       setShowHomeVisitForm(true);
     } else {
       setShowHomeVisitForm(false);
+      setVirtualMode(false);
     }
   };
 
   const handleBackFromHomeVisit = () => {
     setShowHomeVisitForm(false);
+    setVirtualMode(false);
     updateBookingData({ serviceCategory: "" });
   };
 
@@ -340,10 +348,14 @@ const BookingPage = () => {
 
               <div className="sm:text-right">
                 <h3 className="text-lg sm:text-xl font-axiforma text-[#0E2127] mb-1">
-                  Book Home Visit
+                  {virtualMode
+                    ? "Book Virtual Consultation"
+                    : "Book Home Visit"}
                 </h3>
                 <p className="text-gray-600 text-base font-uber">
-                  We'll arrange a convenient time for your home visit
+                  {virtualMode
+                    ? "We'll contact you to arrange your video consultation"
+                    : "We'll arrange a convenient time for your home visit"}
                 </p>
               </div>
             </div>
@@ -354,7 +366,11 @@ const BookingPage = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
           <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <div className="p-4 sm:p-6 lg:p-8">
-              <HomeVisitBookingForm onBack={handleBackFromHomeVisit} />
+              <HomeVisitBookingForm
+                onBack={handleBackFromHomeVisit}
+                // pass a flag so form can tag submission as virtual
+                isVirtual={virtualMode}
+              />
             </div>
           </div>
         </div>

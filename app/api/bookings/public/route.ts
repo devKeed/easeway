@@ -33,21 +33,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // For home visits, date and time are not required (will be TBD)
-    const isHomeVisit = serviceCategory === "home" || service === "Home Visit";
-    if (!isHomeVisit && (!date || !time)) {
+    // For home & virtual visits, date and time are not required (will be TBD)
+    const isManualScheduling =
+      serviceCategory === "home" ||
+      serviceCategory === "virtual" ||
+      service === "Home Visit" ||
+      service === "Virtual Consultation";
+    if (!isManualScheduling && (!date || !time)) {
       return NextResponse.json(
         { error: "Date and time are required for non-home visit bookings" },
         { status: 400 }
       );
     }
 
-    // For home visits, set TBD values
-    const bookingDate = isHomeVisit ? "TBD" : date;
-    const bookingTime = isHomeVisit ? "TBD" : time;
+    // For manually scheduled (home/virtual), set TBD values
+    const bookingDate = isManualScheduling ? "TBD" : date;
+    const bookingTime = isManualScheduling ? "TBD" : time;
 
-    // Validate date only for non-home visits
-    if (!isHomeVisit) {
+    // Validate date only for non-manual visits
+    if (!isManualScheduling) {
       const selectedDate = new Date(date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);

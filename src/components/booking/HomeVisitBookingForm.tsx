@@ -17,10 +17,12 @@ interface HomeVisitFormData {
 
 interface HomeVisitBookingFormProps {
   onBack: () => void;
+  isVirtual?: boolean; // when true, treat as virtual consultation
 }
 
 const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
   onBack,
+  isVirtual = false,
 }) => {
   const { showSuccess, showError } = useToast();
   const [formData, setFormData] = useState<HomeVisitFormData>({
@@ -109,10 +111,10 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        serviceCategory: "home",
-        service: "Home Visit",
-        date: "TBD", // Home visits don't have fixed dates
-        time: "TBD", // Will be arranged by phone
+        serviceCategory: isVirtual ? "virtual" : "home",
+        service: isVirtual ? "Virtual Consultation" : "Home Visit",
+        date: "TBD", // home & virtual consultations are scheduled manually
+        time: "TBD", // will be arranged by phone / email
         sessionType: formData.sessionType,
         sessionDuration: sessionInfo.duration,
         message: formData.message,
@@ -133,8 +135,12 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         setConfirmationNumber(data.booking.confirmationNumber);
         setIsSuccess(true);
         showSuccess(
-          "Home Visit Booking Confirmed!",
-          "We'll call you within 24 hours to schedule your home visit appointment."
+          isVirtual
+            ? "Virtual Consultation Request Received!"
+            : "Home Visit Booking Confirmed!",
+          isVirtual
+            ? "We'll contact you within 24 hours to arrange your video consultation."
+            : "We'll call you within 24 hours to schedule your home visit appointment."
         );
       } else {
         showError(
@@ -164,7 +170,9 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
           <Check className="w-8 h-8 text-green-600" />
         </div>
         <h3 className="text-lg font-axiforma text-[#0E2127] mb-4">
-          Home Visit Booking Confirmed!
+          {isVirtual
+            ? "Virtual Consultation Request Received!"
+            : "Home Visit Booking Confirmed!"}
         </h3>
         <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6 max-w-md mx-auto">
           <p className="text-green-800 font-medium mb-2">
@@ -178,8 +186,9 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
           </p>
         </div>
         <p className="text-gray-600 text-base font-uber mb-8 max-w-lg mx-auto">
-          Thank you for booking a home visit! We'll contact you within 24 hours
-          to arrange a convenient time for your appointment.
+          {isVirtual
+            ? "Thank you for requesting a virtual consultation! We'll contact you within 24 hours to arrange a convenient video session."
+            : "Thank you for booking a home visit! We'll contact you within 24 hours to arrange a convenient time for your appointment."}
         </p>
         <button
           onClick={() => (window.location.href = "/")}
@@ -204,11 +213,12 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
           <Home className="w-8 h-8 text-[#FF3133]" />
         </div>
         <h2 className="text-lg font-axiforma text-[#0E2127] mb-2">
-          Book Home Visit
+          {isVirtual ? "Request Virtual Consultation" : "Book Home Visit"}
         </h2>
         <p className="text-gray-600 font-uber">
-          Fill out the form below and we'll contact you to schedule your home
-          visit
+          {isVirtual
+            ? "Fill out the form below and we'll contact you to arrange your video consultation"
+            : "Fill out the form below and we'll contact you to schedule your home visit"}
         </p>
       </div>
 
@@ -216,7 +226,7 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         {/* Session Type Selection */}
 
         <div>
-           <BlockOf5Info />
+          <BlockOf5Info />
           <label className="block text-[#0E2127] font-medium mb-3 text-base mt-4">
             Session Type *
           </label>
@@ -443,6 +453,8 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 Submitting...
               </>
+            ) : isVirtual ? (
+              "Request Virtual Consultation"
             ) : (
               "Book Home Visit"
             )}
@@ -455,12 +467,25 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
         <h4 className="font-semibold text-blue-800 mb-2 text-base">
           Important Information
         </h4>
-        <ul className="text-base text-blue-700 space-y-1 list-disc list-inside">
-          <li>We'll contact you within 24 hours to schedule your home visit</li>
-          <li>Our team will work with you to find a convenient time</li>
-          <li>All equipment will be brought to your location</li>
-          <li>Payment can be made on the day of your visit</li>
-        </ul>
+        {isVirtual ? (
+          <ul className="text-base text-blue-700 space-y-1 list-disc list-inside">
+            <li>
+              We'll contact you within 24 hours to schedule your video call
+            </li>
+            <li>Ensure you have a stable internet connection</li>
+            <li>No special software needed; we'll send a secure link</li>
+            <li>Have space available to perform basic movement tests</li>
+          </ul>
+        ) : (
+          <ul className="text-base text-blue-700 space-y-1 list-disc list-inside">
+            <li>
+              We'll contact you within 24 hours to schedule your home visit
+            </li>
+            <li>Our team will work with you to find a convenient time</li>
+            <li>All equipment will be brought to your location</li>
+            <li>Payment can be made on the day of your visit</li>
+          </ul>
+        )}
       </div>
     </motion.div>
   );

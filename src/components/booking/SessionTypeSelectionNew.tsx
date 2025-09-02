@@ -14,7 +14,7 @@ export interface SessionType {
 interface SessionTypeSelectionProps {
   selectedSession: SessionType | null;
   onSessionSelect: (session: SessionType) => void;
-  serviceCategory?: "clinic" | "home" | "sports" | ""; // added
+  serviceCategory?: "clinic" | "home" | "virtual" | "sports" | ""; // added virtual
 }
 
 // Pricing configuration per service category
@@ -37,6 +37,13 @@ const pricingConfig: Record<
   sports: {
     new: "£40",
     followup: "£35",
+    newDuration: 40,
+    followupDuration: 30,
+  },
+  virtual: {
+    // align with clinic pricing or custom; adjust as needed
+    new: "£55",
+    followup: "£45",
     newDuration: 40,
     followupDuration: 30,
   },

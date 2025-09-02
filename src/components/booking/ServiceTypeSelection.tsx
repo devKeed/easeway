@@ -29,6 +29,12 @@ const serviceTypes: ServiceTypeOption[] = [
     icon: Home,
   },
   {
+    key: "virtual",
+    label: "Virtual Consultation",
+    description: "Video physiotherapy consultation done remotely",
+    icon: Home, // reuse home icon for now; could swap for a monitor icon later
+  },
+  {
     key: "sports",
     label: "Sports Massage",
     description: "Performance & recovery focused soft tissue therapy",
