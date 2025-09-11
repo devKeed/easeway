@@ -71,7 +71,7 @@ export async function sendAdminBookingNotification(
 ) {
   try {
     const adminEmail =
-      process.env.ADMIN_EMAIL || "admin@easeway-medicare.co.uk";
+      process.env.ADMIN_EMAIL || "easeway.physiotherapy@easewaymedicare.co.uk";
 
     const isTBD = bookingData.time === "TBD";
 
@@ -320,7 +320,7 @@ export async function sendPatientConfirmationEmail(
           <div style="text-align: center; margin: 20px 0;">
             <p><strong>Contact Information:</strong></p>
             <p>Phone: <a href="tel:+447460091561" style="color: #FF3133;">+44 7460 091561</a></p>
-            <p>Email: <a href="mailto:info@easeway-medicare.co.uk" style="color: #FF3133;">info@easeway-medicare.co.uk</a></p>
+            <p>Email: <a href="mailto:easeway.physiotherapy@easewaymedicare.co.uk" style="color: #FF3133;">easeway.physiotherapy@easewaymedicare.co.uk</a></p>
           </div>
         </div>
         
