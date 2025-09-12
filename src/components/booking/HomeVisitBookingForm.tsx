@@ -99,11 +99,15 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Get pricing based on session type
-      const pricing = {
-        new: { price: "£80", duration: 40 },
-        followup: { price: "£70", duration: 30 },
-      };
+      const pricing = isVirtual
+        ? {
+            new: { price: "£45", duration: 40 },
+            followup: { price: "£40", duration: 30 },
+          }
+        : {
+            new: { price: "£80", duration: 40 },
+            followup: { price: "£70", duration: 30 },
+          };
 
       const sessionInfo = pricing[formData.sessionType];
 
@@ -181,8 +185,8 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
           <p className="text-green-700 text-base">
             Session Type:{" "}
             {formData.sessionType === "new"
-              ? "Initial Meeting (40 min) - £80"
-              : "Follow-up Session (30 min) - £70"}
+              ? `Initial Meeting (40 min) - ${isVirtual ? "£45" : "£80"}`
+              : `Follow-up Session (30 min) - ${isVirtual ? "£40" : "£70"}`}
           </p>
         </div>
         <p className="text-gray-600 text-base font-uber mb-8 max-w-lg mx-auto">
@@ -259,7 +263,9 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
                 )}
               </div>
               <p className="text-base text-gray-600 mb-2">40 minutes</p>
-              <p className="text-base font-bold text-[#0E2127]">£80</p>
+              <p className="text-base font-bold text-[#0E2127]">
+                {isVirtual ? "£45" : "£80"}
+              </p>
             </motion.button>
 
             <motion.button
@@ -290,7 +296,9 @@ const HomeVisitBookingForm: React.FC<HomeVisitBookingFormProps> = ({
                 )}
               </div>
               <p className="text-base text-gray-600 mb-2">30 minutes</p>
-              <p className="text-base font-bold text-[#0E2127]">£70</p>
+              <p className="text-base font-bold text-[#0E2127]">
+                {isVirtual ? "£40" : "£70"}
+              </p>
             </motion.button>
           </div>
         </div>
