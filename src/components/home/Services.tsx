@@ -172,6 +172,29 @@ const Services = () => {
       },
     },
     {
+      icon: Target,
+      title: "Virtual Physiotherapy",
+      description:
+        "Professional physiotherapy consultations and guided exercises from the comfort of your home through secure video calls.",
+      image: "/images/fx22.jpg",
+      modalContent: {
+        title: "Expert Care, Anywhere You Are",
+        description:
+          "Virtual physiotherapy brings professional assessment, treatment guidance, and rehabilitation directly to you, wherever you are. Using secure video technology, I provide the same quality care and personalized approach as in-person sessions, making expert physiotherapy accessible to everyone regardless of location or mobility constraints.",
+        features: [
+          "Comprehensive assessment through guided movement testing",
+          "Real-time exercise demonstration and correction",
+          "Personalized home exercise programs with visual guides",
+          "Regular progress tracking and program adjustments",
+          "Convenient scheduling without travel time",
+          "Follow-up support via secure messaging",
+        ],
+        process:
+          "Before your virtual session, I'll send preparation instructions to ensure we maximize our time together. During the consultation, I'll guide you through movements for assessment, demonstrate exercises tailored to your condition, and provide immediate feedback on your technique. You'll receive a detailed follow-up with your personalized exercise program and resources to support your recovery journey.",
+        duration: "Virtual sessions: 30-60 minutes depending on needs",
+      },
+    },
+    {
       icon: Home,
       title: "Home Physiotherapy (Exclusive in Whittlesey)",
       description:
