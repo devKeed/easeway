@@ -32,7 +32,7 @@ export interface BookingFormData {
 
   // Medical information
   message: string;
-  howCanWeHelp: string; // New field for "How can we help"
+  howCanWeHelp: string;
   medicalHistory: string;
   currentMedications: string;
   previousPhysiotherapy: string;

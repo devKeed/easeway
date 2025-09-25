@@ -681,7 +681,7 @@ const BookingPage = () => {
                   <h5 className="font-semibold text-[#0E2127] text-base uppercase tracking-wide">
                     Medical Information
                   </h5>
-                  {bookingData.howCanWeHelp && (
+                  {/* {bookingData.howCanWeHelp && (
                     <div>
                       <span className="text-gray-600 text-base block mb-2">
                         How can we help:
@@ -690,7 +690,7 @@ const BookingPage = () => {
                         {bookingData.howCanWeHelp}
                       </p>
                     </div>
-                  )}
+                  )} */}
                   {bookingData.message && (
                     <div>
                       <span className="text-gray-600 text-base block mb-2">
