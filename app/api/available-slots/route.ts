@@ -52,7 +52,7 @@ const DAILY_SCHEDULE: Record<number, { open: string; close: string }> = {
   3: { open: "19:00", close: "21:00" }, // Wednesday
   4: { open: "19:00", close: "21:00" }, // Thursday
   5: { open: "19:00", close: "21:00" }, // Friday
-  6: { open: "09:30", close: "20:00" }, // Saturday
+  6: { open: "09:30", close: "16:00" }, // Saturday
   0: { open: "13:00", close: "16:00" }, // Sunday
 };
 
